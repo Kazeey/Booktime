@@ -1,6 +1,17 @@
-def print_hi(name):
-    print(f'Hi, {name}')
+import cv2.cv2 as cv
 
+url = "http://192.168.1.99:8080/video"
+cap = cv.VideoCapture(url)
 
-if __name__ == '__main__':
-    print_hi('PyCharm')
+while(True):
+    camera, frame = cap.read()
+    if frame is not None:
+        width, height, layers = frame.shape
+        nHeight = height / 2
+        nWidth = width / 2
+        nResizedFrame = cv.resize(frame, (int(nHeight), int(nWidth)))
+        cv.imshow("Video", nResizedFrame)
+    q = cv.waitKey(1)
+    if q == ord("q"):
+        break
+cv.destroyAllWindows()
