@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a770370f-09df-4e5d-8efe-d6e7ddc6de0f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../front-mobile/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../front-mobile/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/controllers/ExempleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/controllers/ExempleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-web/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-web/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -14,6 +14,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1zxV28wTC8a4V1p7XEMHYZ48Xi3" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -25,6 +33,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="reference.idesettings.debugger.python" />
   </component>
   <component name="RunManager">
@@ -65,6 +74,12 @@
       <workItem from="1635103705233" duration="384000" />
       <workItem from="1635106927472" duration="326000" />
       <workItem from="1635367947967" duration="2413000" />
+      <workItem from="1635373075590" duration="23000" />
+      <workItem from="1635441044679" duration="614000" />
+      <workItem from="1635456929541" duration="223000" />
+      <workItem from="1636217455203" duration="881000" />
+      <workItem from="1636672872023" duration="9000" />
+      <workItem from="1637095466961" duration="1295000" />
     </task>
     <servers />
   </component>
@@ -72,6 +87,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/scanApp$main.coverage" NAME="main Coverage Results" MODIFIED="1635370309671" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/scanApp$main.coverage" NAME="main Coverage Results" MODIFIED="1637096500002" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
