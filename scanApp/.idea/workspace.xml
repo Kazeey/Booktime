@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a770370f-09df-4e5d-8efe-d6e7ddc6de0f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/controllers/ExempleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/controllers/ExempleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-web/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-web/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -80,6 +78,8 @@
       <workItem from="1636217455203" duration="881000" />
       <workItem from="1636672872023" duration="9000" />
       <workItem from="1637095466961" duration="1295000" />
+      <workItem from="1637513584396" duration="9000" />
+      <workItem from="1637513603225" duration="230000" />
     </task>
     <servers />
   </component>

@@ -19,7 +19,8 @@ def decoder(image):
         barcode_type = obj.type
         string = "Data " + str(barcode_data) + " | Type " + str(barcode_type)
         cv.putText(frame, string, (x, y), cv.FONT_HERSHEY_SIMPLEX, 0.8, (255, 0, 0), 2)
-        print("Barcode : " + barcode_data + " | Type : " + barcode_type)
+
+
 
 
 cap = cv.VideoCapture(url)
