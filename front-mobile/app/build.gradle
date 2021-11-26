@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id "org.sonarqube" version "3.3"
 }
 
 android {
@@ -28,6 +29,14 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    sonarqube {
+        properties {
+            property "sonar.projectKey", "com.project.frontMobile"
+            property "sonar.organization", "kazeey"
+            property "sonar.host.url", "https://sonarcloud.io"
+        }
     }
 }
 
