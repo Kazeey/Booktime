@@ -18,7 +18,7 @@ class ExempleControllerTest {
 
     @Test
     void getExemple() {
-        ResponseEntity<String> response = template.getForEntity(Constants.backURL + Constants.exempleControllerURL, String.class);
+        ResponseEntity<String> response = template.getForEntity(Constants.BACK_URL + Constants.EXEMPLE_CONTROLLER_URL, String.class);
         assertThat(response.getBody()).isEqualTo("Controller exemple");
     }
 }
