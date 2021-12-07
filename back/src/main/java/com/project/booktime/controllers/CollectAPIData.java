@@ -1,20 +1,17 @@
 package com.project.booktime.controllers;
 
-import com.project.booktime.params.Constants;
-import org.bson.json.JsonObject;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.project.booktime.params.Constants;
 
 @RestController
 @ComponentScan
-public class ExempleController
+public class CollectAPIData
 {
-    @GetMapping(Constants.EXEMPLE_CONTROLLER_URL)
-    public String getExemple()
+    @GetMapping(Constants.DATA_COLLECT_URL)
+    public boolean collectData()
     {
-        return "Controller exemple";
+        return true;
     }
 }
-
-
