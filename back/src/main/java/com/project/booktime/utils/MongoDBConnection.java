@@ -8,10 +8,10 @@ import com.project.booktime.params.Constants;
 
 public class MongoDBConnection
 {
-    public MongoDatabase getDatabase (String databaseName)
+    public MongoDatabase getDatabase ()
     {
         MongoClient mongoClient = MongoClients.create(Constants.MONGO_DB_CONNECTION_STRING);
-        MongoDatabase database = mongoClient.getDatabase(databaseName);
+        MongoDatabase database = mongoClient.getDatabase(Constants.MONGO_DB_DATABASE_NAME);
         return database;
     }
 
