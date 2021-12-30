@@ -1,10 +1,7 @@
 package com.project.booktime.controllers;
 
-import com.project.booktime.exception.BookNotFoundException;
 import com.project.booktime.exception.UserNotFoundException;
-import com.project.booktime.model.dto.BookDTO;
 import com.project.booktime.model.dto.UserDTO;
-import com.project.booktime.model.entity.Book;
 import com.project.booktime.model.entity.User;
 import com.project.booktime.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController()
 @RequestMapping("/user")
 public class UserController {
 
@@ -22,14 +19,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping()
+    @GetMapping("/findAll")
     public ResponseEntity<List<UserDTO>> findAll() {
         List<UserDTO> userDTOList = userService.findAll();
 
         return ResponseEntity.ok(userDTOList);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/findBy/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable("id") String id) {
         try {
             UserDTO userDTO = userService.findById(id);
@@ -40,14 +37,14 @@ public class UserController {
         }
     }
 
-    @PostMapping()
+    @PostMapping("/add")
     public ResponseEntity<UserDTO> add(@RequestBody User user) {
         UserDTO userDTO = userService.add(user);
 
         return ResponseEntity.ok(userDTO);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<UserDTO> update(@PathVariable("id") String id, @RequestBody User user) {
         try {
             UserDTO userDTO = userService.update(id, user);
@@ -58,7 +55,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         try {
             userService.delete(id);

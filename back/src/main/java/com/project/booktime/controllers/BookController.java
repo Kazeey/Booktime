@@ -4,6 +4,7 @@ import com.project.booktime.exception.BookNotFoundException;
 import com.project.booktime.model.dto.BookDTO;
 import com.project.booktime.model.entity.Book;
 import com.project.booktime.services.BookService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,14 +20,14 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping()
+    @GetMapping("/findAll")
     public ResponseEntity<List<BookDTO>> findAll() {
         List<BookDTO> bookDTOList = bookService.findAll();
 
         return ResponseEntity.ok(bookDTOList);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/findBy/{id}")
     public ResponseEntity<BookDTO> findById(@PathVariable("id") String id) {
         try {
             BookDTO bookDTO = bookService.findById(id);
@@ -37,14 +38,14 @@ public class BookController {
         }
     }
 
-    @PostMapping()
+    @PostMapping("/add")
     public ResponseEntity<BookDTO> add(@RequestBody Book book) {
         BookDTO bookDTO = bookService.add(book);
 
         return ResponseEntity.ok(bookDTO);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<BookDTO> update(@PathVariable("id") String id, @RequestBody Book book) {
         try {
             BookDTO bookDTO = bookService.update(id, book);
@@ -55,7 +56,7 @@ public class BookController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") String id) {
         try {
             bookService.delete(id);

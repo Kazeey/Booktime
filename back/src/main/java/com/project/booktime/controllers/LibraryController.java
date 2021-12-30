@@ -1,19 +1,13 @@
 package com.project.booktime.controllers;
 
-import com.project.booktime.exception.BookNotFoundException;
 import com.project.booktime.exception.LibraryNotFoundException;
-import com.project.booktime.model.dto.BookDTO;
 import com.project.booktime.model.dto.LibraryDTO;
-import com.project.booktime.model.entity.Book;
 import com.project.booktime.model.entity.Library;
 import com.project.booktime.services.LibraryService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/library")
@@ -25,14 +19,14 @@ public class LibraryController {
         this.libraryService = libraryService;
     }
 
-    @GetMapping()
+    @GetMapping("/findAll")
     public ResponseEntity<List<LibraryDTO>> findAll() {
         List<LibraryDTO> libraryDTOList = libraryService.findAll();
 
         return ResponseEntity.ok(libraryDTOList);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/findBy/{id}")
     public ResponseEntity<LibraryDTO> findById(@PathVariable("id") String id) {
         try {
             LibraryDTO libraryDTO = libraryService.findById(id);
@@ -43,14 +37,14 @@ public class LibraryController {
         }
     }
 
-    @PostMapping()
+    @PostMapping("/add")
     public ResponseEntity<LibraryDTO> add(@RequestBody Library library) {
         LibraryDTO libraryDTO = libraryService.add(library);
 
         return ResponseEntity.ok(libraryDTO);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<LibraryDTO> update(@PathVariable("id") String id, @RequestBody Library library) {
         try {
             LibraryDTO libraryDTO = libraryService.update(id, library);
@@ -61,7 +55,7 @@ public class LibraryController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Library> delete(@PathVariable("id") String id) {
         try {
             libraryService.delete(id);
