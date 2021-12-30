@@ -1,5 +1,6 @@
 package com.project.booktime.controllers;
 
+import com.project.booktime.model.dto.BookDTO;
 import com.project.booktime.model.entity.Book;
 import com.project.booktime.services.BookService;
 import org.springframework.web.bind.annotation.*;
@@ -18,17 +19,17 @@ public class BookController {
     }
 
     @GetMapping()
-    public List<Book> findAll() {
+    public List<BookDTO> findAll() {
         return bookService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Book> findById(@PathVariable("id") String id) {
+    public BookDTO findById(@PathVariable("id") String id) {
         return bookService.findById(id);
     }
 
     @PostMapping()
-    public Book add(@RequestBody Book book) {
+    public BookDTO add(@RequestBody Book book) {
         return bookService.add(book);
     }
 

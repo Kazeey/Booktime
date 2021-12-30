@@ -1,6 +1,8 @@
 package com.project.booktime.services;
 
+import com.project.booktime.model.dto.UserDTO;
 import com.project.booktime.model.entity.User;
+import com.project.booktime.model.helper.UserHelper;
 import com.project.booktime.repository.IUserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,16 +20,23 @@ public class UserService {
         this.repository = repository;
     }
 
-    public List<User> findAll() {
-        return repository.findAll();
+    public List<UserDTO> findAll() {
+        return UserHelper.convertAll(repository.findAll());
     }
 
-    public Optional<User> findById(String id) {
-        return repository.findById(id);
+    public UserDTO findById(String id) {
+        Optional<User> user = repository.findById(id);
+
+        if (user.isPresent()) {
+            return UserHelper.convert(user.get());
+        } else {
+            // throw ...
+            return null;
+        }
     }
 
-    public User add(User user) {
-        return repository.save(user);
+    public UserDTO add(User user) {
+        return UserHelper.convert(repository.save(user));
     }
 
     public void delete(User user) {

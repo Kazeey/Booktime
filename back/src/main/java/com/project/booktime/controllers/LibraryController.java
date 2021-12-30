@@ -1,11 +1,11 @@
 package com.project.booktime.controllers;
 
+import com.project.booktime.model.dto.LibraryDTO;
 import com.project.booktime.model.entity.Library;
 import com.project.booktime.services.LibraryService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/library")
@@ -18,17 +18,17 @@ public class LibraryController {
     }
 
     @GetMapping()
-    public List<Library> findAll() {
+    public List<LibraryDTO> findAll() {
         return libraryService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Library> findById(@PathVariable("id") String id) {
+    public LibraryDTO findById(@PathVariable("id") String id) {
         return libraryService.findById(id);
     }
 
     @PostMapping()
-    public Library add(@RequestBody Library library) {
+    public LibraryDTO add(@RequestBody Library library) {
         return libraryService.add(library);
     }
 

@@ -1,5 +1,7 @@
 package com.project.booktime.controllers;
 
+import com.project.booktime.exception.UserNotFoundException;
+import com.project.booktime.model.dto.UserDTO;
 import com.project.booktime.model.entity.User;
 import com.project.booktime.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -20,17 +22,17 @@ public class UserController {
     }
 
     @GetMapping()
-    public List<User> findAll() {
+    public List<UserDTO> findAll() {
         return userService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<User> findById(@PathVariable("id") String id) {
+    public UserDTO findById(@PathVariable("id") String id) {
         return userService.findById(id);
     }
 
     @PostMapping()
-    public User add(@RequestBody User user) {
+    public UserDTO add(@RequestBody User user) {
         return userService.add(user);
     }
 

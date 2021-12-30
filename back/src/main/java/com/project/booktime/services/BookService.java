@@ -1,6 +1,10 @@
 package com.project.booktime.services;
 
+import com.project.booktime.model.dto.BookDTO;
 import com.project.booktime.model.entity.Book;
+import com.project.booktime.model.entity.User;
+import com.project.booktime.model.helper.BookHelper;
+import com.project.booktime.model.helper.UserHelper;
 import com.project.booktime.repository.IBookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,16 +22,23 @@ public class BookService {
         this.repository = repository;
     }
 
-    public List<Book> findAll() {
-        return repository.findAll();
+    public List<BookDTO> findAll() {
+        return BookHelper.convertAll(repository.findAll());
     }
 
-    public Optional<Book> findById(String id) {
-        return repository.findById(id);
+    public BookDTO findById(String id) {
+        Optional<Book> book = repository.findById(id);
+
+        if (book.isPresent()) {
+            return BookHelper.convert(book.get());
+        } else {
+            // throw ...
+            return null;
+        }
     }
 
-    public Book add(Book book) {
-        return repository.save(book);
+    public BookDTO add(Book book) {
+        return BookHelper.convert(repository.save(book));
     }
 
     public void delete(Book book) {

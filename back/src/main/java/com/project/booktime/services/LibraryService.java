@@ -1,6 +1,8 @@
 package com.project.booktime.services;
 
+import com.project.booktime.model.dto.LibraryDTO;
 import com.project.booktime.model.entity.Library;
+import com.project.booktime.model.helper.LibraryHelper;
 import com.project.booktime.repository.ILibraryRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,16 +20,23 @@ public class LibraryService {
         this.repository = repository;
     }
 
-    public List<Library> findAll() {
-        return repository.findAll();
+    public List<LibraryDTO> findAll() {
+        return LibraryHelper.convertAll(repository.findAll());
     }
 
-    public Optional<Library> findById(String id) {
-        return repository.findById(id);
+    public LibraryDTO findById(String id) {
+        Optional<Library> library = repository.findById(id);
+
+        if (library.isPresent()) {
+            return LibraryHelper.convert(library.get());
+        } else {
+            // throw ...
+            return null;
+        }
     }
 
-    public Library add(Library library) {
-        return repository.save(library);
+    public LibraryDTO add(Library library) {
+        return LibraryHelper.convert(repository.save(library));
     }
 
     public void delete(Library library) {
