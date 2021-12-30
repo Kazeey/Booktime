@@ -1,5 +1,7 @@
 package com.project.booktime.services;
 
+import com.project.booktime.exception.BookNotFoundException;
+import com.project.booktime.exception.LibraryNotFoundException;
 import com.project.booktime.model.dto.LibraryDTO;
 import com.project.booktime.model.entity.Library;
 import com.project.booktime.model.helper.LibraryHelper;
@@ -14,32 +16,47 @@ import java.util.Optional;
 @Service
 public class LibraryService {
 
-    private ILibraryRepository repository;
+    private final ILibraryRepository repository;
 
     public LibraryService(ILibraryRepository repository) {
         this.repository = repository;
     }
 
     public List<LibraryDTO> findAll() {
-        return LibraryHelper.convertAll(repository.findAll());
+        List<Library> libraryList = repository.findAll();
+
+        return LibraryHelper.convertAll(libraryList);
     }
 
     public LibraryDTO findById(String id) {
         Optional<Library> library = repository.findById(id);
 
-        if (library.isPresent()) {
-            return LibraryHelper.convert(library.get());
-        } else {
-            // throw ...
-            return null;
-        }
+        if (library.isEmpty()) throw new LibraryNotFoundException();
+
+        return LibraryHelper.convert(library.get());
     }
 
     public LibraryDTO add(Library library) {
-        return LibraryHelper.convert(repository.save(library));
+        Library createdLibrary = repository.save(library);
+
+        return LibraryHelper.convert(createdLibrary);
     }
 
-    public void delete(Library library) {
-        repository.delete(library);
+    public LibraryDTO update(String id, Library library) {
+        Optional<Library> optionalLibrary = repository.findById(id);
+
+        if (optionalLibrary.isEmpty()) throw new LibraryNotFoundException();
+
+        Library updatedLibrary = repository.save(library);
+
+        return LibraryHelper.convert(updatedLibrary);
+    }
+
+    public void delete(String id) {
+        Optional<Library> optionalLibrary = repository.findById(id);
+
+        if (optionalLibrary.isEmpty()) throw new BookNotFoundException();
+
+        repository.delete(optionalLibrary.get());
     }
 }

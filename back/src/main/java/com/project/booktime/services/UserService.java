@@ -1,5 +1,6 @@
 package com.project.booktime.services;
 
+import com.project.booktime.exception.UserNotFoundException;
 import com.project.booktime.model.dto.UserDTO;
 import com.project.booktime.model.entity.User;
 import com.project.booktime.model.helper.UserHelper;
@@ -14,32 +15,47 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    IUserRepository repository;
+    private final IUserRepository repository;
 
     public UserService(IUserRepository repository) {
         this.repository = repository;
     }
 
     public List<UserDTO> findAll() {
-        return UserHelper.convertAll(repository.findAll());
+        List<User> userList = repository.findAll();
+
+        return UserHelper.convertAll(userList);
     }
 
     public UserDTO findById(String id) {
         Optional<User> user = repository.findById(id);
 
-        if (user.isPresent()) {
-            return UserHelper.convert(user.get());
-        } else {
-            // throw ...
-            return null;
-        }
+        if (user.isEmpty()) throw new UserNotFoundException();
+
+        return UserHelper.convert(user.get());
     }
 
     public UserDTO add(User user) {
-        return UserHelper.convert(repository.save(user));
+        User createdUser = repository.insert(user);
+
+        return UserHelper.convert(createdUser);
     }
 
-    public void delete(User user) {
-        repository.delete(user);
+    public UserDTO update(String id, User user) {
+        Optional<User> optionalUser = repository.findById(id);
+
+        if (optionalUser.isEmpty()) throw new UserNotFoundException();
+
+        User updatedUser = repository.save(user);
+
+        return UserHelper.convert(updatedUser);
+    }
+
+    public void delete(String id) {
+        Optional<User> optionalUser = repository.findById(id);
+
+        if (optionalUser.isEmpty()) throw new UserNotFoundException();
+
+        repository.delete(optionalUser.get());
     }
 }
