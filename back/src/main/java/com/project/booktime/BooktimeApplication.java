@@ -1,19 +1,12 @@
 package com.project.booktime;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Controller;
-
-import java.util.Arrays;
 
 @SpringBootApplication
-@ComponentScan
 public class BooktimeApplication
 {
+
 	public static void main(String[] args)
 	{
 		SpringApplication.run(BooktimeApplication.class, args);
