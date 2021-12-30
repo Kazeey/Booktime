@@ -4,7 +4,6 @@ import com.project.booktime.exception.BookNotFoundException;
 import com.project.booktime.model.dto.BookDTO;
 import com.project.booktime.model.entity.Book;
 import com.project.booktime.services.BookService;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
