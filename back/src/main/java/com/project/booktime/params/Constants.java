@@ -6,10 +6,6 @@ public class Constants
 {
     private Constants() {}
 
-    // MongoDB
-    public static final String MONGO_DB_CONNECTION_STRING= "mongodb://localhost:27017";
-    public static final String MONGO_DB_DATABASE_NAME = "booktime";
-
     // API Key
     public final static String API_KEY_GOOGLE_BOOKS = "AIzaSyDojgOQt_GHgwTR-bCM--As_WTRERNqz0k";
 
