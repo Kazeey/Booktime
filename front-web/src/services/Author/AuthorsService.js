@@ -3,10 +3,10 @@ import apiURL from '../../utils/constants/index';
 
 export default {
 
-    getBooksList: () => {
+    getAuthorsList: () => {
         try
         {
-            const response = axios.get(apiURL + '/book/findall');
+            const response = axios.get(apiURL + '/author/findall');
             return response.data;
         }
         catch (error)
@@ -15,10 +15,10 @@ export default {
         }
     },
 
-    getBookById: (id) => {
+    getAuthorById: (id) => {
         try
         {
-            const response = axios.get(apiURL + '/book/findById/' + id);
+            const response = axios.get(apiURL + '/author/findById/' + id);
             return response.data;
         }
         catch (error)
