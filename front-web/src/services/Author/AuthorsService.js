@@ -1,7 +1,7 @@
 import axios from 'axios';
 import apiURL from '../../utils/constants/index';
 
-export default {
+let services = {
 
     getAuthorsList: () => {
         try
@@ -27,3 +27,5 @@ export default {
         }
     }
 }
+
+export default services;

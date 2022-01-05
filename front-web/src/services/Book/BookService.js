@@ -1,29 +1,29 @@
 import axios from 'axios';
-import apiURL from '../../utils/constants/index';
+import { apiURL } from '../../utils/constants/index';
 
-export default {
-
-    getBooksList: () => {
-        try
-        {
-            const response = axios.get(apiURL + '/book/findall');
-            return response.data;
-        }
-        catch (error)
-        {
-            throw error;
-        }
-    },
-
-    getBookById: (id) => {
-        try
-        {
-            const response = axios.get(apiURL + '/book/findById/' + id);
-            return response.data;
-        }
-        catch (error)
-        {
-            throw error;
-        }
+const getBooksList = async () => {
+    try
+    {
+        const response = await axios.get(apiURL + 'books/findall/');
+        return response.data;
+    }
+    catch (error)
+    {
+        throw error;
     }
 }
+
+const getBookById = async (id) => {
+    try
+    {
+        const response = await axios.get(apiURL + 'books/findById/' + id);
+        return response.data;
+    }
+    catch (error)
+    {
+        throw error;
+    }
+}
+
+export {getBooksList, getBookById};
+
