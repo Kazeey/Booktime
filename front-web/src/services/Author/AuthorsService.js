@@ -1,31 +1,29 @@
 import axios from 'axios';
-import apiURL from '../../utils/constants/index';
+import { apiURL } from '../../utils/constants/index';
 
-let services = {
-
-    getAuthorsList: () => {
-        try
-        {
-            const response = axios.get(apiURL + '/author/findall');
-            return response.data;
-        }
-        catch (error)
-        {
-            throw error;
-        }
-    },
-
-    getAuthorById: (id) => {
-        try
-        {
-            const response = axios.get(apiURL + '/author/findById/' + id);
-            return response.data;
-        }
-        catch (error)
-        {
-            throw error;
-        }
+const getAuthorsList = async () => {
+    try
+    {
+        const response = await axios.get(apiURL + 'authors/findall/');
+        return response.data;
+    }
+    catch (error)
+    {
+        throw error;
     }
 }
 
-export default services;
+const getAuthorById = async (id) => {
+    try
+    {
+        const response = await axios.get(apiURL + 'authors/findById/' + id);
+        return response.data;
+    }
+    catch (error)
+    {
+        throw error;
+    }
+}
+
+export { getAuthorsList, getAuthorById };
+

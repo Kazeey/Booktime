@@ -25,5 +25,4 @@ const getBookById = async (id) => {
     }
 }
 
-export {getBooksList, getBookById};
-
+export { getBooksList, getBookById };
