@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { apiURL } from '../../utils/constants/index';
+import { apiURL } from '../utils/constants/constants';
 
 const getAuthorsList = async () => {
     try

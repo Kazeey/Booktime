@@ -1,9 +1,10 @@
-import { getAuthorsList } from "./AuthorsService";
+import { getAuthorsList } from "../../services/AuthorService";
 
 describe("AuthorService", () => {
     describe("API call is successfull", () => {
         it("should return authors list", done => {
-            getAuthorsList().then(response => {
+            getAuthorsList()
+            .then(response => {
                 expect(response).toEqual(
                     expect.objectContaining({
                         id : expect.any(Number),

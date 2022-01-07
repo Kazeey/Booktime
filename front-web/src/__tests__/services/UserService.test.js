@@ -1,4 +1,4 @@
-import { getUsersList } from "./UserService";
+import { getUsersList } from "../../services/UserService";
 
 describe("UserService", () => {
     describe("API call is successfull", () => {

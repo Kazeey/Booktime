@@ -1,4 +1,4 @@
-import { getBooksList } from "./BookService";
+import { getBooksList } from "../../services/BookService";
 
 describe("BookService", () => {
     describe("API call is successfull", () => {
