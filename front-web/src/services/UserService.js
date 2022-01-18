@@ -4,7 +4,7 @@ import { apiURL } from '../utils/constants/constants';
 const getUsersList = async () => {
     try
     {
-        const response = await axios.get(apiURL + 'users/findall/');
+        const response = await axios.get(apiURL + 'user/findAll/');
         return response.data;
     }
     catch (error)
@@ -16,7 +16,7 @@ const getUsersList = async () => {
 const getUserById = async (id) => {
     try
     {
-        const response = await axios.get(apiURL + 'users/findById/' + id);
+        const response = await axios.get(apiURL + 'user/findById/' + id);
         return response.data;
     }
     catch (error)

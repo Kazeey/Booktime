@@ -4,7 +4,7 @@ import { apiURL } from '../utils/constants/constants';
 const getAuthorsList = async () => {
     try
     {
-        const response = await axios.get(apiURL + 'authors/findall/');
+        const response = await axios.get(apiURL + 'author/findAll/');
         return response.data;
     }
     catch (error)
@@ -16,7 +16,7 @@ const getAuthorsList = async () => {
 const getAuthorById = async (id) => {
     try
     {
-        const response = await axios.get(apiURL + 'authors/findById/' + id);
+        const response = await axios.get(apiURL + 'author/findById/' + id);
         return response.data;
     }
     catch (error)

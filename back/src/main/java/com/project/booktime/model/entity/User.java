@@ -13,18 +13,20 @@ public class User {
     private String id;
     private String pseudo;
     private String name;
+    private String firstName;
     private String password;
     private String email;
     private Date birthday;
-    private Picture picture;
+    private String base64;
 
-    public User(String pseudo, String name, String password, String email, Date birthday, Picture picture) {
+    public User(String pseudo, String name, String firstName, String password, String email, Date birthday, String base64) {
         this.pseudo = pseudo;
         this.name = name;
+        this.firstName = firstName;
         this.password = password;
         this.email = email;
         this.birthday = birthday;
-        this.picture = picture;
+        this.base64 = base64;
     }
 
     public String getId() {
@@ -51,6 +53,14 @@ public class User {
         this.name = name;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -75,11 +85,11 @@ public class User {
         this.birthday = birthday;
     }
 
-    public Picture getPicture() {
-        return picture;
+    public String getBase64() {
+        return base64;
     }
 
-    public void setPicture(Picture picture) {
-        this.picture = picture;
+    public void setBase64(String base64) {
+        this.base64 = base64;
     }
 }

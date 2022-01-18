@@ -1,8 +1,5 @@
 package com.project.booktime.model.dto;
 
-import com.project.booktime.model.entity.Picture;
-import org.springframework.data.annotation.Id;
-
 import java.util.Date;
 
 public class BookDTO {
@@ -15,9 +12,9 @@ public class BookDTO {
     private int pageCount;
     private double rating;
     private String authorId;
-    private Picture picture;
+    private String base64;
 
-    public BookDTO(String id, String title, String synopsis, Date publicationDate, String category, int pageCount, double rating, String authorId, Picture picture) {
+    public BookDTO(String id, String title, String synopsis, Date publicationDate, String category, int pageCount, double rating, String authorId, String base64) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
@@ -26,7 +23,7 @@ public class BookDTO {
         this.pageCount = pageCount;
         this.rating = rating;
         this.authorId = authorId;
-        this.picture = picture;
+        this.base64 = base64;
     }
 
     public String getId() {
@@ -93,11 +90,11 @@ public class BookDTO {
         this.authorId = authorId;
     }
 
-    public Picture getPicture() {
-        return picture;
+    public String getBase64() {
+        return base64;
     }
 
-    public void setPicture(Picture picture) {
-        this.picture = picture;
+    public void setBase64(String base64) {
+        this.base64 = base64;
     }
 }
