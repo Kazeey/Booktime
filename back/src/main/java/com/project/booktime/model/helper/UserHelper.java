@@ -25,9 +25,10 @@ public class UserHelper {
                 user.getId(),
                 user.getPseudo(),
                 user.getName(),
+                user.getFirstName(),
                 user.getEmail(),
                 user.getBirthday(),
-                user.getPicture()
+                user.getBase64()
         );
     }
 }

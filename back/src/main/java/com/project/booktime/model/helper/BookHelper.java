@@ -30,7 +30,7 @@ public class BookHelper {
                 book.getPageCount(),
                 book.getRating(),
                 book.getAuthorId(),
-                book.getPicture()
+                book.getBase64()
         );
     }
 }
