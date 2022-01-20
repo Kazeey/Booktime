@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/libraryFragment"
-        android:name="com.project.frontMobile.view.library.LibraryFragment"
+        android:name="com.project.frontMobile.ui.library.LibraryFragment"
         android:label="fragment_library"
         tools:layout="@layout/fragment_library" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/suggestionFragment"
-        android:name="com.project.frontMobile.view.suggestion.SuggestionFragment"
+        android:name="com.project.frontMobile.ui.suggestion.SuggestionFragment"
         android:label="fragment_suggestion"
         tools:layout="@layout/fragment_suggestion" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/authenticationFragment"
-        android:name="com.project.frontMobile.view.authentication.AuthenticationFragment"
+        android:name="com.project.frontMobile.ui.authentication.AuthenticationFragment"
         android:label="fragment_authentication"
         tools:layout="@layout/fragment_authentication" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.project.frontMobile.view.authentication.login.LogInFragment"
+        android:name="com.project.frontMobile.ui.authentication.login.LogInFragment"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" >
         <action
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.project.frontMobile.view.authentication.signup.SignUpFragment"
+        android:name="com.project.frontMobile.ui.authentication.signup.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -61,12 +61,12 @@
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.project.frontMobile.view.authentication.forgotpassword.ForgotPasswordFragment"
+        android:name="com.project.frontMobile.ui.authentication.forgotpassword.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" />
     <fragment
         android:id="@+id/loadingFragment"
-        android:name="com.project.frontMobile.view.loading.LoadingFragment"
+        android:name="com.project.frontMobile.ui.loading.LoadingFragment"
         android:label="fragment_loading"
         tools:layout="@layout/fragment_loading" >
         <action
@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.project.frontMobile.view.search.SearchFragment"
+        android:name="com.project.frontMobile.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -90,7 +90,7 @@
     </fragment>
     <fragment
         android:id="@+id/upcomingFragment"
-        android:name="com.project.frontMobile.view.upcoming.UpcomingFragment"
+        android:name="com.project.frontMobile.ui.upcoming.UpcomingFragment"
         android:label="fragment_upcoming"
         tools:layout="@layout/fragment_upcoming" >
         <action
@@ -99,7 +99,7 @@
     </fragment>
     <fragment
         android:id="@+id/bookFragment"
-        android:name="com.project.frontMobile.view.book.BookFragment"
+        android:name="com.project.frontMobile.ui.book.BookFragment"
         android:label="fragment_book"
         tools:layout="@layout/fragment_book" >
         <action
@@ -108,17 +108,17 @@
     </fragment>
     <fragment
         android:id="@+id/authorFragment"
-        android:name="com.project.frontMobile.view.author.AuthorFragment"
+        android:name="com.project.frontMobile.ui.author.AuthorFragment"
         android:label="fragment_author"
         tools:layout="@layout/fragment_author" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.project.frontMobile.view.user.ProfileFragment"
+        android:name="com.project.frontMobile.ui.user.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.project.frontMobile.view.menu.MenuFragment"
+        android:name="com.project.frontMobile.ui.menu.MenuFragment"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu" >
         <action
@@ -139,17 +139,17 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.project.frontMobile.view.settings.SettingsFragment"
+        android:name="com.project.frontMobile.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/helpFragment"
-        android:name="com.project.frontMobile.view.help.HelpFragment"
+        android:name="com.project.frontMobile.ui.help.HelpFragment"
         android:label="fragment_help"
         tools:layout="@layout/fragment_help" />
     <fragment
         android:id="@+id/RGPDFragment"
-        android:name="com.project.frontMobile.view.rgpd.RGPDFragment"
+        android:name="com.project.frontMobile.ui.rgpd.RGPDFragment"
         android:label="fragment_r_g_p_d"
         tools:layout="@layout/fragment_r_g_p_d" />
 </navigation>
