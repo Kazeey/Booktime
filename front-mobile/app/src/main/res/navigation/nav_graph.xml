@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/loadingFragment">
+
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.project.frontMobile.ui.library.LibraryFragment"
+        android:label="fragment_library"
+        tools:layout="@layout/fragment_library" >
+        <action
+            android:id="@+id/action_libraryFragment_to_bookFragment"
+            app:destination="@id/bookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/suggestionFragment"
+        android:name="com.project.frontMobile.ui.suggestion.SuggestionFragment"
+        android:label="fragment_suggestion"
+        tools:layout="@layout/fragment_suggestion" >
+        <action
+            android:id="@+id/action_suggestionFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_suggestionFragment_to_bookFragment"
+            app:destination="@id/bookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authenticationFragment"
+        android:name="com.project.frontMobile.ui.authentication.AuthenticationFragment"
+        android:label="fragment_authentication"
+        tools:layout="@layout/fragment_authentication" >
+        <action
+            android:id="@+id/action_authenticationFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_authenticationFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.project.frontMobile.ui.authentication.login.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logInFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.project.frontMobile.ui.authentication.signup.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.project.frontMobile.ui.authentication.forgotpassword.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/loadingFragment"
+        android:name="com.project.frontMobile.ui.loading.LoadingFragment"
+        android:label="fragment_loading"
+        tools:layout="@layout/fragment_loading" >
+        <action
+            android:id="@+id/action_loadingFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
+        <action
+            android:id="@+id/action_loadingFragment_to_authenticationFragment"
+            app:destination="@id/authenticationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.project.frontMobile.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_bookFragment"
+            app:destination="@id/bookFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_authorFragment"
+            app:destination="@id/authorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/upcomingFragment"
+        android:name="com.project.frontMobile.ui.upcoming.UpcomingFragment"
+        android:label="fragment_upcoming"
+        tools:layout="@layout/fragment_upcoming" >
+        <action
+            android:id="@+id/action_upcomingFragment_to_bookFragment"
+            app:destination="@id/bookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookFragment"
+        android:name="com.project.frontMobile.ui.book.BookFragment"
+        android:label="fragment_book"
+        tools:layout="@layout/fragment_book" >
+        <action
+            android:id="@+id/action_bookFragment_to_authorFragment"
+            app:destination="@id/authorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authorFragment"
+        android:name="com.project.frontMobile.ui.author.AuthorFragment"
+        android:label="fragment_author"
+        tools:layout="@layout/fragment_author" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.project.frontMobile.ui.user.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.project.frontMobile.ui.menu.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_authenticationFragment"
+            app:destination="@id/authenticationFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_RGPDFragment"
+            app:destination="@id/RGPDFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_helpFragment"
+            app:destination="@id/helpFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.project.frontMobile.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.project.frontMobile.ui.help.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/RGPDFragment"
+        android:name="com.project.frontMobile.ui.rgpd.RGPDFragment"
+        android:label="fragment_r_g_p_d"
+        tools:layout="@layout/fragment_r_g_p_d" />
+</navigation>
