@@ -5,11 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.google.android.material.button.MaterialButton
 import com.project.frontMobile.R
+import com.project.frontMobile.viewmodel.BookViewModel
 
 class LibraryFragment : Fragment() {
+
+    private val viewModel: BookViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +28,8 @@ class LibraryFragment : Fragment() {
         val bookButton = view.findViewById<MaterialButton>(R.id.book_button)
 
         bookButton.setOnClickListener {
-            val action = LibraryFragmentDirections.actionLibraryFragmentToBookFragment()
+            // TODO() : Replace hardcoded string for bookId with id get on recyclerView item
+            val action = LibraryFragmentDirections.actionLibraryFragmentToBookFragment("61cebf67000cbb4e92ba15aa")
             view?.findNavController()?.navigate(action)
         }
 

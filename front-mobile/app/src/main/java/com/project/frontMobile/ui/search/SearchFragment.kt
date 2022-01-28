@@ -25,7 +25,8 @@ class SearchFragment : Fragment() {
         val authorButton = view.findViewById<MaterialButton>(R.id.author_button)
 
         bookButton.setOnClickListener {
-            val action = SearchFragmentDirections.actionSearchFragmentToBookFragment()
+            // TODO() : Replace hardcoded string for bookId with id get on recyclerView item
+            val action = SearchFragmentDirections.actionSearchFragmentToBookFragment("61cebf67000cbb4e92ba15aa")
             view?.findNavController()?.navigate(action)
         }
 

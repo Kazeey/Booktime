@@ -5,29 +5,56 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.google.android.material.button.MaterialButton
 import com.project.frontMobile.R
+import com.project.frontMobile.databinding.FragmentBookBinding
+import com.project.frontMobile.ui.MainActivity
+import com.project.frontMobile.utils.ClickHandler
+import com.project.frontMobile.viewmodel.BookViewModel
 
-class BookFragment : Fragment() {
+class BookFragment : Fragment(), ClickHandler {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    companion object {
+        const val BOOK_ID = "book_id"
     }
+
+    private lateinit var binding: FragmentBookBinding
+
+    private val viewModel: BookViewModel by viewModels()
+
+    private lateinit var bookId: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_book, container, false)
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_book, container, false)
 
-        val authorButton = view.findViewById<MaterialButton>(R.id.author_button)
+        return binding.root
+    }
 
-        authorButton.setOnClickListener {
-            val action = BookFragmentDirections.actionBookFragmentToAuthorFragment()
-            view?.findNavController()?.navigate(action)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.handler = this
+
+        arguments?.let {
+            bookId = it.getString(BOOK_ID).toString()
         }
 
-        return view
+        viewModel.init(bookId)
+
+        viewModel.currentBookResponse.observe(viewLifecycleOwner, { book ->
+            (activity as MainActivity).supportActionBar?.title = book.title
+        })
+    }
+
+    override fun onClick(view: View) {
+        val action = BookFragmentDirections.actionBookFragmentToAuthorFragment()
+        view.findNavController().navigate(action)
     }
 }
