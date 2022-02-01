@@ -10,7 +10,9 @@ class BookConverter {
             response.id,
             response.title,
             response.synopsis,
-            response.category
+            response.category,
+            response.authorId,
+            response.base64
         )
     }
 

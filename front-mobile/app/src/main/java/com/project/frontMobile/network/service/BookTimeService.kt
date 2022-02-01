@@ -1,5 +1,6 @@
 package com.project.frontMobile.network.service
 
+import com.project.frontMobile.network.response.AuthorResponse
 import com.project.frontMobile.network.response.BookResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -19,16 +20,30 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-interface BookService {
+interface BookTimeService {
+
+    /**
+     * Book
+     */
     @GET("book/findAll")
     suspend fun getBooks(): List<BookResponse>
 
     @GET("book/findBy/{id}")
     suspend fun getBookById(@Path("id") id: String): BookResponse
+
+    /**
+     * Author
+     */
+
+    @GET("author/findAll")
+    suspend fun getAuthors(): List<AuthorResponse>
+
+    @GET("author/findBy/{id}")
+    suspend fun getAuthorById(@Path("id") id: String): AuthorResponse
 }
 
-object BookApi {
-    val retrofitService: BookService by lazy {
-        retrofit.create(BookService::class.java)
+object BookTimeApi {
+    val retrofitService: BookTimeService by lazy {
+        retrofit.create(BookTimeService::class.java)
     }
 }

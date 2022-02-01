@@ -9,7 +9,11 @@
     <string name="title_settings_fragment">Settings</string>
 
     <!-- Book Fragment -->
-    <string name="title_synopsis">Synopsis</string>
+    <string name="header_synopsis">Synopsis</string>
+    <string name="header_author">Writing By</string>
+
+    <!-- Author RecyclerView -->
+    <string name="author_name">%1$s %2$s</string>
 
     <string name="button_log_in">Log In</string>
     <string name="button_sign_up">Sign up</string>
@@ -22,6 +26,4 @@
     <string name="button_search">Search</string>
     <string name="button_book">Book</string>
     <string name="button_author">Author</string>
-
-    <string name="test">Writing by\n%s</string>
 </resources>

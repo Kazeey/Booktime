@@ -113,7 +113,11 @@
         android:id="@+id/authorFragment"
         android:name="com.project.frontMobile.ui.author.AuthorFragment"
         android:label="fragment_author"
-        tools:layout="@layout/fragment_author" />
+        tools:layout="@layout/fragment_author" >
+        <argument
+            android:name="author_id"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.project.frontMobile.ui.user.ProfileFragment"

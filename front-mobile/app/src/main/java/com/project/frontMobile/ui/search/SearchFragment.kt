@@ -31,7 +31,7 @@ class SearchFragment : Fragment() {
         }
 
         authorButton.setOnClickListener {
-            val action = SearchFragmentDirections.actionSearchFragmentToAuthorFragment()
+            val action = SearchFragmentDirections.actionSearchFragmentToAuthorFragment("1")
             view?.findNavController()?.navigate(action)
         }
 

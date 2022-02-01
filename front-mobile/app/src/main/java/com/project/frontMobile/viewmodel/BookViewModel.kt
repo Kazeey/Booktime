@@ -7,13 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.project.frontMobile.data.converter.BookConverter
 import com.project.frontMobile.data.model.Book
-import com.project.frontMobile.network.service.BookApi
+import com.project.frontMobile.network.service.BookTimeApi
 import kotlinx.coroutines.launch
 
 class BookViewModel: ViewModel() {
 
     private val _currentBook = MutableLiveData<Book>()
-    val currentBookResponse: LiveData<Book>
+    val currentBook: LiveData<Book>
         get() = _currentBook
 
     private val _books = MutableLiveData<List<Book>>()
@@ -22,24 +22,23 @@ class BookViewModel: ViewModel() {
 
     fun init(id: String) {
         getBookById(id)
-        getAllBooks()
     }
 
-    fun getAllBooks() {
+    private fun getAllBooks() {
         viewModelScope.launch {
-            val listResult = BookApi.retrofitService.getBooks()
+            val listResult = BookTimeApi.retrofitService.getBooks()
             _books.value = BookConverter().convertAll(listResult)
 
             Log.d(BookViewModel::class.java.name, "Nb of books : ${books.value?.size}")
         }
     }
 
-    fun getBookById(id: String) {
+    private fun getBookById(id: String) {
         viewModelScope.launch {
-            val bookResult = BookApi.retrofitService.getBookById(id)
+            val bookResult = BookTimeApi.retrofitService.getBookById(id)
             _currentBook.value = BookConverter().convert(bookResult)
 
-            Log.d(BookViewModel::class.java.name, "Current Book : ${currentBookResponse.value?.title}")
+            Log.d(BookViewModel::class.java.name, "Current Book : ${currentBook.value?.id}")
         }
     }
 }
