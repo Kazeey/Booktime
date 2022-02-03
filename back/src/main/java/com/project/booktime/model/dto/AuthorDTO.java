@@ -1,6 +1,7 @@
 package com.project.booktime.model.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class AuthorDTO
 {
@@ -12,9 +13,9 @@ public class AuthorDTO
     private String biography;
     private String country;
     private String base64;
+    private List<String> booksId;
 
-    public AuthorDTO(String id, String name, String firstName, Date birthDate, Date deathDate, String biography, String country, String base64)
-    {
+    public AuthorDTO(String id, String name, String firstName, Date birthDate, Date deathDate, String biography, String country, String base64, List<String> booksId) {
         this.id = id;
         this.name = name;
         this.firstName = firstName;
@@ -23,6 +24,7 @@ public class AuthorDTO
         this.biography = biography;
         this.country = country;
         this.base64 = base64;
+        this.booksId = booksId;
     }
 
     public String getId() {
@@ -87,5 +89,13 @@ public class AuthorDTO
 
     public void setBase64(String base64) {
         this.base64 = base64;
+    }
+
+    public List<String> getBooksId() {
+        return booksId;
+    }
+
+    public void setBooksId(List<String> booksId) {
+        this.booksId = booksId;
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
 
 @Document("book")
 public class Book {
@@ -16,17 +17,17 @@ public class Book {
     private String category;
     private int pageCount;
     private double rating;
-    private String authorId;
+    private List<String> authorsId;
     private String base64;
 
-    public Book(String title, String synopsis, Date publicationDate, String category, int pageCount, double rating, String authorId, String base64) {
+    public Book(String title, String synopsis, Date publicationDate, String category, int pageCount, double rating, List<String> authorsId, String base64) {
         this.title = title;
         this.synopsis = synopsis;
         this.publicationDate = publicationDate;
         this.category = category;
         this.pageCount = pageCount;
         this.rating = rating;
-        this.authorId = authorId;
+        this.authorsId = authorsId;
         this.base64 = base64;
     }
 
@@ -86,12 +87,12 @@ public class Book {
         this.rating = rating;
     }
 
-    public String getAuthorId() {
-        return authorId;
+    public List<String> getAuthorsId() {
+        return authorsId;
     }
 
-    public void setAuthorId(String authorId) {
-        this.authorId = authorId;
+    public void setAuthorsId(List<String> authorsId) {
+        this.authorsId = authorsId;
     }
 
     public String getBase64() {

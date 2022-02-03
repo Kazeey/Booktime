@@ -32,7 +32,8 @@ public class AuthorHelper
                 author.getDeathDate(),
                 author.getBiography(),
                 author.getCountry(),
-                author.getBase64()
+                author.getBase64(),
+                author.getBooksId()
         );
     }
 }

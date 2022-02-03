@@ -29,7 +29,7 @@ public class BookHelper {
                 book.getCategory(),
                 book.getPageCount(),
                 book.getRating(),
-                book.getAuthorId(),
+                book.getAuthorsId(),
                 book.getBase64()
         );
     }

@@ -1,9 +1,7 @@
 package com.project.frontMobile.data.converter
 
 import com.project.frontMobile.data.model.Author
-import com.project.frontMobile.data.model.Book
 import com.project.frontMobile.network.response.AuthorResponse
-import com.project.frontMobile.network.response.BookResponse
 
 class AuthorConverter {
 
@@ -12,6 +10,7 @@ class AuthorConverter {
             response.id,
             response.name,
             response.firstName,
+            response.booksId,
             response.base64
         )
     }

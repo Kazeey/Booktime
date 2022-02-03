@@ -26,7 +26,7 @@ class SuggestionFragment : Fragment() {
 
         bookButton.setOnClickListener {
             // TODO() : Replace hardcoded string for bookId with id get on recyclerView item
-            val action = SuggestionFragmentDirections.actionSuggestionFragmentToBookFragment("61cebf67000cbb4e92ba15aa")
+            val action = SuggestionFragmentDirections.actionSuggestionFragmentToBookFragment("61fbdd5286bac81a8deaacd2")
             view?.findNavController()?.navigate(action)
         }
 

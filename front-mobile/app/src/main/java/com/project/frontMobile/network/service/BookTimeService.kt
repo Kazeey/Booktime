@@ -38,6 +38,9 @@ interface BookTimeService {
     @GET("author/findAll")
     suspend fun getAuthors(): List<AuthorResponse>
 
+    @GET("author/findAuthorsByBook/{bookId}")
+    suspend fun getAuthorsByBookId(@Path("bookId") bookId: String): List<AuthorResponse>
+
     @GET("author/findBy/{id}")
     suspend fun getAuthorById(@Path("id") id: String): AuthorResponse
 }

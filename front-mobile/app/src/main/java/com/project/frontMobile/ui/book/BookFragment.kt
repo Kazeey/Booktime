@@ -10,13 +10,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.project.frontMobile.R
 import com.project.frontMobile.adapter.AuthorAdapter
 import com.project.frontMobile.databinding.FragmentBookBinding
 import com.project.frontMobile.ui.MainActivity
-import com.project.frontMobile.utils.ClickHandler
 import com.project.frontMobile.viewmodel.AuthorViewModel
 import com.project.frontMobile.viewmodel.BookViewModel
 
@@ -52,15 +50,14 @@ class BookFragment : Fragment() {
             bookId = it.getString(BOOK_ID).toString()
         }
 
-        bookViewModel.init(bookId)
+        bookViewModel.getBookById(bookId)
+        authorViewModel.getAuthorsByBookId(bookId)
 
         bookViewModel.currentBook.observe(viewLifecycleOwner, { book ->
             (activity as MainActivity).supportActionBar?.title = book.title
 
             val base64: ByteArray = Base64.decode(book.base64, Base64.DEFAULT)
             binding.bookImage.setImageBitmap(BitmapFactory.decodeByteArray(base64, 0, base64.size))
-
-            authorViewModel.getAllAuthors()
         })
 
         authorViewModel.authors.observe(viewLifecycleOwner, { authors ->
