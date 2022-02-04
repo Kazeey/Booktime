@@ -17,9 +17,9 @@ public class Book {
     private int pageCount;
     private double rating;
     private String authorId;
-    private Picture picture;
+    private String base64;
 
-    public Book(String title, String synopsis, Date publicationDate, String category, int pageCount, double rating, String authorId, Picture picture) {
+    public Book(String title, String synopsis, Date publicationDate, String category, int pageCount, double rating, String authorId, String base64) {
         this.title = title;
         this.synopsis = synopsis;
         this.publicationDate = publicationDate;
@@ -27,7 +27,7 @@ public class Book {
         this.pageCount = pageCount;
         this.rating = rating;
         this.authorId = authorId;
-        this.picture = picture;
+        this.base64 = base64;
     }
 
     public String getId() {
@@ -94,11 +94,11 @@ public class Book {
         this.authorId = authorId;
     }
 
-    public Picture getPicture() {
-        return picture;
+    public String getBase64() {
+        return base64;
     }
 
-    public void setPicture(Picture picture) {
-        this.picture = picture;
+    public void setBase64(String base64) {
+        this.base64 = base64;
     }
 }
