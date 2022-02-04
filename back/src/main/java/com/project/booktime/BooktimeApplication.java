@@ -12,7 +12,6 @@ public class BooktimeApplication
 		SpringApplication.run(BooktimeApplication.class, args);
 	}
 
-	@Override
 	public void run(String... args) throws Exception {
 
 	}

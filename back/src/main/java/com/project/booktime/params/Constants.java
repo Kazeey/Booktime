@@ -13,9 +13,10 @@ public class Constants
     public final static String BACK_URL = "http://127.0.0.1:8080/";
     public final static String EXEMPLE_CONTROLLER_URL = "exemples/controller";
     public final static String DATA_COLLECT_URL = "private/controllers/dataCollect";
+    public final static String GOOGLE_API = "https://www.googleapis.com/books/v1/volumes?q=";
 
     // Google books categories
-    String categories[] = {
+    public final static String categories[] = {
             "Anthologies",
             "Art",
             "Biographies",
