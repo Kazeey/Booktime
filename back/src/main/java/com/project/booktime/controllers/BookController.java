@@ -19,6 +19,9 @@ import com.project.booktime.params.Constants;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -81,7 +84,7 @@ public class BookController {
     }
 
     @GetMapping("/googleApi/database/addBooks")
-    public void addBooksToDB() throws IOException, JSONException, ParseException {
+    public void addBooksToDB() throws IOException, JSONException, ParseException, java.text.ParseException {
         URL url;
 
         for (String category : Constants.categories)
@@ -116,8 +119,24 @@ public class BookController {
 
                 for(int l = 0; l < obj.size(); l++)
                 {
-                    System.out.println(obj.get(l));
+                    JSONObject bookData = (JSONObject) obj.get(l);
+                    JSONObject volumeInfo = (JSONObject) bookData.get("volumeInfo");
+                    JSONObject imageLinks = (JSONObject) volumeInfo.get("imageLinks");
 
+                    DateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
+                    System.out.println(volumeInfo.get("averageRating").getClass());
+                    Book book = new Book(
+                        (String) volumeInfo.get("title") + " " + (String) volumeInfo.get("subtitle"),
+                            (String) volumeInfo.get("description"),
+                            (Date) simpleDateFormat.parse((String) volumeInfo.get("publishedDate")),
+                            (String) volumeInfo.get("categories"),
+                            ((Long) volumeInfo.get("pageCount")).intValue(),
+                            (double) volumeInfo.get("averageRating"),
+                            "null",
+                            (String) imageLinks.get("thumbnail")
+                    );
+
+                    System.out.println(book.toString());
                     //BookDTO bookDTO = bookService.add(book);
                 }
             }
