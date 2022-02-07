@@ -1,5 +1,7 @@
 package com.project.booktime.model.dto;
 
+import org.json.simple.JSONArray;
+
 import java.util.Date;
 
 public class BookDTO {
@@ -7,17 +9,19 @@ public class BookDTO {
     private String id;
     private String title;
     private String synopsis;
+    private Object ISBN;
     private Date publicationDate;
-    private String category;
-    private int pageCount;
-    private double rating;
+    private Object category;
+    private String pageCount;
+    private String rating;
     private String authorId;
     private String base64;
 
-    public BookDTO(String id, String title, String synopsis, Date publicationDate, String category, int pageCount, double rating, String authorId, String base64) {
+    public BookDTO(String id, String title, String synopsis, Object ISBN, Date publicationDate, Object category, String pageCount, String rating, String authorId, String base64) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
+        this.ISBN = ISBN;
         this.publicationDate = publicationDate;
         this.category = category;
         this.pageCount = pageCount;
@@ -50,6 +54,14 @@ public class BookDTO {
         this.synopsis = synopsis;
     }
 
+    public Object getISBN() {
+        return ISBN;
+    }
+
+    public void setISBN(Object ISBN) {
+        this.ISBN = ISBN;
+    }
+
     public Date getPublicationDate() {
         return publicationDate;
     }
@@ -58,27 +70,27 @@ public class BookDTO {
         this.publicationDate = publicationDate;
     }
 
-    public String getCategory() {
+    public Object getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Object category) {
         this.category = category;
     }
 
-    public int getPageCount() {
+    public String getPageCount() {
         return pageCount;
     }
 
-    public void setPageCount(int pageCount) {
+    public void setPageCount(String pageCount) {
         this.pageCount = pageCount;
     }
 
-    public double getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

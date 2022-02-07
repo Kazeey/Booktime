@@ -5,22 +5,28 @@ import com.project.booktime.exception.BookNotFoundException;
 import com.project.booktime.model.dto.BookDTO;
 import com.project.booktime.model.entity.Book;
 import com.project.booktime.services.BookService;
+import com.project.booktime.services.ImageService;
 import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.project.booktime.params.Constants;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -84,15 +90,16 @@ public class BookController {
     }
 
     @GetMapping("/googleApi/database/addBooks")
-    public void addBooksToDB() throws IOException, JSONException, ParseException, java.text.ParseException {
+    public void addBooksToDB() throws IOException, JSONException, ParseException, java.text.ParseException, InterruptedException {
         URL url;
+        ImageService imageService = new ImageService();
 
         for (String category : Constants.categories)
         {
             int nbStartIndex = 0;
             for (int i = 0; i < 3; i++)
             {
-                url = new URL(Constants.GOOGLE_API + "subject:" + category + "&startIndex=" + nbStartIndex + "&maxResults=40");
+                url = new URL(Constants.GOOGLE_API + "subject:" + category + "&startIndex=" + nbStartIndex + "&maxResults=40&langRestrict=fr");
                 nbStartIndex += 40;
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -112,36 +119,76 @@ public class BookController {
 
                 scanner.close();
 
+                System.out.println(conn.getResponseCode());
+
                 JSONParser parser = new JSONParser();
                 JSONObject data = (JSONObject) parser.parse(zIncomingBook);
-
                 JSONArray obj = (JSONArray) data.get("items");
 
+                /*
                 for(int l = 0; l < obj.size(); l++)
                 {
                     JSONObject bookData = (JSONObject) obj.get(l);
                     JSONObject volumeInfo = (JSONObject) bookData.get("volumeInfo");
                     JSONObject imageLinks = (JSONObject) volumeInfo.get("imageLinks");
+                    JSONArray industryIdentifiers = (JSONArray) volumeInfo.get("industryIdentifiers");
+
+                    String zTitle = "";
+                    String zAverageRating = "";
+                    String zDescription = "";
+                    String zPageCount = "";
+                    String zThumbnail = "";
 
                     DateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
-                    System.out.println(volumeInfo.get("averageRating").getClass());
+
+                    if (volumeInfo.get("subtitle") == null)
+                        zTitle = (String) volumeInfo.get("title");
+                    else
+                        zTitle = (String) volumeInfo.get("title") + " - " + (String) volumeInfo.get("subtitle");
+
+                    zAverageRating = checkKey(volumeInfo.get("averageRating"));
+                    zDescription = checkKey(volumeInfo.get("description"));
+                    zPageCount = checkKey(volumeInfo.get("pageCount"));
+                    zThumbnail = imageService.encodeImage((String) imageLinks.get("thumbnail"));
+
+                    if (bookService.findByTitle(zTitle))
+                    {
+                        System.out.println("Livre déjà enregistré : " + zTitle);
+                        continue;
+                    }
+
+                    System.out.println("Livre ajouté : " + zTitle);
                     Book book = new Book(
-                        (String) volumeInfo.get("title") + " " + (String) volumeInfo.get("subtitle"),
-                            (String) volumeInfo.get("description"),
+                            zTitle,
+                            zDescription,
+                            industryIdentifiers,
                             (Date) simpleDateFormat.parse((String) volumeInfo.get("publishedDate")),
-                            (String) volumeInfo.get("categories"),
-                            ((Long) volumeInfo.get("pageCount")).intValue(),
-                            (double) volumeInfo.get("averageRating"),
+                            volumeInfo.get("categories"),
+                            zPageCount,
+                            zAverageRating,
                             "null",
-                            (String) imageLinks.get("thumbnail")
+                            zThumbnail
                     );
 
-                    System.out.println(book.toString());
-                    //BookDTO bookDTO = bookService.add(book);
+                    BookDTO bookDTO = bookService.add(book);
+
                 }
+             */
+
+                System.out.println("Pause \n");
+                Thread.sleep(30000);
+                System.out.println("Reparti \n");
             }
         };
 
         System.out.println("Récupération des livres terminée");
+    }
+
+    public String checkKey(Object key)
+    {
+        if (key == null)
+            return "N/A";
+        else
+            return key.toString();
     }
 }

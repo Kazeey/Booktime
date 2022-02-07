@@ -32,6 +32,7 @@ public class Constants
             "Horror",
             "Humor",
             "Litterature",
+            "Love",
             "Mystery",
             "Manga",
             "Romance",
