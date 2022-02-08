@@ -96,7 +96,7 @@
                     app:layout_constraintStart_toStartOf="parent"/>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
+                    android:id="@+id/author_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -104,24 +104,15 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/title_header"/>
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/category_group"
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/category_recyclerView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/recyclerView">
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{viewModel.currentBook.category}"
-                        android:textColor="@color/white"
-                        android:backgroundTint="@color/primary_light"
-                        android:clickable="false"
-                        tools:text="Thriller"/>
-
-                </com.google.android.material.chip.ChipGroup>
+                    android:scrollbars="horizontal"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/author_recyclerView"/>
 
                 <TextView
                     android:id="@+id/synopsis_header"
@@ -132,7 +123,7 @@
                     android:textSize="17sp"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@+id/category_group"
+                    app:layout_constraintTop_toBottomOf="@+id/category_recyclerView"
                     app:layout_constraintStart_toStartOf="parent"/>
 
                 <TextView

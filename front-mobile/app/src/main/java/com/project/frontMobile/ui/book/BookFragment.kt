@@ -11,13 +11,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.project.frontMobile.R
 import com.project.frontMobile.adapter.AuthorAdapter
+import com.project.frontMobile.adapter.CategoryAdapter
+import com.project.frontMobile.data.model.Author
 import com.project.frontMobile.data.model.User
 import com.project.frontMobile.databinding.FragmentBookBinding
 import com.project.frontMobile.ui.MainActivity
-import com.project.frontMobile.utils.SnackbarUtils
 import com.project.frontMobile.viewmodel.AuthorViewModel
 import com.project.frontMobile.viewmodel.BookViewModel
 import com.project.frontMobile.viewmodel.UserViewModel
@@ -64,11 +64,12 @@ class BookFragment : Fragment() {
 
             val base64: ByteArray = Base64.decode(book.base64, Base64.DEFAULT)
             binding.bookImage.setImageBitmap(BitmapFactory.decodeByteArray(base64, 0, base64.size))
+
+            setupCategoryRecyclerView(view, book.category)
         })
 
         authorViewModel.authors.observe(viewLifecycleOwner, { authors ->
-            val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-            recyclerView.adapter = AuthorAdapter(requireContext(), authors)
+            setupAuthorRecyclerView(view, authors)
         })
 
         userViewModel.currentUser.observe(viewLifecycleOwner, { user ->
@@ -86,5 +87,15 @@ class BookFragment : Fragment() {
             currentUser.manageLiked(bookId)
             userViewModel.updateUser(currentUser)
         }
+    }
+
+    private fun setupAuthorRecyclerView(view: View, authors: List<Author>) {
+        val recyclerView = view.findViewById<RecyclerView>(R.id.author_recyclerView)
+        recyclerView.adapter = AuthorAdapter(requireContext(), authors)
+    }
+
+    private fun setupCategoryRecyclerView(view: View, categories: List<String>) {
+        val recyclerView = view.findViewById<RecyclerView>(R.id.category_recyclerView)
+        recyclerView.adapter = CategoryAdapter(requireContext(), categories)
     }
 }
