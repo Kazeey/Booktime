@@ -11,12 +11,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.project.frontMobile.R
 import com.project.frontMobile.adapter.AuthorAdapter
+import com.project.frontMobile.data.model.User
 import com.project.frontMobile.databinding.FragmentBookBinding
 import com.project.frontMobile.ui.MainActivity
+import com.project.frontMobile.utils.SnackbarUtils
 import com.project.frontMobile.viewmodel.AuthorViewModel
 import com.project.frontMobile.viewmodel.BookViewModel
+import com.project.frontMobile.viewmodel.UserViewModel
 
 class BookFragment : Fragment() {
 
@@ -28,8 +32,10 @@ class BookFragment : Fragment() {
 
     private val bookViewModel: BookViewModel by viewModels()
     private val authorViewModel: AuthorViewModel by activityViewModels()
+    private val userViewModel: UserViewModel by activityViewModels()
 
     private lateinit var bookId: String
+    private lateinit var currentUser: User
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,5 +70,21 @@ class BookFragment : Fragment() {
             val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
             recyclerView.adapter = AuthorAdapter(requireContext(), authors)
         })
+
+        userViewModel.currentUser.observe(viewLifecycleOwner, { user ->
+            currentUser = user
+            binding.favorite.setImageResource(currentUser.isBookLiked(bookId))
+            binding.add.setImageResource(currentUser.isBookAdded(bookId))
+        })
+
+        binding.addContainer.setOnClickListener {
+            currentUser.manageAdded(bookId)
+            userViewModel.updateUser(currentUser)
+        }
+
+        binding.likeContainer.setOnClickListener {
+            currentUser.manageLiked(bookId)
+            userViewModel.updateUser(currentUser)
+        }
     }
 }

@@ -3,6 +3,8 @@ package com.project.frontMobile.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -10,10 +12,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.project.frontMobile.R
+import com.project.frontMobile.viewmodel.UserViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
+
+    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         setupToolbar()
         setupNav()
+
+        userViewModel.getUserById("6200eab8bd5a43766af23e96")
     }
 
     private fun setupToolbar() {

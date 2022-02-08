@@ -5,7 +5,7 @@
         android:id="@+id/libraryFragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_format_list_24"
-        android:title="@string/title_suggestion_fragment"/>
+        android:title="@string/title_library_fragment"/>
 
     <item
         android:id="@+id/upcomingFragment"

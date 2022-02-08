@@ -29,7 +29,7 @@ class LibraryFragment : Fragment() {
 
         bookButton.setOnClickListener {
             // TODO() : Replace hardcoded string for bookId with id get on recyclerView item
-            val action = LibraryFragmentDirections.actionLibraryFragmentToBookFragment("61fbdd5286bac81a8deaacd2")
+            val action = LibraryFragmentDirections.actionLibraryFragmentToBookFragment("6200ea111010dc1e695a2746")
             view?.findNavController()?.navigate(action)
         }
 

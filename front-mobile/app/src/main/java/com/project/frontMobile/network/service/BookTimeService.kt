@@ -1,12 +1,16 @@
 package com.project.frontMobile.network.service
 
+import com.project.frontMobile.data.model.User
 import com.project.frontMobile.network.response.AuthorResponse
 import com.project.frontMobile.network.response.BookResponse
+import com.project.frontMobile.network.response.UserResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.Path
 
 private const val BASE_URL = "http://10.0.2.2:8080"
@@ -23,7 +27,7 @@ private val retrofit = Retrofit.Builder()
 interface BookTimeService {
 
     /**
-     * Book
+     * BOOK
      */
     @GET("book/findAll")
     suspend fun getBooks(): List<BookResponse>
@@ -32,7 +36,7 @@ interface BookTimeService {
     suspend fun getBookById(@Path("id") id: String): BookResponse
 
     /**
-     * Author
+     * AUTHOR
      */
 
     @GET("author/findAll")
@@ -43,6 +47,17 @@ interface BookTimeService {
 
     @GET("author/findBy/{id}")
     suspend fun getAuthorById(@Path("id") id: String): AuthorResponse
+
+    /**
+     * USER
+     */
+
+    @GET("user/findBy/{id}")
+    suspend fun getUserById(@Path("id") id: String): UserResponse
+
+    @PATCH("user/update/{id}")
+    suspend fun updateUser(@Path("id") id: String,
+                           @Body user: User): UserResponse
 }
 
 object BookTimeApi {
