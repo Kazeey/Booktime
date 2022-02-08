@@ -119,13 +119,13 @@ public class BookController {
 
                 scanner.close();
 
-                System.out.println(conn.getResponseCode());
+                System.out.println(i + " / " + conn.getResponseCode() + " / " + category + "\n");
+                System.out.println(url);
 
                 JSONParser parser = new JSONParser();
                 JSONObject data = (JSONObject) parser.parse(zIncomingBook);
                 JSONArray obj = (JSONArray) data.get("items");
 
-                /*
                 for(int l = 0; l < obj.size(); l++)
                 {
                     JSONObject bookData = (JSONObject) obj.get(l);
@@ -134,10 +134,6 @@ public class BookController {
                     JSONArray industryIdentifiers = (JSONArray) volumeInfo.get("industryIdentifiers");
 
                     String zTitle = "";
-                    String zAverageRating = "";
-                    String zDescription = "";
-                    String zPageCount = "";
-                    String zThumbnail = "";
 
                     DateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
 
@@ -146,10 +142,13 @@ public class BookController {
                     else
                         zTitle = (String) volumeInfo.get("title") + " - " + (String) volumeInfo.get("subtitle");
 
-                    zAverageRating = checkKey(volumeInfo.get("averageRating"));
-                    zDescription = checkKey(volumeInfo.get("description"));
-                    zPageCount = checkKey(volumeInfo.get("pageCount"));
-                    zThumbnail = imageService.encodeImage((String) imageLinks.get("thumbnail"));
+                    if (zTitle == "Le Montage")
+                        System.out.println("Bon titre");
+
+                    String zAverageRating = checkKey(volumeInfo.get("averageRating"));
+                    String zDescription = checkKey(volumeInfo.get("description"));
+                    String zPageCount = checkKey(volumeInfo.get("pageCount"));
+                    String zThumbnail = imageService.encodeImage((String) imageLinks.get("thumbnail"));
 
                     if (bookService.findByTitle(zTitle))
                     {
@@ -158,6 +157,8 @@ public class BookController {
                     }
 
                     System.out.println("Livre ajouté : " + zTitle);
+
+                    /*
                     Book book = new Book(
                             zTitle,
                             zDescription,
@@ -171,9 +172,8 @@ public class BookController {
                     );
 
                     BookDTO bookDTO = bookService.add(book);
-
+                    */
                 }
-             */
 
                 System.out.println("Pause \n");
                 Thread.sleep(30000);

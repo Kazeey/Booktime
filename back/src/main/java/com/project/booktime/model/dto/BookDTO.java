@@ -14,10 +14,10 @@ public class BookDTO {
     private Object category;
     private String pageCount;
     private String rating;
-    private String authorId;
+    private String authorsId;
     private String base64;
 
-    public BookDTO(String id, String title, String synopsis, Object ISBN, Date publicationDate, Object category, String pageCount, String rating, String authorId, String base64) {
+    public BookDTO(String id, String title, String synopsis, Object ISBN, Date publicationDate, Object category, String pageCount, String rating, String authorsId, String base64) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
@@ -26,7 +26,7 @@ public class BookDTO {
         this.category = category;
         this.pageCount = pageCount;
         this.rating = rating;
-        this.authorId = authorId;
+        this.authorsId = authorsId;
         this.base64 = base64;
     }
 
@@ -94,12 +94,12 @@ public class BookDTO {
         this.rating = rating;
     }
 
-    public String getAuthorId() {
-        return authorId;
+    public String getAuthorsId() {
+        return authorsId;
     }
 
-    public void setAuthorId(String authorId) {
-        this.authorId = authorId;
+    public void setAuthorsId(String authorsId) {
+        this.authorsId = authorsId;
     }
 
     public String getBase64() {
