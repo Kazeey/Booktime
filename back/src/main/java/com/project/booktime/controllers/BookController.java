@@ -14,11 +14,13 @@ import org.json.simple.parser.ParseException;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 
 import com.project.booktime.params.Constants;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -26,10 +28,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Base64;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
-import java.util.Scanner;
 
 @CrossOrigin
 @RestController
@@ -128,27 +128,52 @@ public class BookController {
 
                 for(int l = 0; l < obj.size(); l++)
                 {
-                    JSONObject bookData = (JSONObject) obj.get(l);
-                    JSONObject volumeInfo = (JSONObject) bookData.get("volumeInfo");
-                    JSONObject imageLinks = (JSONObject) volumeInfo.get("imageLinks");
-                    JSONArray industryIdentifiers = (JSONArray) volumeInfo.get("industryIdentifiers");
-
                     String zTitle = "";
+                    String zThumbnailBase64 = "";
+                    String zThumbnail = "";
 
-                    DateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
+                    JSONObject bookData = (JSONObject) obj.get(l);
+
+                    if (!bookData.containsKey("volumeInfo"))
+                        continue;
+
+                    JSONObject volumeInfo = (JSONObject) bookData.get("volumeInfo");
 
                     if (volumeInfo.get("subtitle") == null)
                         zTitle = (String) volumeInfo.get("title");
                     else
                         zTitle = (String) volumeInfo.get("title") + " - " + (String) volumeInfo.get("subtitle");
 
-                    if (zTitle == "Le Montage")
-                        System.out.println("Bon titre");
-
                     String zAverageRating = checkKey(volumeInfo.get("averageRating"));
                     String zDescription = checkKey(volumeInfo.get("description"));
                     String zPageCount = checkKey(volumeInfo.get("pageCount"));
-                    String zThumbnail = imageService.encodeImage((String) imageLinks.get("thumbnail"));
+                    String zDate = checkKey(volumeInfo.get("publishedDate"));
+
+                    if (!volumeInfo.containsKey("imageLinks"))
+                    {
+                        String zImagePath = "../../assets/naThumbnail.jpg";
+                        System.out.println(imageService.encodeImageFromUrl(zImagePath));
+                    }
+                    else
+                    {
+                        JSONObject imageLinks = (JSONObject) volumeInfo.get("imageLinks");
+                        zThumbnail = checkKey(imageLinks.get("thumbnail"));
+                        zThumbnailBase64 = imageService.encodeImageFromUrl(zThumbnail);
+                    }
+
+                    JSONArray industryIdentifiers = (JSONArray) volumeInfo.get("industryIdentifiers");
+
+                    System.out.println(zTitle);
+                    System.out.println(zDescription);
+                    System.out.println(industryIdentifiers);
+                    System.out.println(zDate);
+                    System.out.println(volumeInfo.get("categories"));
+                    System.out.println(zPageCount);
+                    System.out.println(zAverageRating);
+                    System.out.println(zThumbnail);
+                    System.out.println(zThumbnailBase64);
+                    System.out.println("-------------------------------- \n");
+                    System.out.println("\n");
 
                     if (bookService.findByTitle(zTitle))
                     {
@@ -163,12 +188,12 @@ public class BookController {
                             zTitle,
                             zDescription,
                             industryIdentifiers,
-                            (Date) simpleDateFormat.parse((String) volumeInfo.get("publishedDate")),
+                            zDate,
                             volumeInfo.get("categories"),
                             zPageCount,
                             zAverageRating,
                             "null",
-                            zThumbnail
+                            zThumbnailBase64
                     );
 
                     BookDTO bookDTO = bookService.add(book);

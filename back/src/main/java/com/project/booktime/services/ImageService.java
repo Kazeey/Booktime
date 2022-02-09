@@ -1,18 +1,22 @@
 package com.project.booktime.services;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Base64;
 
+
 @Service
 public class ImageService
 {
-    public String encodeImage(String imageUrl) throws IOException
+    public String encodeImageFromUrl(String imageUrl) throws IOException
     {
         if (imageUrl == null)
             return "N/A";
@@ -26,5 +30,10 @@ public class ImageService
         baos.close();
 
         return Base64.getEncoder().encodeToString(imageInByte);
+    }
+
+    public String encodeImageFromPath(String imagePath) throws IOException
+    {
+        
     }
 }
