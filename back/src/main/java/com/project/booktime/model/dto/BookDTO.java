@@ -3,6 +3,7 @@ package com.project.booktime.model.dto;
 import org.json.simple.JSONArray;
 
 import java.util.Date;
+import java.util.List;
 
 public class BookDTO {
 
@@ -11,13 +12,13 @@ public class BookDTO {
     private String synopsis;
     private Object ISBN;
     private String publicationDate;
-    private Object category;
+    private List<String> category;
     private String pageCount;
     private String rating;
-    private String authorsId;
+    private List<String> authorsId;
     private String base64;
 
-    public BookDTO(String id, String title, String synopsis, Object ISBN, String publicationDate, Object category, String pageCount, String rating, String authorsId, String base64) {
+    public BookDTO(String id, String title, String synopsis, Object ISBN, String publicationDate, List<String> category, String pageCount, String rating, List<String> authorsId, String base64) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
@@ -70,11 +71,11 @@ public class BookDTO {
         this.publicationDate = publicationDate;
     }
 
-    public Object getCategory() {
+    public List<String> getCategory() {
         return category;
     }
 
-    public void setCategory(Object category) {
+    public void setCategory(List<String> category) {
         this.category = category;
     }
 
@@ -94,11 +95,11 @@ public class BookDTO {
         this.rating = rating;
     }
 
-    public String getAuthorsId() {
+    public List<String> getAuthorsId() {
         return authorsId;
     }
 
-    public void setAuthorsId(String authorsId) {
+    public void setAuthorsId(List<String> authorsId) {
         this.authorsId = authorsId;
     }
 

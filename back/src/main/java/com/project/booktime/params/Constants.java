@@ -14,6 +14,7 @@ public class Constants
     public final static String EXEMPLE_CONTROLLER_URL = "exemples/controller";
     public final static String DATA_COLLECT_URL = "private/controllers/dataCollect";
     public final static String GOOGLE_API = "https://www.googleapis.com/books/v1/volumes?q=";
+    public final static String NON_ACQUIS = "N/A";
 
     // Google books categories
     public final static String categories[] = {

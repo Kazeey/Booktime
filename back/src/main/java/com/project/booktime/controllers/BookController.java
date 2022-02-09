@@ -1,9 +1,12 @@
 package com.project.booktime.controllers;
 
-import com.mongodb.util.JSON;
 import com.project.booktime.exception.BookNotFoundException;
+import com.project.booktime.model.dto.AuthorDTO;
 import com.project.booktime.model.dto.BookDTO;
+import com.project.booktime.model.entity.Author;
 import com.project.booktime.model.entity.Book;
+import com.project.booktime.repository.IAuthorRepository;
+import com.project.booktime.services.AuthorService;
 import com.project.booktime.services.BookService;
 import com.project.booktime.services.ImageService;
 import org.json.JSONException;
@@ -11,23 +14,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 
 import com.project.booktime.params.Constants;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
@@ -37,9 +31,11 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
+    private final IAuthorRepository authorRepository;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, IAuthorRepository authorRepository) {
         this.bookService = bookService;
+        this.authorRepository = authorRepository;
     }
 
     @GetMapping("/findAll")
@@ -90,9 +86,10 @@ public class BookController {
     }
 
     @GetMapping("/googleApi/database/addBooks")
-    public void addBooksToDB() throws IOException, JSONException, ParseException, java.text.ParseException, InterruptedException {
+    public void addBooksToDB() throws IOException, ParseException,  InterruptedException {
         URL url;
         ImageService imageService = new ImageService();
+        AuthorService authorService = new AuthorService(authorRepository);
 
         for (String category : Constants.categories)
         {
@@ -113,14 +110,9 @@ public class BookController {
                 Scanner scanner = new Scanner(url.openStream());
 
                 while (scanner.hasNext())
-                {
                     zIncomingBook += scanner.nextLine();
-                }
 
                 scanner.close();
-
-                System.out.println(i + " / " + conn.getResponseCode() + " / " + category + "\n");
-                System.out.println(url);
 
                 JSONParser parser = new JSONParser();
                 JSONObject data = (JSONObject) parser.parse(zIncomingBook);
@@ -131,6 +123,9 @@ public class BookController {
                     String zTitle = "";
                     String zThumbnailBase64 = "";
                     String zThumbnail = "";
+                    List<String> lCategories = new ArrayList<>();
+                    List<String> lAuthors = new ArrayList<>();
+                    List<String> lAuthorsId = new ArrayList<>();
 
                     JSONObject bookData = (JSONObject) obj.get(l);
 
@@ -144,6 +139,9 @@ public class BookController {
                     else
                         zTitle = (String) volumeInfo.get("title") + " - " + (String) volumeInfo.get("subtitle");
 
+                    if (bookService.findByTitle(zTitle))
+                        continue;
+
                     String zAverageRating = checkKey(volumeInfo.get("averageRating"));
                     String zDescription = checkKey(volumeInfo.get("description"));
                     String zPageCount = checkKey(volumeInfo.get("pageCount"));
@@ -151,8 +149,7 @@ public class BookController {
 
                     if (!volumeInfo.containsKey("imageLinks"))
                     {
-                        String zImagePath = "../../assets/naThumbnail.jpg";
-                        System.out.println(imageService.encodeImageFromUrl(zImagePath));
+                        zThumbnailBase64 = imageService.encoreImageFromPath("src/main/assets/naThumbnail.jpg");
                     }
                     else
                     {
@@ -163,41 +160,51 @@ public class BookController {
 
                     JSONArray industryIdentifiers = (JSONArray) volumeInfo.get("industryIdentifiers");
 
-                    System.out.println(zTitle);
-                    System.out.println(zDescription);
-                    System.out.println(industryIdentifiers);
-                    System.out.println(zDate);
-                    System.out.println(volumeInfo.get("categories"));
-                    System.out.println(zPageCount);
-                    System.out.println(zAverageRating);
-                    System.out.println(zThumbnail);
-                    System.out.println(zThumbnailBase64);
-                    System.out.println("-------------------------------- \n");
-                    System.out.println("\n");
+                    if (volumeInfo.containsKey("categories"))
+                        lCategories = generateList((JSONArray) volumeInfo.get("categories"));
+                    else
+                        lCategories.add(category);
 
-                    if (bookService.findByTitle(zTitle))
+                    if (volumeInfo.containsKey("authors"))
+                        lAuthors = generateList((JSONArray) volumeInfo.get("authors"));
+                    else
+                        lAuthors.add(Constants.NON_ACQUIS);
+
+                    for(int j = 0; j < lAuthors.size(); j++)
                     {
-                        System.out.println("Livre déjà enregistré : " + zTitle);
-                        continue;
+                        if (lAuthors.get(j).equals(Constants.NON_ACQUIS))
+                            lAuthorsId.add(Constants.NON_ACQUIS);
+
+                        if (authorService.isRegistered(lAuthors.get(j)))
+                        {
+                            AuthorDTO returnedAuthor = authorService.findByName(lAuthors.get(j));
+
+                            lAuthorsId.add(returnedAuthor.getId());
+                        }
+                        else
+                        {
+                            // Ajout de l'auteur dans la base
+                        }
+
                     }
 
                     System.out.println("Livre ajouté : " + zTitle);
+                    System.out.println(lAuthors);
 
-                    /*
                     Book book = new Book(
                             zTitle,
                             zDescription,
                             industryIdentifiers,
                             zDate,
-                            volumeInfo.get("categories"),
+                            lCategories,
                             zPageCount,
                             zAverageRating,
                             "null",
                             zThumbnailBase64
                     );
 
-                    BookDTO bookDTO = bookService.add(book);
-                    */
+                    //BookDTO bookDTO = bookService.add(book);
+
                 }
 
                 System.out.println("Pause \n");
@@ -212,8 +219,18 @@ public class BookController {
     public String checkKey(Object key)
     {
         if (key == null)
-            return "N/A";
+            return Constants.NON_ACQUIS;
         else
             return key.toString();
+    }
+
+    public List<String> generateList(JSONArray array)
+    {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < array.size(); i++)
+        {
+            list.add((String) array.get(i));
+        }
+        return list;
     }
 }

@@ -37,6 +37,25 @@ public class AuthorService
         return AuthorHelper.convert(author.get());
     }
 
+    public AuthorDTO findByName(String name)
+    {
+        Author author = repository.findByName(name);
+
+        if (author == null) throw new AuthorNotFoundException();
+
+        return AuthorHelper.convert(author);
+    }
+
+    public Boolean isRegistered(String name)
+    {
+        Author author = repository.findByName(name);
+
+        if (author != null)
+            return true;
+        else
+            return false;
+    }
+
     public AuthorDTO add(Author author)
     {
         Author createdAuthor = repository.insert(author);
