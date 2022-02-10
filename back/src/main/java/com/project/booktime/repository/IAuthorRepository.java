@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface IAuthorRepository extends MongoRepository<Author, String>
 {
     Author findByName(String name);
-    Author isRegistered(String name);
+    Boolean findBooleanByName(String name);
 }

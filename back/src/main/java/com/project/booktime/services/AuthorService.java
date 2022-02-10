@@ -46,7 +46,7 @@ public class AuthorService
         return AuthorHelper.convert(author);
     }
 
-    public Boolean isRegistered(String name)
+    public Boolean findBooleanByName(String name)
     {
         Author author = repository.findByName(name);
 

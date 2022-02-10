@@ -5,25 +5,24 @@ import com.project.booktime.model.dto.AuthorDTO;
 import com.project.booktime.model.dto.BookDTO;
 import com.project.booktime.model.entity.Author;
 import com.project.booktime.model.entity.Book;
+import com.project.booktime.params.Constants;
 import com.project.booktime.repository.IAuthorRepository;
 import com.project.booktime.services.AuthorService;
 import com.project.booktime.services.BookService;
 import com.project.booktime.services.ImageService;
-import org.json.JSONException;
-import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.project.booktime.params.Constants;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @CrossOrigin
 @RestController
@@ -175,7 +174,7 @@ public class BookController {
                         if (lAuthors.get(j).equals(Constants.NON_ACQUIS))
                             lAuthorsId.add(Constants.NON_ACQUIS);
 
-                        if (authorService.isRegistered(lAuthors.get(j)))
+                        if (authorService.findBooleanByName(lAuthors.get(j)))
                         {
                             AuthorDTO returnedAuthor = authorService.findByName(lAuthors.get(j));
 
@@ -183,13 +182,23 @@ public class BookController {
                         }
                         else
                         {
-                            // Ajout de l'auteur dans la base
+                           Author author = new Author(
+                                   lAuthors.get(j),
+                                   "null",
+                                   "null",
+                                   "null",
+                                   "null",
+                                   "null"
+                           );
+                           AuthorDTO authorDTO = authorService.add(author);
+
+                           AuthorDTO returnedAuthor = authorService.findByName(author.getName());
+                           lAuthorsId.add (returnedAuthor.getId());
                         }
 
                     }
 
                     System.out.println("Livre ajouté : " + zTitle);
-                    System.out.println(lAuthors);
 
                     Book book = new Book(
                             zTitle,
@@ -199,11 +208,11 @@ public class BookController {
                             lCategories,
                             zPageCount,
                             zAverageRating,
-                            "null",
+                            lAuthorsId,
                             zThumbnailBase64
                     );
 
-                    //BookDTO bookDTO = bookService.add(book);
+                    BookDTO bookDTO = bookService.add(book);
 
                 }
 

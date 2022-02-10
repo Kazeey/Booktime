@@ -1,13 +1,15 @@
 package com.project.booktime.services;
 
 import com.project.booktime.params.Constants;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Base64;
 
