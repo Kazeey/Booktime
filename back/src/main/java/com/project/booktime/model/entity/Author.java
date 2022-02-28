@@ -12,17 +12,15 @@ public class Author
     @Id
     private String id;
     private String name;
-    private String firstName;
-    private Date birthDate;
-    private Date deathDate;
+    private String birthDate;
+    private String deathDate;
     private String biography;
     private String country;
     private String base64;
     private List<String> booksId;
 
-    public Author(String name, String firstName, Date birthDate, Date deathDate, String biography, String country, String base64, List<String> booksId) {
+    public Author(String name, String birthDate, String deathDate, String biography, String country, String base64) {
         this.name = name;
-        this.firstName = firstName;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         this.biography = biography;
@@ -47,27 +45,19 @@ public class Author
         this.name = name;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
-    public Date getDeathDate() {
+    public String getDeathDate() {
         return deathDate;
     }
 
-    public void setDeathDate(Date deathDate) {
+    public void setDeathDate(String deathDate) {
         this.deathDate = deathDate;
     }
 

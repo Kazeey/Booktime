@@ -1,5 +1,6 @@
 package com.project.booktime.model.entity;
 
+import org.json.simple.JSONArray;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,16 +14,18 @@ public class Book {
     private String id;
     private String title;
     private String synopsis;
-    private Date publicationDate;
+    private Object ISBN;
+    private String publicationDate;
     private List<String> category;
-    private int pageCount;
-    private double rating;
+    private String pageCount;
+    private String rating;
     private List<String> authorsId;
     private String base64;
 
-    public Book(String title, String synopsis, Date publicationDate, List<String> category, int pageCount, double rating, List<String> authorsId, String base64) {
+    public Book(String title, String synopsis, Object ISBN, String publicationDate, List<String> category, String pageCount, String rating, List<String> authorsId, String base64) {
         this.title = title;
         this.synopsis = synopsis;
+        this.ISBN = ISBN;
         this.publicationDate = publicationDate;
         this.category = category;
         this.pageCount = pageCount;
@@ -55,11 +58,19 @@ public class Book {
         this.synopsis = synopsis;
     }
 
-    public Date getPublicationDate() {
+    public Object getISBN() {
+        return ISBN;
+    }
+
+    public void setISBN(Object ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public String getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Date publicationDate) {
+    public void setPublicationDate(String publicationDate) {
         this.publicationDate = publicationDate;
     }
 
@@ -71,19 +82,19 @@ public class Book {
         this.category = category;
     }
 
-    public int getPageCount() {
+    public String getPageCount() {
         return pageCount;
     }
 
-    public void setPageCount(int pageCount) {
+    public void setPageCount(String pageCount) {
         this.pageCount = pageCount;
     }
 
-    public double getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

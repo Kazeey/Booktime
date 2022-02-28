@@ -6,8 +6,11 @@ import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
 
-public interface IAuthorRepository extends MongoRepository<Author, String> {
-
+public interface IAuthorRepository extends MongoRepository<Author, String>
+{
+    Author findByName(String name);
+    Boolean findBooleanByName(String name);
+    
     @Query("{ 'booksId' : ?0 }")
     List<Author> findAuthorsByBookId(String bookId);
 }

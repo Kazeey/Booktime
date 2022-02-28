@@ -7,18 +7,17 @@ public class AuthorDTO
 {
     private String id;
     private String name;
-    private String firstName;
-    private Date birthDate;
-    private Date deathDate;
+    private String birthDate;
+    private String deathDate;
     private String biography;
     private String country;
     private String base64;
     private List<String> booksId;
-
-    public AuthorDTO(String id, String name, String firstName, Date birthDate, Date deathDate, String biography, String country, String base64, List<String> booksId) {
+  
+    public AuthorDTO(String id, String name, String birthDate, String deathDate, String biography, String country, String base64)
+    {
         this.id = id;
         this.name = name;
-        this.firstName = firstName;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         this.biography = biography;
@@ -43,27 +42,19 @@ public class AuthorDTO
         this.name = name;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
-    public Date getDeathDate() {
+    public String getDeathDate() {
         return deathDate;
     }
 
-    public void setDeathDate(Date deathDate) {
+    public void setDeathDate(String deathDate) {
         this.deathDate = deathDate;
     }
 

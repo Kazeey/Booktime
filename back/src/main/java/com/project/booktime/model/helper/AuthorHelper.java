@@ -27,7 +27,6 @@ public class AuthorHelper
         return new AuthorDTO(
                 author.getId(),
                 author.getName(),
-                author.getFirstName(),
                 author.getBirthDate(),
                 author.getDeathDate(),
                 author.getBiography(),

@@ -3,5 +3,8 @@ package com.project.booktime.repository;
 import com.project.booktime.model.entity.Book;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface IBookRepository extends MongoRepository<Book, String> {
+public interface IBookRepository extends MongoRepository<Book, String>
+{
+    Book findByISBN(String ISBN);
+    Book findByTitle(String title);
 }

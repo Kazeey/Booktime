@@ -12,21 +12,7 @@ public class BooktimeApplication
 		SpringApplication.run(BooktimeApplication.class, args);
 	}
 
-	/*
-	A décommenter pour voir la liste complète des beans fournies par Sprint Boot
+	public void run(String... args) throws Exception {
 
-	@Bean
-	public CommandLineRunner commandLineRunner(ApplicationContext context)
-	{
-		return args -> {
-			System.out.println("Beans fournies par Spring Boot : ");
-			String[] beanNames = context.getBeanDefinitionNames();
-			Arrays.sort(beanNames);
-			for (String beanName : beanNames)
-			{
-				System.out.println(beanName);
-			}
-		};
 	}
-	 */
 }

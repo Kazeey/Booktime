@@ -25,6 +25,7 @@ public class BookHelper {
                 book.getId(),
                 book.getTitle(),
                 book.getSynopsis(),
+                book.getISBN(),
                 book.getPublicationDate(),
                 book.getCategory(),
                 book.getPageCount(),

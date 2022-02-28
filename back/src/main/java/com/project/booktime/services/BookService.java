@@ -35,6 +35,16 @@ public class BookService {
         return BookHelper.convert(book.get());
     }
 
+    public Boolean findByTitle(String title)
+    {
+        Book book = repository.findByTitle(title);
+
+        if(book != null)
+            return true;
+        else
+            return false;
+    }
+
     public BookDTO add(Book book) {
         Book createdBook = repository.insert(book);
 
