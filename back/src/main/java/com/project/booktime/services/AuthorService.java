@@ -37,6 +37,12 @@ public class AuthorService
         return AuthorHelper.convert(author.get());
     }
 
+    public List<AuthorDTO> findAuthorsByBookId(String bookId) {
+        List<Author> authorList = repository.findAuthorsByBookId(bookId);
+
+        return AuthorHelper.convertAll(authorList);
+    }
+  
     public AuthorDTO findByName(String name)
     {
         Author author = repository.findByName(name);

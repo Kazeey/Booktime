@@ -3,6 +3,7 @@ package com.project.booktime.model.dto;
 import com.project.booktime.model.entity.Picture;
 
 import java.util.Date;
+import java.util.List;
 
 public class UserDTO {
 
@@ -13,8 +14,10 @@ public class UserDTO {
     private String email;
     private Date birthday;
     private String base64;
+    private List<String> added;
+    private List<String> liked;
 
-    public UserDTO(String id, String pseudo, String name, String firstName, String email, Date birthday, String base64) {
+    public UserDTO(String id, String pseudo, String name, String firstName, String email, Date birthday, String base64, List<String> added, List<String> liked) {
         this.id = id;
         this.pseudo = pseudo;
         this.name = name;
@@ -22,6 +25,8 @@ public class UserDTO {
         this.email = email;
         this.birthday = birthday;
         this.base64 = base64;
+        this.added = added;
+        this.liked = liked;
     }
 
     public String getId() {
@@ -78,5 +83,21 @@ public class UserDTO {
 
     public void setBase64(String base64) {
         this.base64 = base64;
+    }
+
+    public List<String> getAdded() {
+        return added;
+    }
+
+    public void setAdded(List<String> added) {
+        this.added = added;
+    }
+
+    public List<String> getLiked() {
+        return liked;
+    }
+
+    public void setLiked(List<String> liked) {
+        this.liked = liked;
     }
 }

@@ -43,6 +43,13 @@ public class AuthorController
         }
     }
 
+    @GetMapping("/findAuthorsByBook/{bookId}")
+    public ResponseEntity<List<AuthorDTO>> findAuthorsByBookId(@PathVariable("bookId") String bookId) {
+        List<AuthorDTO> authorDTOList = authorService.findAuthorsByBookId(bookId);
+
+        return ResponseEntity.ok(authorDTOList);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<AuthorDTO> add(@RequestBody Author author)
     {
