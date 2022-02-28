@@ -59,24 +59,24 @@ class BookFragment : Fragment() {
         bookViewModel.getBookById(bookId)
         authorViewModel.getAuthorsByBookId(bookId)
 
-        bookViewModel.currentBook.observe(viewLifecycleOwner, { book ->
+        bookViewModel.currentBook.observe(viewLifecycleOwner) { book ->
             (activity as MainActivity).supportActionBar?.title = book.title
 
             val base64: ByteArray = Base64.decode(book.base64, Base64.DEFAULT)
             binding.bookImage.setImageBitmap(BitmapFactory.decodeByteArray(base64, 0, base64.size))
 
             setupCategoryRecyclerView(view, book.category)
-        })
+        }
 
-        authorViewModel.authors.observe(viewLifecycleOwner, { authors ->
+        authorViewModel.authors.observe(viewLifecycleOwner) { authors ->
             setupAuthorRecyclerView(view, authors)
-        })
+        }
 
-        userViewModel.currentUser.observe(viewLifecycleOwner, { user ->
+        userViewModel.currentUser.observe(viewLifecycleOwner) { user ->
             currentUser = user
             binding.favorite.setImageResource(currentUser.isBookLiked(bookId))
             binding.add.setImageResource(currentUser.isBookAdded(bookId))
-        })
+        }
 
         binding.addContainer.setOnClickListener {
             currentUser.manageAdded(bookId)
