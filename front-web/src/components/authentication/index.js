@@ -1,18 +1,10 @@
 import React from 'react'
 import { Box } from '@mui/system'
 import PropTypes from 'prop-types'
-import { FormControl, IconButton, Input, InputAdornment, InputLabel, TextField } from '@mui/material';
+import { FormControl, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-
-const style = {
-  width : 400,
-  bgcolor : 'white',
-  border : "1px solid #707070",
-  p : 2,
-  px : 4,
-  pb : 3,
-};
+import modalStyle from '../../utils/styles/modal.style';
 
 const Authentication = ( props ) => {
 
@@ -38,32 +30,45 @@ const Authentication = ( props ) => {
   };
 
   return (
-    <Box sx={style}>
-      <FormControl>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <EmailIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-          <TextField id="mailInput" label="Adresse mail" variant="standard" onChange={handleChange('email')} />
-        </Box>
+    <Box sx={modalStyle.Box}>
+      <h1 style={modalStyle.h1}>Formulaire de connexion</h1>
+      <FormControl variant="standard" sx={modalStyle.formControl}>
+        <InputLabel htmlFor="emailInput">
+          With a start adornment
+        </InputLabel>
+        <Input
+          id="emailInput"
+          startAdornment={
+            <InputAdornment position="start">
+              <EmailIcon />
+            </InputAdornment>
+          }
+        />
       </FormControl>
 
-      <FormControl>
+      <FormControl variant='standard' sx={modalStyle.formControl}>
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+          <InputLabel htmlFor="passwordInput">
+            With a start adornment
+          </InputLabel>
           <Input
-            id="standard-adornment-password"
+            id="passwordInput"
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
             onChange={handleChange('password')}
+            startAdornment={
+              <InputAdornment position="start">
+                <EmailIcon />
+              </InputAdornment>
+            }
             endAdornment={
-              <InputAdornment position="end">
-                <IconButton
+              <IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
                 >
                   {values.showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
-              </InputAdornment>
             }
           />
         </Box>
