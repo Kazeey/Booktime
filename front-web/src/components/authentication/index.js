@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box } from '@mui/system'
 import PropTypes from 'prop-types'
-import { FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
+import { Button, FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -33,7 +33,7 @@ const Authentication = ( props ) => {
   };
 
   return (
-    <Box sx={modalStyle.Box}>
+    <Box sx={modalStyle.box}>
       <h1 style={modalStyle.h1}>Formulaire de connexion</h1>
       <FormControl variant="standard" sx={modalStyle.formControl}>
         <InputLabel htmlFor="emailInput">
@@ -44,7 +44,7 @@ const Authentication = ( props ) => {
           type='email'
           error={!checkMail(values.email) && values.email !== ''}
           value={values.email}
-          onChange={event => handleChange('email')(event)}
+          onChange={handleChange('email')}
           startAdornment={
             <InputAdornment position="start">
               <EmailIcon />
@@ -86,6 +86,18 @@ const Authentication = ( props ) => {
             ""
           }
       </FormControl>
+      <Box sx={modalStyle.boxButton}>
+        <FormControl variant='standard' sx={modalStyle.formControl}>
+          <Button variant="contained" color="success">
+            Success
+          </Button>
+        </FormControl>
+        <FormControl variant='standard' sx={modalStyle.formControl}>
+          <Button variant="contained" color="success">
+            Success
+          </Button>
+        </FormControl>
+      </Box>
     </Box>
   )
 }
