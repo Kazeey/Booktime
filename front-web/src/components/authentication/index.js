@@ -1,10 +1,13 @@
 import React from 'react'
 import { Box } from '@mui/system'
 import PropTypes from 'prop-types'
-import { FormControl, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
+import { FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
+import HttpsIcon from '@mui/icons-material/Https';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import modalStyle from '../../utils/styles/modal.style';
+import checkMail from '../../utils/functions/checkMailFormat';
+import { checkPassword, passwordStrength } from '../../utils/functions/checkPassword';
 
 const Authentication = ( props ) => {
 
@@ -29,25 +32,17 @@ const Authentication = ( props ) => {
     event.preventDefault();
   };
 
-  const checkMail = (email) => {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (re.test(String(email).toLowerCase())) 
-      return true;
-    else
-      return false;
-  }
-
   return (
     <Box sx={modalStyle.Box}>
       <h1 style={modalStyle.h1}>Formulaire de connexion</h1>
       <FormControl variant="standard" sx={modalStyle.formControl}>
         <InputLabel htmlFor="emailInput">
-          With a start adornment
+          Adresse mail
         </InputLabel>
         <Input
           id="emailInput"
           type='email'
-          error={!checkMail(values.email)}
+          error={!checkMail(values.email) && values.email !== ''}
           value={values.email}
           onChange={event => handleChange('email')(event)}
           startAdornment={
@@ -60,16 +55,17 @@ const Authentication = ( props ) => {
 
       <FormControl variant='standard' sx={modalStyle.formControl}>
           <InputLabel htmlFor="passwordInput">
-            With a start adornment
+            Mot de passe
           </InputLabel>
           <Input
             id="passwordInput"
             type={values.showPassword ? 'text' : 'password'}
+            error={!checkPassword(values.password) && values.password !== ''}
             value={values.password}
             onChange={handleChange('password')}
             startAdornment={
               <InputAdornment position="start">
-                <EmailIcon />
+                <HttpsIcon />
               </InputAdornment>
             }
             endAdornment={
@@ -82,10 +78,18 @@ const Authentication = ( props ) => {
                 </IconButton>
             }
           />
+          {
+            !checkPassword(values.password) && values.password !== '' 
+            ?            
+            passwordStrength(values.password)
+            :
+            ""
+          }
       </FormControl>
     </Box>
   )
 }
+
 
 Authentication.propTypes = {
   email : PropTypes.string,

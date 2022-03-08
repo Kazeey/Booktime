@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { apiURL } from '../utils/constants/constants';
+import { constants } from '../utils/constants/constants';
 
 const getAuthorsList = async () => {
     try
     {
-        const response = await axios.get(apiURL + 'author/findAll/');
+        const response = await axios.get(constants.apiURL + 'author/findAll/');
         return response.data;
     }
     catch (error)
@@ -16,7 +16,7 @@ const getAuthorsList = async () => {
 const getAuthorById = async (id) => {
     try
     {
-        const response = await axios.get(apiURL + 'author/findById/' + id);
+        const response = await axios.get(constants.apiURL + 'author/findById/' + id);
         return response.data;
     }
     catch (error)
