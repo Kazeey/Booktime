@@ -1,5 +1,3 @@
-import React from "react";
-
 /*
 * @param password : string
 * @returns {boolean}
@@ -20,13 +18,6 @@ const checkPassword = (password) => {
         return false;
 }
 
-/*
-* @param password : string
-* @returns {list (<li>)}
-*
-* @description
-* Render the helping message for the password field
-*/
 const passwordStrength = (password) => {
     let li = [];
     let passwordLength = password.length;
@@ -49,10 +40,10 @@ const passwordStrength = (password) => {
     if (!passwordSpecial) {
         li.push(<li>Le mot de passe doit contenir au moins un caractère spécial</li>);
     }
-    
+
     return (
-        <ul style={{fontSize : "9px", listStyle : "none", padding : 0}}>
-            {li}
+        <ul style={{ fontSize : '9px', listStyle : 'none', padding : 0}}>
+            {li.map((item, index) => (<li key={index}>{item}</li>))}
         </ul>
     )
 }
