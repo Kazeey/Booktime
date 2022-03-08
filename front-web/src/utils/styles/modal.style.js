@@ -1,6 +1,7 @@
 const modalStyle = {
     Box : {
         width : 400,
+        height : 400,
         bgcolor : 'white',
         border : "1px solid #707070",
         p : 2,
