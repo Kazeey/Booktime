@@ -15,7 +15,7 @@ const Authentication = ( props ) => {
   });
 
   const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+    setValues({ ...values, [prop]: event.target.value })
   };
 
   const handleClickShowPassword = () => {
@@ -29,6 +29,14 @@ const Authentication = ( props ) => {
     event.preventDefault();
   };
 
+  const checkMail = (email) => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(String(email).toLowerCase())) 
+      return true;
+    else
+      return false;
+  }
+
   return (
     <Box sx={modalStyle.Box}>
       <h1 style={modalStyle.h1}>Formulaire de connexion</h1>
@@ -38,6 +46,10 @@ const Authentication = ( props ) => {
         </InputLabel>
         <Input
           id="emailInput"
+          type='email'
+          error={!checkMail(values.email)}
+          value={values.email}
+          onChange={event => handleChange('email')(event)}
           startAdornment={
             <InputAdornment position="start">
               <EmailIcon />
@@ -47,7 +59,6 @@ const Authentication = ( props ) => {
       </FormControl>
 
       <FormControl variant='standard' sx={modalStyle.formControl}>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
           <InputLabel htmlFor="passwordInput">
             With a start adornment
           </InputLabel>
@@ -71,7 +82,6 @@ const Authentication = ( props ) => {
                 </IconButton>
             }
           />
-        </Box>
       </FormControl>
     </Box>
   )
