@@ -3,34 +3,45 @@ import styleModal from '../../utils/styles/modal';
 import Authentication from '../authentication';
 import Register from '../register';
 
-const Modal = ({module}) => {
-  const [values, setValues] = React.useState({
-    open : false,
-    authentication : true,
-  });
+const Modal = () => {
+  const [moduleStatus, setModule] = React.useState('authentication');
+  const [openStatus, setOpen] = React.useState(false);
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value })
+  const changeModule = module => {
+    setModule(module);
+  };
+
+  const modalStatus = open => {
+    setOpen(open);
+  };
+
+  const onOpenModal = (event, module) => {
+    modalStatus(event.target.value);     
+    changeModule(module);
+  };
+
+  const onCloseModal = (event) => {
+    modalStatus(event.target.value);
   };
 
   return (
     <div>
-      <button type="button" value="true" onClick={handleChange('open')}> 
+      <button type="button" value="true" onClick={(event) => onOpenModal(event, "authentication")}> 
         Authentification
       </button>
-      <button type="button" value="true" onClick={handleChange('open')}> 
+      <button type="button" value="true" onClick={(event) => onOpenModal(event, "register")}> 
         Enregistrement
       </button>
       
       <styleModal.StyledModal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        open={values.open}
+        open={openStatus}
         value = "false"
-        onClose={handleChange('open')}
+        onClose={(event) => onCloseModal(event)}
         BackdropComponent={styleModal.Backdrop}
       >
-        {values.authentication ? <Authentication /> : <Register />}
+        {moduleStatus === "authentication" ? <Authentication /> : <Register />}
       </styleModal.StyledModal>
     </div>
   )
