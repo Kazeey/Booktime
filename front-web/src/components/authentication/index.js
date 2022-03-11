@@ -78,23 +78,18 @@ const Authentication = ( props ) => {
                 </IconButton>
             }
           />
-          {
-            !checkPassword(values.password) && values.password !== '' 
-            ?            
+          {          
             passwordStrength(values.password)
-            :
-            ""
           }
       </FormControl>
       <Box sx={modalStyle.boxButton}>
         <FormControl variant='standard' sx={modalStyle.formControl}>
-          <Button variant="contained" color="success">
-            Success
-          </Button>
-        </FormControl>
-        <FormControl variant='standard' sx={modalStyle.formControl}>
-          <Button variant="contained" color="success">
-            Success
+          <Button variant="contained" color="success" sx={modalStyle.ButtonForm} 
+            // disabled={
+            //   // Ajouter condition ? true : false
+            // }
+          >
+            Se connecter
           </Button>
         </FormControl>
       </Box>

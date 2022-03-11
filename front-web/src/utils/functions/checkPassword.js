@@ -18,6 +18,15 @@ const checkPassword = (password) => {
         return false;
 }
 
+/*
+* @param password : string
+* @returns {<ul> containing the requirements in <li>}
+*
+* @description
+* Check the password complexity and if the requirements are not met, color the text :
+* red : not met
+* green : met
+*/
 const passwordStrength = (password) => {
     let li = [];
     let passwordLength = password.length;
@@ -25,21 +34,39 @@ const passwordStrength = (password) => {
     let passwordNumber = password.match(/[0-9]/g);
     let passwordSpecial = password.match(/[^a-zA-Z0-9]/g);
 
-    if (passwordLength < 8) {
-        li.push(<li>Le mot de passe doit contenir au moins 8 caractères</li>);
-    }
+    let color;
 
-    if (!passwordUpperCase) {
-        li.push(<li>Le mot de passe doit contenir au moins une majuscule</li>);
-    }
+    if (passwordLength < 8) 
+        color = "red";
+    else
+        color = "green";
 
-    if (!passwordNumber) {
-        li.push(<li>Le mot de passe doit contenir au moins un chiffre</li>);
-    }
+    li.push(<li style={{"color" : color}}>Le mot de passe doit contenir au moins 8 caractères</li>);
+    
 
-    if (!passwordSpecial) {
-        li.push(<li>Le mot de passe doit contenir au moins un caractère spécial</li>);
-    }
+    if (!passwordUpperCase) 
+        color = "red";
+    else
+        color = "green";
+
+    li.push(<li style={{"color" : color}}>Le mot de passe doit contenir au moins une majuscule</li>);
+    
+
+    if (!passwordNumber) 
+        color = "red";
+    else
+        color = "green";
+
+    li.push(<li style={{"color" : color}}>Le mot de passe doit contenir au moins un chiffre</li>);
+    
+
+    if (!passwordSpecial) 
+        color = "red";
+    else
+        color = "green";
+
+    li.push(<li style={{"color" : color}}>Le mot de passe doit contenir au moins un caractère spécial</li>);
+    
 
     return (
         <ul style={{ fontSize : '9px', listStyle : 'none', padding : 0}}>
