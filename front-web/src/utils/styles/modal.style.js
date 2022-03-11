@@ -1,3 +1,5 @@
+import { autocompleteClasses } from "@mui/material";
+
 const modalStyle = {
     box : {
         width : 400,
@@ -18,8 +20,25 @@ const modalStyle = {
         textAlign : 'center',
     },
     formControl : {
+        marginTop : '1em',
         width : '30ch',
+        margin : 'auto',
+    },
+    ButtonForm : {
+        width : '30ch',
+        margin : '0 auto',
+        marginTop: '5em',
+        display : 'flex',
+        flexDirection : 'column',
+        alignItems : 'center',
+    },
+    ButtonSwap : {
+        width : '30ch',
+        margin : '0 auto',
         marginTop: '1rem',
+        marginLeft : 50 + '%',
+        display : 'flex',
+        alignItems : 'center',
     }
 };
 
