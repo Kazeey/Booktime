@@ -12,9 +12,6 @@
     <string name="header_synopsis">Synopsis</string>
     <string name="header_author">Writing By</string>
 
-    <!-- Author RecyclerView -->
-    <string name="author_name">%1$s %2$s</string>
-
     <string name="button_log_in">Log In</string>
     <string name="button_sign_up">Sign up</string>
     <string name="button_forgot_password">Forgot Password ?</string>

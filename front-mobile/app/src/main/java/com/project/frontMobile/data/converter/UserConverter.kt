@@ -12,7 +12,7 @@ class UserConverter {
             response.name,
             response.firstName,
             response.email,
-            response.added,
+            BookConverter().convertAll(response.library),
             response.liked,
             response.base64
         )

@@ -46,8 +46,8 @@ class AuthorFragment : Fragment() {
 
         authorViewModel.getAuthorById(authorId)
 
-        authorViewModel.currentAuthor.observe(viewLifecycleOwner, { author ->
-            (activity as MainActivity).supportActionBar?.title = "${author.firstName} ${author.name}"
-        })
+        authorViewModel.currentAuthor.observe(viewLifecycleOwner) { author ->
+            (activity as MainActivity).supportActionBar?.title = author.name
+        }
     }
 }

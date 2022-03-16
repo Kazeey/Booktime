@@ -20,7 +20,7 @@ class BookViewModel: ViewModel() {
     val books: MutableLiveData<List<Book>>
         get() = _books
 
-    private fun getAllBooks() {
+    fun getAllBooks() {
         viewModelScope.launch {
             val listResult = BookTimeApi.retrofitService.getBooks()
             _books.value = BookConverter().convertAll(listResult)

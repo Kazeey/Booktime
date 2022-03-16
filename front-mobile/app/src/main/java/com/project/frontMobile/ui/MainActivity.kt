@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setupToolbar()
         setupNav()
 
-        userViewModel.getUserById("6200eab8bd5a43766af23e96")
+        userViewModel.findMe("6200eab8bd5a43766af23e96")
     }
 
     private fun setupToolbar() {

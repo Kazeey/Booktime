@@ -14,10 +14,10 @@ public class UserDTO {
     private String email;
     private Date birthday;
     private String base64;
-    private List<String> added;
+    private List<BookDTO> library;
     private List<String> liked;
 
-    public UserDTO(String id, String pseudo, String name, String firstName, String email, Date birthday, String base64, List<String> added, List<String> liked) {
+    public UserDTO(String id, String pseudo, String name, String firstName, String email, Date birthday, String base64, List<String> liked) {
         this.id = id;
         this.pseudo = pseudo;
         this.name = name;
@@ -25,7 +25,6 @@ public class UserDTO {
         this.email = email;
         this.birthday = birthday;
         this.base64 = base64;
-        this.added = added;
         this.liked = liked;
     }
 
@@ -85,12 +84,12 @@ public class UserDTO {
         this.base64 = base64;
     }
 
-    public List<String> getAdded() {
-        return added;
+    public List<BookDTO> getLibrary() {
+        return library;
     }
 
-    public void setAdded(List<String> added) {
-        this.added = added;
+    public void setLibrary(List<BookDTO> library) {
+        this.library = library;
     }
 
     public List<String> getLiked() {

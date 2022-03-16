@@ -20,6 +20,17 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/me/{id}")
+    public ResponseEntity<UserDTO> findMe(@PathVariable("id") String id) {
+        try {
+            UserDTO userDTO = userService.findMe(id);
+
+            return ResponseEntity.ok().body(userDTO);
+        } catch (UserNotFoundException exception) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/findAll")
     public ResponseEntity<List<UserDTO>> findAll() {
         List<UserDTO> userDTOList = userService.findAll();

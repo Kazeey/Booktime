@@ -16,9 +16,9 @@ class UserViewModel: ViewModel() {
     val currentUser: LiveData<User>
         get() = _currentUser
 
-    fun getUserById(id: String) {
+    fun findMe(id: String) {
         viewModelScope.launch {
-            val userResult = BookTimeApi.retrofitService.getUserById(id)
+            val userResult = BookTimeApi.retrofitService.findMe(id)
             _currentUser.value = UserConverter().convert(userResult)
 
             Log.d(UserViewModel::class.java.name, "Current User : ${currentUser.value?.id}")

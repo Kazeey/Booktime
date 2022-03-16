@@ -1,7 +1,6 @@
 package com.project.frontMobile.data.model
 
 import com.project.frontMobile.R
-import com.project.frontMobile.viewmodel.UserViewModel
 
 class User(
     var id: String,
@@ -9,23 +8,24 @@ class User(
     var name: String,
     var firstName: String,
     var email: String,
-    var added: MutableList<String>,
+    var library: MutableList<Book>,
     var liked: MutableList<String>,
     var base64: String,
 ) {
 
     fun isBookAdded(bookId: String): Int {
-        return when (added.contains(bookId)) {
+        /*return when (added.contains(bookId)) {
             true -> R.drawable.ic_baseline_remove_24
             else -> R.drawable.ic_baseline_add_24
-        }
+        }*/
+        return R.drawable.ic_baseline_remove_24
     }
 
     fun manageAdded(bookId: String) {
-        when (added.contains(bookId)) {
+        /*when (added.contains(bookId)) {
             true -> added.remove(bookId)
             else -> added.add(bookId)
-        }
+        }*/
     }
 
     fun isBookLiked(bookId: String): Int {
