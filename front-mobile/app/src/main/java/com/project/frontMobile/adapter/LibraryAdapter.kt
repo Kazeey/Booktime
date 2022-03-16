@@ -1,7 +1,6 @@
 package com.project.frontMobile.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,10 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project.frontMobile.data.model.Book
 import com.project.frontMobile.databinding.ItemBookBinding
 import com.project.frontMobile.databinding.ItemHeaderBinding
-import com.project.frontMobile.viewmodel.UserViewModel
 
-private val ITEM_VIEW_TYPE_HEADER = 0
-private val ITEM_VIEW_TYPE_ITEM = 1
+private const val ITEM_VIEW_TYPE_HEADER = 0
+private const val ITEM_VIEW_TYPE_ITEM = 1
 
 class LibraryAdapter(private val clickListener: LibraryListener): ListAdapter<LibraryAdapter.DataItem, RecyclerView.ViewHolder>(LibraryDiffCallback()) {
 
@@ -33,14 +31,6 @@ class LibraryAdapter(private val clickListener: LibraryListener): ListAdapter<Li
         for (header: String in headerList) {
             _items.addAll(createSection(header, bookList))
         }
-
-        /*for (item: DataItem in _items) {
-            if (item is DataItem.BookItem) {
-                Log.d(LibraryAdapter::class.java.name, "BookItem")
-            } else if (item is DataItem.Header) {
-                Log.d(LibraryAdapter::class.java.name, "Header")
-            }
-        }*/
 
         submitList(_items)
     }
@@ -78,10 +68,6 @@ class LibraryAdapter(private val clickListener: LibraryListener): ListAdapter<Li
             is DataItem.BookItem -> ITEM_VIEW_TYPE_ITEM
         }
     }
-
-    /**
-     * ViewHolder
-     * **/
 
     class HeaderViewHolder private constructor(private val binding: ItemHeaderBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: String) {

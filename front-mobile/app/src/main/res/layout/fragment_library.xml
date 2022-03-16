@@ -16,21 +16,20 @@
         tools:context=".ui.library.LibraryFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerView_book"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/textView"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toStartOf="@id/recyclerview_index"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <TextView
-            android:id="@+id/textView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_index"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:text="A\nB\n\C"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@id/recyclerView"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toEndOf="@id/recyclerView_book"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>

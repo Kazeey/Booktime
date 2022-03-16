@@ -1,7 +1,6 @@
 package com.project.frontMobile.ui.library
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.project.frontMobile.R
+import com.project.frontMobile.adapter.IndexAdapter
 import com.project.frontMobile.adapter.LibraryAdapter
 import com.project.frontMobile.adapter.LibraryAdapter.LibraryListener
 import com.project.frontMobile.data.model.Book
@@ -30,22 +30,29 @@ class LibraryFragment : Fragment() {
         val binding: FragmentLibraryBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_library, container, false)
         val viewModel: UserViewModel by activityViewModels()
 
-        val adapter = LibraryAdapter(LibraryListener { bookId ->
+        val libraryAdapter = LibraryAdapter(LibraryListener { bookId ->
             val action = LibraryFragmentDirections.actionLibraryFragmentToBookFragment(bookId)
             view?.findNavController()?.navigate(action)
         })
 
         val manager = GridLayoutManager(activity, 3)
 
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = manager
+        binding.recyclerViewBook.adapter = libraryAdapter
+        binding.recyclerViewBook.layoutManager = manager
+
+        val indexAdapter = IndexAdapter()
+        binding.recyclerviewIndex.adapter = indexAdapter
+
 
         viewModel.currentUser.observe(viewLifecycleOwner) {
             it?.let {
                 val sortedList = it.library.sortedBy { book -> book.title.first() }
-                adapter.addHeaderAndSubmitList(getHeader(sortedList), sortedList)
+                val headerList = getHeader(sortedList)
 
-                manageSpanSize(manager, adapter)
+                libraryAdapter.addHeaderAndSubmitList(headerList, sortedList)
+                manageSpanSize(manager, libraryAdapter)
+
+                indexAdapter.submitList(headerList)
             }
         }
 
