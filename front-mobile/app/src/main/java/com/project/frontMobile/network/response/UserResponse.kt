@@ -7,7 +7,7 @@ data class UserResponse(
     val firstName: String,
     val email: String,
     val library: MutableList<BookResponse>,
-    val liked: MutableList<String>,
+    val liked: MutableList<BookResponse>,
     val base64: String
 ) {
 }

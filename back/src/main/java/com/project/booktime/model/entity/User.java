@@ -18,10 +18,10 @@ public class User {
     private String email;
     private Date birthday;
     private String base64;
-    private List<String> added;
+    private List<String> library;
     private List<String> liked;
 
-    public User(String pseudo, String name, String firstName, String password, String email, Date birthday, String base64, List<String> added, List<String> liked) {
+    public User(String pseudo, String name, String firstName, String password, String email, Date birthday, String base64, List<String> library, List<String> liked) {
         this.pseudo = pseudo;
         this.name = name;
         this.firstName = firstName;
@@ -29,7 +29,7 @@ public class User {
         this.email = email;
         this.birthday = birthday;
         this.base64 = base64;
-        this.added = added;
+        this.library = library;
         this.liked = liked;
     }
 
@@ -97,12 +97,12 @@ public class User {
         this.base64 = base64;
     }
 
-    public List<String> getAdded() {
-        return added;
+    public List<String> getLibrary() {
+        return library;
     }
 
-    public void setAdded(List<String> added) {
-        this.added = added;
+    public void setLibrary(List<String> library) {
+        this.library = library;
     }
 
     public List<String> getLiked() {

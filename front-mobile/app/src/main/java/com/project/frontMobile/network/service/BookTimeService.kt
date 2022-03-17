@@ -1,6 +1,7 @@
 package com.project.frontMobile.network.service
 
 import com.project.frontMobile.data.model.User
+import com.project.frontMobile.network.request.UserRequest
 import com.project.frontMobile.network.response.AuthorResponse
 import com.project.frontMobile.network.response.BookResponse
 import com.project.frontMobile.network.response.UserResponse
@@ -57,7 +58,7 @@ interface BookTimeService {
 
     @PATCH("user/update/{id}")
     suspend fun updateUser(@Path("id") id: String,
-                           @Body user: User): UserResponse
+                           @Body user: UserRequest): UserResponse
 }
 
 object BookTimeApi {

@@ -3,10 +3,8 @@ package com.project.booktime.services;
 import com.project.booktime.exception.UserNotFoundException;
 import com.project.booktime.model.dto.BookDTO;
 import com.project.booktime.model.dto.UserDTO;
-import com.project.booktime.model.entity.Book;
 import com.project.booktime.model.entity.User;
 import com.project.booktime.model.helper.UserHelper;
-import com.project.booktime.repository.IBookRepository;
 import com.project.booktime.repository.IUserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,17 +24,24 @@ public class UserService {
         this.bookService = bookService;
     }
 
+    private UserDTO createUserDTO(User user) {
+        UserDTO userDTO = UserHelper.convert(user);
+
+        List<BookDTO> addedDTOList = bookService.findBookListById(user.getLibrary());
+        List<BookDTO> likedDTOList = bookService.findBookListById(user.getLiked());
+
+        userDTO.setLibrary(addedDTOList);
+        userDTO.setLiked(likedDTOList);
+
+        return userDTO;
+    }
+
     public UserDTO findMe(String id) {
         Optional<User> user = repository.findById(id);
 
         if (user.isEmpty()) throw new UserNotFoundException();
 
-        List<BookDTO> bookDTOList = bookService.findLibrary(user.get().getAdded());
-
-        UserDTO userDTO = UserHelper.convert(user.get());
-        userDTO.setLibrary(bookDTOList);
-
-        return userDTO;
+        return createUserDTO(user.get());
     }
 
     public List<UserDTO> findAll() {
@@ -50,13 +55,13 @@ public class UserService {
 
         if (user.isEmpty()) throw new UserNotFoundException();
 
-        return UserHelper.convert(user.get());
+        return createUserDTO(user.get());
     }
 
     public UserDTO add(User user) {
         User createdUser = repository.insert(user);
 
-        return UserHelper.convert(createdUser);
+        return createUserDTO(createdUser);
     }
 
     public UserDTO update(String id, User user) {
@@ -66,7 +71,7 @@ public class UserService {
 
         User updatedUser = repository.save(user);
 
-        return UserHelper.convert(updatedUser);
+        return createUserDTO(updatedUser);
     }
 
     public void delete(String id) {

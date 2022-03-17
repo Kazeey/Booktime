@@ -13,5 +13,5 @@ public interface IBookRepository extends MongoRepository<Book, String>
     Book findByTitle(String title);
 
     @Query("{ _id: { $in: ?0 } }")
-    Optional<List<Book>> findLibrary(List<String> booksId);
+    Optional<List<Book>> findBookListById(List<String> booksId);
 }

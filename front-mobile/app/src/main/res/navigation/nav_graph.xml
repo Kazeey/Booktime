@@ -106,8 +106,8 @@
             android:id="@+id/action_bookFragment_to_authorFragment"
             app:destination="@id/authorFragment" />
         <argument
-            android:name="book_id"
-            app:argType="string" />
+            android:name="book"
+            app:argType="com.project.frontMobile.data.model.Book" />
     </fragment>
     <fragment
         android:id="@+id/authorFragment"

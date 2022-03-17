@@ -111,8 +111,8 @@ class LibraryAdapter(private val clickListener: LibraryListener): ListAdapter<Li
         }
     }
 
-    class LibraryListener(val clickListener: (bookId: String) -> Unit) {
-        fun onClick(book: Book) = clickListener(book.id)
+    class LibraryListener(val clickListener: (book: Book) -> Unit) {
+        fun onClick(book: Book) = clickListener(book)
     }
 
     sealed class DataItem {

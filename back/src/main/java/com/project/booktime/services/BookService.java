@@ -35,8 +35,8 @@ public class BookService {
         return BookHelper.convert(book.get());
     }
 
-    public List<BookDTO> findLibrary(List<String> booksId) {
-        Optional<List<Book>> books = repository.findLibrary(booksId);
+    public List<BookDTO> findBookListById(List<String> booksId) {
+        Optional<List<Book>> books = repository.findBookListById(booksId);
 
         if (books.isEmpty()) throw new BookNotFoundException();
 

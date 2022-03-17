@@ -3,6 +3,7 @@ package com.project.frontMobile.ui.book
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.project.frontMobile.R
 import com.project.frontMobile.adapter.AuthorAdapter
 import com.project.frontMobile.adapter.CategoryAdapter
 import com.project.frontMobile.data.model.Author
+import com.project.frontMobile.data.model.Book
 import com.project.frontMobile.data.model.User
 import com.project.frontMobile.databinding.FragmentBookBinding
 import com.project.frontMobile.ui.MainActivity
@@ -25,7 +27,7 @@ import com.project.frontMobile.viewmodel.UserViewModel
 class BookFragment : Fragment() {
 
     companion object {
-        const val BOOK_ID = "book_id"
+        const val BOOK = "book"
     }
 
     private lateinit var binding: FragmentBookBinding
@@ -34,7 +36,7 @@ class BookFragment : Fragment() {
     private val authorViewModel: AuthorViewModel by activityViewModels()
     private val userViewModel: UserViewModel by activityViewModels()
 
-    private lateinit var bookId: String
+    private lateinit var book: Book
     private lateinit var currentUser: User
 
     override fun onCreateView(
@@ -53,20 +55,17 @@ class BookFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         arguments?.let {
-            bookId = it.getString(BOOK_ID).toString()
+            book = it.getSerializable(BOOK) as Book
         }
 
-        bookViewModel.getBookById(bookId)
-        authorViewModel.getAuthorsByBookId(bookId)
+        authorViewModel.getAuthorsByBookId(book.id)
 
-        bookViewModel.currentBook.observe(viewLifecycleOwner) { book ->
-            (activity as MainActivity).supportActionBar?.title = book.title
+        (activity as MainActivity).supportActionBar?.title = book.title
 
-            val base64: ByteArray = Base64.decode(book.base64, Base64.DEFAULT)
-            binding.bookImage.setImageBitmap(BitmapFactory.decodeByteArray(base64, 0, base64.size))
+        val base64: ByteArray = Base64.decode(book.base64, Base64.DEFAULT)
+        binding.bookImage.setImageBitmap(BitmapFactory.decodeByteArray(base64, 0, base64.size))
 
-            setupCategoryRecyclerView(view, book.category)
-        }
+        setupCategoryRecyclerView(view, book.category)
 
         authorViewModel.authors.observe(viewLifecycleOwner) { authors ->
             setupAuthorRecyclerView(view, authors)
@@ -74,17 +73,20 @@ class BookFragment : Fragment() {
 
         userViewModel.currentUser.observe(viewLifecycleOwner) { user ->
             currentUser = user
-            binding.favorite.setImageResource(currentUser.isBookLiked(bookId))
-            binding.add.setImageResource(currentUser.isBookAdded(bookId))
+
+            Log.d("BookFragment", currentUser.toString())
+
+            binding.favorite.setImageResource(currentUser.library.isBookLiked(book))
+            binding.add.setImageResource(currentUser.library.isBookAdded(book))
         }
 
         binding.addContainer.setOnClickListener {
-            currentUser.manageAdded(bookId)
+            currentUser.library.manageAdded(book)
             userViewModel.updateUser(currentUser)
         }
 
         binding.likeContainer.setOnClickListener {
-            currentUser.manageLiked(bookId)
+            currentUser.library.manageLiked(book)
             userViewModel.updateUser(currentUser)
         }
     }

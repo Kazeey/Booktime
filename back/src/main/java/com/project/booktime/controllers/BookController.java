@@ -59,7 +59,7 @@ public class BookController {
     @PostMapping("/find/library")
     public ResponseEntity<List<BookDTO>> findLibrary(@RequestBody Library library) {
         try {
-            List<BookDTO> bookDTOList = bookService.findLibrary(library.getBookIdList());
+            List<BookDTO> bookDTOList = bookService.findBookListById(library.getBookIdList());
 
             return ResponseEntity.ok().body(bookDTOList);
         } catch (BookNotFoundException exception) {

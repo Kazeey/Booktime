@@ -30,8 +30,8 @@ class LibraryFragment : Fragment() {
         val binding: FragmentLibraryBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_library, container, false)
         val viewModel: UserViewModel by activityViewModels()
 
-        val libraryAdapter = LibraryAdapter(LibraryListener { bookId ->
-            val action = LibraryFragmentDirections.actionLibraryFragmentToBookFragment(bookId)
+        val libraryAdapter = LibraryAdapter(LibraryListener { book ->
+            val action = LibraryFragmentDirections.actionLibraryFragmentToBookFragment(book)
             view?.findNavController()?.navigate(action)
         })
 
@@ -43,10 +43,9 @@ class LibraryFragment : Fragment() {
         val indexAdapter = IndexAdapter()
         binding.recyclerviewIndex.adapter = indexAdapter
 
-
         viewModel.currentUser.observe(viewLifecycleOwner) {
             it?.let {
-                val sortedList = it.library.sortedBy { book -> book.title.first() }
+                val sortedList = it.library.bookList.sortedBy { book -> book.title.first() }
                 val headerList = getHeader(sortedList)
 
                 libraryAdapter.addHeaderAndSubmitList(headerList, sortedList)
