@@ -6,6 +6,7 @@ data class UserResponse(
     val name: String,
     val firstName: String,
     val email: String,
+    val birthday: String,
     val added: MutableList<String>,
     val liked: MutableList<String>,
     val base64: String
