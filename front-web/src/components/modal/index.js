@@ -10,9 +10,10 @@ const Modal = () => {
   const [openStatus, setOpen] = React.useState(false);
   const [values, setValues] = React.useState("S'inscrire");
 
-  const onOpenModal = (event, module) => {
+  const onOpenModal = (event, module, other) => {
     setOpen(Boolean(event.target.value));     
     setModule(module);
+    setValues(other);
   };
 
   const onCloseModal = (event) => {
@@ -26,10 +27,10 @@ const Modal = () => {
 
   return (
     <div>
-      <button type="button" value={true} onClick={(event) => onOpenModal(event, true)}> 
+      <button type="button" value={true} onClick={(event) => onOpenModal(event, true, "S'inscrire")}> 
         Authentification
       </button>
-      <button type="button" value={true} onClick={(event) => onOpenModal(event, false)}> 
+      <button type="button" value={true} onClick={(event) => onOpenModal(event, false, "Se connecter")}> 
         Enregistrement
       </button>
       

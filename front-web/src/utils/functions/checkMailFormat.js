@@ -1,5 +1,5 @@
-/*
-* @param mail : string
+/**
+* @param {String} mail 
 * @returns {boolean}
 * 
 * @description

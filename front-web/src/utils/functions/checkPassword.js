@@ -1,5 +1,5 @@
-/*
-* @param password : string
+/**
+* @param {String} password 
 * @returns {boolean}
 *
 * @description
@@ -18,8 +18,8 @@ const checkPassword = (password) => {
         return false;
 }
 
-/*
-* @param password : string
+/**
+* @param {String} password 
 * @returns {<ul> containing the requirements in <li>}
 *
 * @description
@@ -75,4 +75,29 @@ const passwordStrength = (password) => {
     )
 }
 
-export { checkPassword, passwordStrength };
+/**
+ * @param {String} password 
+ * @param {String} passwordConfirm 
+ * @returns {<ul> containing the password check <li>}
+ * 
+ * @description
+ * Check if the password and the password confirmation are the same
+ * if they are not, color the text : red
+ * if they are, color the text : green
+ */
+const samePassword = (password, passwordConfirm) => {
+    let color;
+
+    if (password === passwordConfirm && passwordConfirm !== '')
+        color = "green";
+    else
+        color = "red";
+
+    return (
+        <ul style={{ fontSize : '9px', listStyle : 'none', padding : 0}}>
+            <li style={{"color" : color}}>Les mots de passe doivent être identiques</li>
+        </ul>
+    )
+}
+
+export { checkPassword, passwordStrength, samePassword};
