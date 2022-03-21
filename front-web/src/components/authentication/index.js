@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box } from '@mui/system'
 import PropTypes from 'prop-types'
-import { Button, FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
+import { Button, FormControl, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -33,7 +33,7 @@ const Authentication = ( props ) => {
   };
 
   return (
-    <Box sx={modalStyle.box}>
+    <Box sx={modalStyle.authenticationBox}>
       <h1 style={modalStyle.h1}>Formulaire de connexion</h1>
       <FormControl variant="standard" sx={modalStyle.formControl}>
         <InputLabel htmlFor="emailInput">
@@ -85,9 +85,9 @@ const Authentication = ( props ) => {
       <Box sx={modalStyle.boxButton}>
         <FormControl variant='standard' sx={modalStyle.formControl}>
           <Button variant="contained" color="success" sx={modalStyle.ButtonForm} 
-            // disabled={
-            //   // Ajouter condition ? true : false
-            // }
+            disabled={
+              !values.email || !checkMail(values.email) || !values.password || !checkPassword(values.password)
+            }
           >
             Se connecter
           </Button>

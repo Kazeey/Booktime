@@ -1,9 +1,20 @@
-import { autocompleteClasses } from "@mui/material";
-
 const modalStyle = {
-    box : {
+    authenticationBox : {
         width : 400,
         height : 400,
+        bgcolor : 'white',
+        border : "1px solid #707070",
+        p : 2,
+        px : 4,
+        pb : 3,
+        paddingTop : '2rem',
+        display : 'flex',
+        flexDirection : 'column',
+        alignItems : 'center',
+    },
+    registerBox : {
+        width : 400,
+        height : 600,
         bgcolor : 'white',
         border : "1px solid #707070",
         p : 2,
@@ -22,12 +33,11 @@ const modalStyle = {
     formControl : {
         marginTop : '1em',
         width : '30ch',
-        margin : 'auto',
     },
     ButtonForm : {
         width : '30ch',
         margin : '0 auto',
-        marginTop: '5em',
+        marginTop: '3em',
         display : 'flex',
         flexDirection : 'column',
         alignItems : 'center',

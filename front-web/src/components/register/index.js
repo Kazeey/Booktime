@@ -1,20 +1,27 @@
 import React from 'react'
 import { Box } from '@mui/system'
 import PropTypes from 'prop-types'
-import { Button, FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
+import { Button, FormControl, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
+import PersonIcon from '@mui/icons-material/Person';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import modalStyle from '../../utils/styles/modal.style';
 import checkMail from '../../utils/functions/checkMailFormat';
-import { checkPassword, passwordStrength } from '../../utils/functions/checkPassword';
+import { checkPassword, passwordStrength, samePassword } from '../../utils/functions/checkPassword';
+import checkNameFormat from '../../utils/functions/checkNameFormat';
 
 const Register = ( props ) => {
 
   const [values, setValues] = React.useState({
+    name : '',
+    firstname : '',
     email: '',
     password: '',
+    confirmPassword: '',
+    sex : '',
     showPassword: false,
+    showConfirmPassword : false,
   });
 
   const handleChange = (prop) => (event) => {
@@ -32,10 +39,148 @@ const Register = ( props ) => {
     event.preventDefault();
   };
 
+  const handleClickShowConfirmPassword = () => {
+    setValues({
+      ...values,
+      showConfirmPassword: !values.showConfirmPassword,
+    });
+  };
+
+  const handleMouseDownConfirmPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
-    <Box sx={modalStyle.box}>
+    <Box sx={modalStyle.registerBox}>
       <h1 style={modalStyle.h1}>Formulaire d'inscription</h1>
+
+      <FormControl variant="standard" sx={modalStyle.formControl}>
+        <InputLabel htmlFor="nameInput">
+          Nom
+        </InputLabel>
+        <Input
+          id="nameInput"
+          type='name'
+          error={!checkNameFormat(values.name) && values.name !== ''}
+          value={values.name}
+          onChange={handleChange('name')}
+          startAdornment={
+            <InputAdornment position="start">
+              <PersonIcon />
+            </InputAdornment>
+          }
+        />
+      </FormControl>
+
+      <FormControl variant="standard" sx={modalStyle.formControl}>
+        <InputLabel htmlFor="firstnameInput">
+          Prénom
+        </InputLabel>
+        <Input
+          id="firstnameInput"
+          type='firstname'
+          error={!checkNameFormat(values.firstname) && values.firstname !== ''}
+          value={values.firstname}
+          onChange={handleChange('firstname')}
+          startAdornment={
+            <InputAdornment position="start">
+              <PersonIcon />
+            </InputAdornment>
+          }
+        />
+      </FormControl>
+
+      <FormControl variant="standard" sx={modalStyle.formControl}>
+        <InputLabel htmlFor="emailInput">
+          Adresse mail
+        </InputLabel>
+        <Input
+          id="emailInput"
+          type='email'
+          error={!checkMail(values.email) && values.email !== ''}
+          value={values.email}
+          onChange={handleChange('email')}
+          startAdornment={
+            <InputAdornment position="start">
+              <EmailIcon />
+            </InputAdornment>
+          }
+        />
+      </FormControl>
+
+      <FormControl variant='standard' sx={modalStyle.formControl}>
+        <InputLabel htmlFor="passwordInput">
+          Mot de passe
+        </InputLabel>
+        <Input
+          id="passwordInput"
+          type={values.showPassword ? 'text' : 'password'}
+          error={!checkPassword(values.password) && values.password !== ''}
+          value={values.password}
+          onChange={handleChange('password')}
+          startAdornment={
+            <InputAdornment position="start">
+              <HttpsIcon />
+            </InputAdornment>
+          }
+          endAdornment={
+            <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+              >
+                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+          }
+        />
+        {          
+          passwordStrength(values.password)
+        }
+      </FormControl>
+
+      <FormControl variant='standard' sx={modalStyle.formControl}>
+        <InputLabel htmlFor="confirmPasswordInput">
+          Confirmation du mot de passe
+        </InputLabel>
+        <Input
+          id="confirmPasswordInput"
+          type={values.showConfirmPassword ? 'text' : 'password'}
+          value={values.confirmPassword}
+          onChange={handleChange('confirmPassword')}
+          startAdornment={
+            <InputAdornment position="start">
+              <HttpsIcon />
+            </InputAdornment>
+          }
+          endAdornment={
+            <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowConfirmPassword}
+                onMouseDown={handleMouseDownConfirmPassword}
+              >
+                {values.showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+          }
+        />
+        {          
+          samePassword(values.password, values.confirmPassword)
+        }
+      </FormControl>
       
+      <Box sx={modalStyle.boxButton}>
+        <FormControl variant='standard' sx={modalStyle.formControl}>
+          <Button variant="contained" color="success" sx={modalStyle.ButtonForm} 
+            disabled={
+              !values.name || !checkNameFormat(values.name) || 
+              !values.firstname || !checkNameFormat(values.firstname) ||
+              !values.email || !checkMail(values.email) ||
+              !values.password || !checkPassword(values.password)
+            }
+          >
+            Se connecter
+          </Button>
+        </FormControl>
+      </Box>
     </Box>
   )
 }

@@ -1,7 +1,7 @@
 import { FormHelperText } from "@mui/material";
 
-/*
-* @param error : string
+/**
+* @param {String} error
 * @returns {FormHelperText}
 *
 * @description
