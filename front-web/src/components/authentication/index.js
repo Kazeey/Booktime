@@ -1,16 +1,20 @@
 import React from 'react'
 import { Box } from '@mui/system'
 import PropTypes from 'prop-types'
-import { Button, FormControl, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
+import { Button, Fade, FormControl, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import modalStyle from '../../utils/styles/modal.style';
 import checkMail from '../../utils/functions/checkMailFormat';
 import { checkPassword, passwordStrength } from '../../utils/functions/checkPassword';
+import styleModal from '../../utils/styles/modal';
+import ForgotPassword from '../forgotPassword';
+import CloseIcon from '@mui/icons-material/Close';
 
-const Authentication = ( props ) => {
+const Authentication = () => {
 
+  const [openStatus, setOpen] = React.useState(false);
   const [values, setValues] = React.useState({
     email: '',
     password: '',
@@ -32,9 +36,18 @@ const Authentication = ( props ) => {
     event.preventDefault();
   };
 
+  const onOpenModal = (event) => {
+    setOpen(Boolean(event.target.value));     
+  };
+
+  const onCloseModal = (event) => {
+    setOpen(Boolean(event.target.value));
+  };
+
   return (
     <Box sx={modalStyle.authenticationBox}>
       <h1 style={modalStyle.h1}>Formulaire de connexion</h1>
+
       <FormControl variant="standard" sx={modalStyle.formControl}>
         <InputLabel htmlFor="emailInput">
           Adresse mail
@@ -60,7 +73,6 @@ const Authentication = ( props ) => {
           <Input
             id="passwordInput"
             type={values.showPassword ? 'text' : 'password'}
-            error={!checkPassword(values.password) && values.password !== ''}
             value={values.password}
             onChange={handleChange('password')}
             startAdornment={
@@ -78,13 +90,14 @@ const Authentication = ( props ) => {
                 </IconButton>
             }
           />
-          {          
+          {   
             passwordStrength(values.password)
           }
       </FormControl>
-      <Box sx={modalStyle.boxButton}>
+
+      <Box>
         <FormControl variant='standard' sx={modalStyle.formControl}>
-          <Button variant="contained" color="success" sx={modalStyle.ButtonForm} 
+          <Button variant="contained" color="success" sx={modalStyle.buttonForm} 
             disabled={
               !values.email || !checkMail(values.email) || !values.password || !checkPassword(values.password)
             }
@@ -93,6 +106,30 @@ const Authentication = ( props ) => {
           </Button>
         </FormControl>
       </Box>
+
+      <Box>
+        <FormControl variant='standard' sx={modalStyle.formControl}>
+          <Button variant="contained" color="success" value={true} sx={modalStyle.buttonForm} onClick={(event) => onOpenModal(event)} >
+            Mot de passe oublié ?
+          </Button>
+        </FormControl>
+      </Box>
+
+      <styleModal.StyledModal
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        open={openStatus}
+        value={false}
+        onClose={(event) => onCloseModal(event)}
+        BackdropComponent={styleModal.Backdrop}
+      >
+        <Fade in={openStatus}>
+          <div>
+            <ForgotPassword func={onCloseModal}/>
+          </div>
+        </Fade>
+      </styleModal.StyledModal>
+    
     </Box>
   )
 }

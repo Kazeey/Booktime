@@ -11,8 +11,7 @@ import checkMail from '../../utils/functions/checkMailFormat';
 import { checkPassword, passwordStrength, samePassword } from '../../utils/functions/checkPassword';
 import checkNameFormat from '../../utils/functions/checkNameFormat';
 
-const Register = ( props ) => {
-
+const Register = () => {
   const [values, setValues] = React.useState({
     name : '',
     firstname : '',
@@ -115,7 +114,6 @@ const Register = ( props ) => {
         <Input
           id="passwordInput"
           type={values.showPassword ? 'text' : 'password'}
-          error={!checkPassword(values.password) && values.password !== ''}
           value={values.password}
           onChange={handleChange('password')}
           startAdornment={
@@ -167,14 +165,15 @@ const Register = ( props ) => {
         }
       </FormControl>
       
-      <Box sx={modalStyle.boxButton}>
+      <Box>
         <FormControl variant='standard' sx={modalStyle.formControl}>
-          <Button variant="contained" color="success" sx={modalStyle.ButtonForm} 
+          <Button variant="contained" color="success" sx={modalStyle.buttonForm} 
             disabled={
               !values.name || !checkNameFormat(values.name) || 
               !values.firstname || !checkNameFormat(values.firstname) ||
               !values.email || !checkMail(values.email) ||
-              !values.password || !checkPassword(values.password)
+              !values.password || !checkPassword(values.password) ||
+              values.password !== values.confirmPassword
             }
           >
             Se connecter
