@@ -1,13 +1,12 @@
 import React from 'react'
 import './App.css';
-import Modal from './components/modal';
+import HomeContainer from './containers/HomeContainer'
 
 
 const App = () => {
   return (
     <div className="App">
-      App
-      <Modal />
+      <HomeContainer />
     </div>
   )
 }

@@ -25,24 +25,42 @@ const modalStyle = {
         flexDirection : 'column',
         alignItems : 'center',
     },
+    forgetPasswordBox : {
+        width : 300,
+        height : 200,
+        bgcolor : 'white',
+        border : "1px solid #707070",
+        p : 2,
+        px : 4,
+        pb : 3,
+        paddingTop : '2rem',
+        display : 'flex',
+        flexDirection : 'column',
+        alignItems : 'center',
+    },
     h1 : {
         fontSize : '1.5rem',
         fontWeight : 'bold',
         textAlign : 'center',
+        float : 'left',
     },
     formControl : {
         marginTop : '1em',
         width : '30ch',
     },
-    ButtonForm : {
+    formControlForgetPassword : {
+        marginTop : '3em',
+        width : '175px',
+    },
+    buttonForm : {
         width : '30ch',
         margin : '0 auto',
-        marginTop: '3em',
+        marginTop: '0em',
         display : 'flex',
         flexDirection : 'column',
         alignItems : 'center',
     },
-    ButtonSwap : {
+    buttonSwap : {
         width : '30ch',
         margin : '0 auto',
         marginTop: '1rem',

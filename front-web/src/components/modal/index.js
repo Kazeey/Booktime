@@ -2,11 +2,12 @@ import React from 'react'
 import styleModal from '../../utils/styles/modal';
 import Authentication from '../authentication';
 import Register from '../register';
-import { Button, FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
+import { Button, Fade, FormControl } from '@mui/material';
 import modalStyle from '../../utils/styles/modal.style';
 
 const Modal = () => {
   const [moduleStatus, setModule] = React.useState(true);
+  const [forgotPasswordStatus, setForgotPasswordStatus] = React.useState(false);
   const [openStatus, setOpen] = React.useState(false);
   const [values, setValues] = React.useState("S'inscrire");
 
@@ -27,9 +28,11 @@ const Modal = () => {
 
   return (
     <div>
-      <button type="button" value={true} onClick={(event) => onOpenModal(event, true, "S'inscrire")}> 
-        Authentification
-      </button>
+      <FormControl variant='standard'>
+        <Button variant='contained' color='warning' value={true} onClick={(event) => onOpenModal(event, true, "S'inscrire")}>
+          Se connecter
+        </Button>
+      </FormControl>
       <button type="button" value={true} onClick={(event) => onOpenModal(event, false, "Se connecter")}> 
         Enregistrement
       </button>
@@ -42,14 +45,16 @@ const Modal = () => {
         onClose={(event) => onCloseModal(event)}
         BackdropComponent={styleModal.Backdrop}
       >
-        <div>
-          {moduleStatus ? <Authentication /> : <Register />}
-          <FormControl variant='standard'>
-            <Button variant="contained" color="success" sx={modalStyle.ButtonSwap} onClick={swapModule}>
-              {values}
-            </Button>
-          </FormControl>
-        </div>
+        <Fade in={openStatus}>
+          <div>
+            {moduleStatus ? <Authentication /> : <Register />}
+            <FormControl variant='standard'>
+              <Button variant="contained" color="success" sx={modalStyle.buttonSwap} onClick={swapModule}>
+                {values}
+              </Button>
+            </FormControl>
+          </div>
+        </Fade>
       </styleModal.StyledModal>
     </div>
   )
