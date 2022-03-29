@@ -2,16 +2,16 @@ package com.project.frontMobile.ui.user
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import com.google.android.material.button.MaterialButton
 import com.project.frontMobile.R
 import com.project.frontMobile.data.model.User
 import com.project.frontMobile.databinding.FragmentProfileBinding
@@ -60,17 +60,32 @@ class ProfileFragment : Fragment(), ClickHandler {
                     Integer.parseInt(DateUtils().extractDayOfMonth(currentUser.birthday))
                 )
             }
-            else -> Log.i(UserViewModel::class.java.name, "Unknown view")
+            else -> Log.i(ProfileFragment::class.java.name, "Unknown view")
         }
     }
 
-    fun openDialog() {
+    private fun openDialog() {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setView(R.layout.custom_dialog)
+        val dialogLayout = layoutInflater.inflate(R.layout.custom_dialog, null)
+        val alertDialog = builder.create()
+        alertDialog.setView(dialogLayout)
 
-        builder.show()
+        val editText = dialogLayout.findViewById<EditText>(R.id.username)
+        editText.setText(currentUser.pseudo)
+        val positiveBtn = dialogLayout.findViewById<MaterialButton>(R.id.positive)
+        val negativeBtn = dialogLayout.findViewById<MaterialButton>(R.id.negative)
 
-        //val input = dialog.findViewById<TextView>(R.id.edittext)
+        positiveBtn.setOnClickListener {
+            currentUser.pseudo = editText.text.toString().trim()
+            userViewModel.updateUser(currentUser)
+            alertDialog.dismiss()
+        }
+
+        negativeBtn.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
     }
 
     private fun openDatePicker(year: Int, month: Int, day: Int) {
