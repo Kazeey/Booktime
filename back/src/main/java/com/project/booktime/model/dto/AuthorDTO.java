@@ -14,7 +14,7 @@ public class AuthorDTO
     private String base64;
     private List<String> booksId;
   
-    public AuthorDTO(String id, String name, String birthDate, String deathDate, String biography, String country, String base64)
+    public AuthorDTO(String id, String name, String birthDate, String deathDate, String biography, String country, String base64, List<String> booksId)
     {
         this.id = id;
         this.name = name;

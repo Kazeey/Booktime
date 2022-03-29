@@ -8,9 +8,11 @@
     <string name="title_suggestion_fragment">Suggestion</string>
     <string name="title_settings_fragment">Settings</string>
 
-    <!-- Book Fragment -->
+    <!-- Header -->
     <string name="header_synopsis">Synopsis</string>
     <string name="header_author">Writing By</string>
+    <string name="header_username">Username</string>
+    <string name="header_birthday">Birthday</string>
 
     <!-- Author RecyclerView -->
     <string name="author_name">%1$s %2$s</string>

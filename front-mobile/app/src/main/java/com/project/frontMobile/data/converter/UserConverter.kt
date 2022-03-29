@@ -12,6 +12,7 @@ class UserConverter {
             response.name,
             response.firstName,
             response.email,
+            response.birthday,
             response.added,
             response.liked,
             response.base64
