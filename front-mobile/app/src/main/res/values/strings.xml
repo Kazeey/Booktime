@@ -17,6 +17,15 @@
     <!-- Author RecyclerView -->
     <string name="author_name">%1$s %2$s</string>
 
+    <!-- Main Menu -->
+    <string name="header_user_data">Main Information</string>
+    <string name="header_app_data">App Settings</string>
+    <string name="header_my_profile">My Profile</string>
+    <string name="header_account_settings">Account Settings</string>
+    <string name="header_rgpd">RGPD</string>
+    <string name="header_help">Help</string>
+    <string name="header_sign_out">Sign out</string>
+
     <string name="button_log_in">Log In</string>
     <string name="button_sign_up">Sign up</string>
     <string name="button_forgot_password">Forgot Password ?</string>
