@@ -5,53 +5,47 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.google.android.material.button.MaterialButton
 import com.project.frontMobile.R
+import com.project.frontMobile.databinding.FragmentMenuBinding
+import com.project.frontMobile.utils.ClickHandler
+import com.project.frontMobile.utils.DateUtils
+import com.project.frontMobile.viewmodel.UserViewModel
 
-class MenuFragment : Fragment() {
+class MenuFragment : Fragment(), ClickHandler {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var binding: FragmentMenuBinding
+
+    private val userViewModel: UserViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_menu, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_menu, container, false)
 
-        val profileButton = view.findViewById<MaterialButton>(R.id.profile_button)
-        val settingsButton = view.findViewById<MaterialButton>(R.id.settings_button)
-        val rgpdButton = view.findViewById<MaterialButton>(R.id.rgpd_button)
-        val helpButton = view.findViewById<MaterialButton>(R.id.help_button)
-        val signOutButton = view.findViewById<MaterialButton>(R.id.sign_out_button)
+        return binding.root
+    }
 
-        profileButton.setOnClickListener {
-            val action = MenuFragmentDirections.actionMenuFragmentToProfileFragment()
-            view?.findNavController()?.navigate(action)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = userViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.handler = this
+    }
+
+    override fun onClick(view: View) {
+        val action = when (view.id) {
+            R.id.account_settings_card -> MenuFragmentDirections.actionMenuFragmentToSettingsFragment()
+            R.id.rgpd_card -> MenuFragmentDirections.actionMenuFragmentToRGPDFragment()
+            R.id.help_card -> MenuFragmentDirections.actionMenuFragmentToHelpFragment()
+            R.id.sign_out_card -> MenuFragmentDirections.actionMenuFragmentToAuthenticationFragment()
+            else -> MenuFragmentDirections.actionMenuFragmentToProfileFragment()
         }
-
-        settingsButton.setOnClickListener {
-            val action = MenuFragmentDirections.actionMenuFragmentToSettingsFragment()
-            view?.findNavController()?.navigate(action)
-        }
-
-        rgpdButton.setOnClickListener {
-            val action = MenuFragmentDirections.actionMenuFragmentToRGPDFragment()
-            view?.findNavController()?.navigate(action)
-        }
-
-        helpButton.setOnClickListener {
-            val action = MenuFragmentDirections.actionMenuFragmentToHelpFragment()
-            view?.findNavController()?.navigate(action)
-        }
-
-        signOutButton.setOnClickListener {
-            val action = MenuFragmentDirections.actionMenuFragmentToAuthenticationFragment()
-            view?.findNavController()?.navigate(action)
-        }
-
-        return view
+        view.findNavController().navigate(action)
     }
 }

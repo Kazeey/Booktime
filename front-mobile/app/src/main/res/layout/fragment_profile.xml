@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@{viewModel.currentUser.formatPicture()}"
-                android:scaleType="center"
+                android:scaleType="centerCrop"
                 tools:src="@tools:sample/avatars" />
 
         </com.google.android.material.card.MaterialCardView>
