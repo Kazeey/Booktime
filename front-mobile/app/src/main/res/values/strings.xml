@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">frontMobile</string>
+    <string name="app_name">BookTime</string>
+    <string name="app_catch_phrase">The world\'s largest tracking tool for books</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -13,6 +14,11 @@
     <string name="header_author">Writing By</string>
     <string name="header_username">Username</string>
     <string name="header_birthday">Birthday</string>
+
+    <!-- Hint -->
+    <string name="hint_email">Email</string>
+    <string name="hint_confirm_email">Confirm Email</string>
+    <string name="hint_password">Password</string>
 
     <!-- Author RecyclerView -->
     <string name="author_name">%1$s %2$s</string>
@@ -37,9 +43,4 @@
     <string name="button_search">Search</string>
     <string name="button_book">Book</string>
     <string name="button_author">Author</string>
-
-    <!-- Status Message -->
-    <string name="add_to_list"></string>
-    <string name="remove_from_list"></string>
-
 </resources>
