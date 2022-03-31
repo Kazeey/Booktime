@@ -5,11 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.google.android.material.button.MaterialButton
 import com.project.frontMobile.R
+import com.project.frontMobile.databinding.FragmentAuthenticationBinding
+import com.project.frontMobile.utils.ClickHandler
 
-class AuthenticationFragment : Fragment() {
+class AuthenticationFragment : Fragment(), ClickHandler {
+
+    private lateinit var binding: FragmentAuthenticationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,21 +24,23 @@ class AuthenticationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_authentication, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_authentication, container, false)
 
-        val logIn: MaterialButton = view.findViewById(R.id.log_in_button)
-        val signUp: MaterialButton = view.findViewById(R.id.sign_up_button)
+        return binding.root
+    }
 
-        logIn.setOnClickListener {
-            val action = AuthenticationFragmentDirections.actionAuthenticationFragmentToLogInFragment()
-            view?.findNavController()?.navigate(action)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.handler = this
+        binding.lifecycleOwner = viewLifecycleOwner
+    }
+
+    override fun onClick(view: View) {
+        val action = when (view.id) {
+            R.id.log_in_button -> AuthenticationFragmentDirections.actionAuthenticationFragmentToLogInFragment()
+            else -> AuthenticationFragmentDirections.actionAuthenticationFragmentToSignUpFragment()
         }
-
-        signUp.setOnClickListener {
-            val action = AuthenticationFragmentDirections.actionAuthenticationFragmentToSignUpFragment()
-            view?.findNavController()?.navigate(action)
-        }
-
-        return view
+        view.findNavController().navigate(action)
     }
 }
