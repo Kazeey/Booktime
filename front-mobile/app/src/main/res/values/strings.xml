@@ -17,6 +17,7 @@
 
     <!-- Hint -->
     <string name="hint_email">Email</string>
+    <string name="hint_confirm_email">Confirm Email</string>
     <string name="hint_password">Password</string>
 
     <!-- Author RecyclerView -->
