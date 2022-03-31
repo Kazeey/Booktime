@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.google.android.material.button.MaterialButton
@@ -34,6 +35,8 @@ class AuthenticationFragment : Fragment(), ClickHandler {
 
         binding.handler = this
         binding.lifecycleOwner = viewLifecycleOwner
+
+        requireActivity().onBackPressedDispatcher.addCallback { }
     }
 
     override fun onClick(view: View) {
