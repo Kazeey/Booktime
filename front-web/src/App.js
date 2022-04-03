@@ -5,7 +5,7 @@ import HomeContainer from './containers/HomeContainer'
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="App" style={{backgroundColor : "black"}}>
       <HomeContainer />
     </div>
   )

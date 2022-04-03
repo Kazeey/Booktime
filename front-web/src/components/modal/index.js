@@ -4,6 +4,7 @@ import Authentication from '../authentication';
 import Register from '../register';
 import { Button, Fade, FormControl } from '@mui/material';
 import modalStyle from '../../utils/styles/modal.style';
+import buttonStyle from '../../utils/styles/button.style';
 
 const Modal = () => {
   const [moduleStatus, setModule] = React.useState(true);
@@ -29,7 +30,7 @@ const Modal = () => {
   return (
     <div>
       <FormControl variant='standard'>
-        <Button variant='contained' color='warning' value={true} onClick={(event) => onOpenModal(event, true, "S'inscrire")}>
+        <Button variant='contained' sx={buttonStyle.loginButton} value={true} onClick={(event) => onOpenModal(event, true, "S'inscrire")}>
           Se connecter
         </Button>
       </FormControl>
