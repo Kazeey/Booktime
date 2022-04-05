@@ -11,10 +11,11 @@ public class UserDTO {
     private String name;
     private String firstName;
     private String email;
+    private String password;
     private Date birthday;
     private String base64;
 
-    public UserDTO(String id, String pseudo, String name, String firstName, String email, Date birthday, String base64) {
+    public UserDTO(String id, String pseudo, String name, String firstName, String email, String password, Date birthday, String base64) {
         this.id = id;
         this.pseudo = pseudo;
         this.name = name;
@@ -62,6 +63,14 @@ public class UserDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Date getBirthday() {

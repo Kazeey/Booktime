@@ -14,12 +14,12 @@ public class User {
     private String pseudo;
     private String name;
     private String firstName;
-    private String password;
     private String email;
+    private String password;
     private Date birthday;
     private String base64;
 
-    public User(String pseudo, String name, String firstName, String password, String email, Date birthday, String base64) {
+    public User(String pseudo, String name, String firstName, String email, String password, Date birthday, String base64) {
         this.pseudo = pseudo;
         this.name = name;
         this.firstName = firstName;
