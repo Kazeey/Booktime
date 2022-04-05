@@ -35,6 +35,14 @@ public class UserService {
         return UserHelper.convert(user.get());
     }
 
+    public UserDTO findByEmailAndPassword(User user) {
+        User userFounded = repository.findByEmailAndPassword(user.getEmail(), user.getPassword());
+
+        if (userFounded == null) throw new UserNotFoundException();
+
+        return UserHelper.convert(userFounded);
+    }
+
     public UserDTO add(User user) {
         User createdUser = repository.insert(user);
 

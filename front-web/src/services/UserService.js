@@ -25,5 +25,17 @@ const getUserById = async (id) => {
     }
 }
 
+const connectUser = async (user) => {
+    try
+    {
+        const response = await axios.post(constants.apiURL + 'user/connect', user);
+        return response.data;
+    }
+    catch (error)
+    {
+        throw error;
+    }
+}
+
 export { getUsersList, getUserById };
 
