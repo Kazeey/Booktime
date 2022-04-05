@@ -4,7 +4,7 @@ import Modal from '../components/modal/index';
 
 const HomeContainer = props => {
     return (
-        <div>
+        <div className='parentDiv'>
             <Modal />
         </div>
     )

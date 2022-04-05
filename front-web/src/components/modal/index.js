@@ -30,13 +30,15 @@ const Modal = () => {
   return (
     <div>
       <FormControl variant='standard'>
-        <Button variant='contained' sx={buttonStyle.loginButton} value={true} onClick={(event) => onOpenModal(event, true, "S'inscrire")}>
+        <Button variant='outlined' sx={buttonStyle.loginButton} value={true} onClick={(event) => onOpenModal(event, true, "S'inscrire")}>
           Se connecter
         </Button>
       </FormControl>
-      <button type="button" value={true} onClick={(event) => onOpenModal(event, false, "Se connecter")}> 
-        Enregistrement
-      </button>
+      <FormControl variant='standard'>
+        <Button variant='contained' sx={buttonStyle.loginButton} value={true} onClick={(event) => onOpenModal(event, false, "Se connecter")}>
+          Enregistrement
+        </Button>
+      </FormControl>
       
       <styleModal.StyledModal
         aria-labelledby="simple-modal-title"
