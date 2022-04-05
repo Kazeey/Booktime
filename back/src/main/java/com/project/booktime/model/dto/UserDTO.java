@@ -21,6 +21,7 @@ public class UserDTO {
         this.name = name;
         this.firstName = firstName;
         this.email = email;
+        this.password = password;
         this.birthday = birthday;
         this.base64 = base64;
     }

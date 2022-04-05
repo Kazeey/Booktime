@@ -1,4 +1,4 @@
-export const setMessage = (message = null, nbEssais = null) => {
+export const setMessage = (message, nbEssais = null) => {
     let messageZone = document.getElementById('messageZone');
 
     if (nbEssais)

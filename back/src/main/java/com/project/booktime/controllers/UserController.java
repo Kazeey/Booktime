@@ -69,8 +69,12 @@ public class UserController {
 
     @PostMapping("/connect")
     public ResponseEntity<UserDTO> connect(@RequestBody User user) {
-        UserDTO userDTO = userService.findByEmailAndPassword(user);
+        try {
+            UserDTO userDTO = userService.findByEmailAndPassword(user);
 
-        return ResponseEntity.ok(userDTO);
+            return ResponseEntity.ok().body(userDTO);
+        } catch (UserNotFoundException exception) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

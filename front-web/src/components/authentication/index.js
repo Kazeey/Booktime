@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box } from '@mui/system'
 import PropTypes from 'prop-types'
-import { Button, Fade, FormControl, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
+import { Button, Fade, FormControl, IconButton, Input, InputAdornment, InputLabel, TextField } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -11,6 +11,8 @@ import { checkPassword, passwordStrength } from '../../utils/functions/checkPass
 import styleModal from '../../utils/styles/modal';
 import ForgotPassword from '../forgotPassword';
 import CloseIcon from '@mui/icons-material/Close';
+import { connectUser } from '../../services/UserService';
+import { setMessage } from '../../utils/functions/setMessage';
 
 const Authentication = () => {
 
@@ -43,6 +45,22 @@ const Authentication = () => {
   const onCloseModal = (event) => {
     setOpen(Boolean(event.target.value));
   };
+
+  const connection = (email, password) => {
+    let user = {
+      "email" : email,
+      "password" : password
+    }
+
+    connectUser(user)
+    .then(response => {
+      setMessage("");
+      console.log(response);
+    })
+    .catch(error => {
+      setMessage("error");
+    });
+  }
 
   return (
     <Box sx={modalStyle.authenticationBox}>
@@ -101,6 +119,7 @@ const Authentication = () => {
             disabled={
               !values.email || !checkMail(values.email) || !values.password || !checkPassword(values.password)
             }
+            onClick={() => { connection(values.email, values.password) }}
           >
             Se connecter
           </Button>
@@ -115,6 +134,8 @@ const Authentication = () => {
         </FormControl>
       </Box>
 
+      <p id="messageZone"></p>
+      
       <styleModal.StyledModal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"

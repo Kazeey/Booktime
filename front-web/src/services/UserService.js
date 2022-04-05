@@ -1,6 +1,30 @@
 import axios from 'axios';
 import { constants } from '../utils/constants/constants';
 
+const connectUser = async (user) => {
+    try
+    {
+        const response = await axios.post(constants.apiURL + 'user/connect', user);
+        return response.data;
+    }
+    catch (error)
+    {
+        throw error;
+    }
+}
+
+const forgetPassword = async (email) => {
+    try
+    {
+        const response = await axios.post(constants.apiURL + 'user/forgetPassword', email);
+        return response.data;
+    }
+    catch (error)
+    {
+        throw error;
+    }
+}
+
 const getUsersList = async () => {
     try
     {
@@ -25,17 +49,5 @@ const getUserById = async (id) => {
     }
 }
 
-const connectUser = async (user) => {
-    try
-    {
-        const response = await axios.post(constants.apiURL + 'user/connect', user);
-        return response.data;
-    }
-    catch (error)
-    {
-        throw error;
-    }
-}
-
-export { getUsersList, getUserById };
+export { connectUser, forgetPassword, getUsersList, getUserById };
 
