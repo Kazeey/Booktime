@@ -3,7 +3,6 @@ package com.project.booktime.controllers;
 import com.project.booktime.exception.UserNotFoundException;
 import com.project.booktime.model.dto.UserDTO;
 import com.project.booktime.model.entity.User;
-import com.project.booktime.services.MailService;
 import com.project.booktime.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -87,19 +86,6 @@ public class UserController {
             return ResponseEntity.ok().body(userDTO);
         } catch (UserNotFoundException exception) {
             return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping("/sendMail")
-    public void sendMail()
-    {
-        try {
-            MailService test = new MailService();
-            test.sendMessage("quentinpeze@hotmail.fr", "test", "text");
-        }
-        catch (UserNotFoundException exception)
-        {
-            System.out.println("nop");
         }
     }
 }

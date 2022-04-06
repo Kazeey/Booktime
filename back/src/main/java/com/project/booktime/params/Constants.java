@@ -16,7 +16,10 @@ public class Constants
     public final static String GOOGLE_API = "https://www.googleapis.com/books/v1/volumes?q=";
     public final static String NON_ACQUIS = "N/A";
 
-    public final static String USER_NOT_FOUND = "Il n'y a pas d'utilisateur avec cet email.";
+    public final static String MAIL_HOST = "smtp.gmail.com";
+    public final static int MAIL_PORT = 587;
+    public final static String MAIL_USERNAME = "booktime.projet@gmail.com";
+    public final static String MAIL_PASSWORD = "Booktime1!";
 
     // Google books categories
     public final static String categories[] = {
