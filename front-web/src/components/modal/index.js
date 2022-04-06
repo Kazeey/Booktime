@@ -1,14 +1,14 @@
 import React from 'react'
-import styleModal from '../../utils/styles/modal';
 import Authentication from '../authentication';
 import Register from '../register';
 import { Button, Fade, FormControl } from '@mui/material';
+
 import modalStyle from '../../utils/styles/modal.style';
+import styleModal from '../../utils/styles/modal';
 import buttonStyle from '../../utils/styles/button.style';
 
 const Modal = () => {
   const [moduleStatus, setModule] = React.useState(true);
-  const [forgotPasswordStatus, setForgotPasswordStatus] = React.useState(false);
   const [openStatus, setOpen] = React.useState(false);
   const [values, setValues] = React.useState("S'inscrire");
 

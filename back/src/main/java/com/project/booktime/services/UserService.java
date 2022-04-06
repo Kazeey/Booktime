@@ -62,7 +62,7 @@ public class UserService {
 
     public UserDTO changeAccount (User user) {
         User notUpdatedUser = repository.findByEmail(user.getEmail());
-        
+
         if (notUpdatedUser == null) throw new UserNotFoundException();
 
         notUpdatedUser.setStatus(user.getStatus());

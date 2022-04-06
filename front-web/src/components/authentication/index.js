@@ -1,22 +1,21 @@
 import React from 'react'
-import { Box } from '@mui/system'
 import PropTypes from 'prop-types'
-import { Button, Fade, FormControl, IconButton, Input, InputAdornment, InputLabel, TextField } from '@mui/material';
-import EmailIcon from '@mui/icons-material/Email';
-import HttpsIcon from '@mui/icons-material/Https';
+import { Box } from '@mui/system'
+import { Button, Fade, FormControl, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import modalStyle from '../../utils/styles/modal.style';
 import checkMail from '../../utils/functions/checkMailFormat';
 import { checkPassword, passwordStrength } from '../../utils/functions/checkPassword';
-import styleModal from '../../utils/styles/modal';
 import ForgotPassword from '../forgotPassword';
-import CloseIcon from '@mui/icons-material/Close';
 import { connectUser, changeAccount } from '../../services/UserService';
 import { setMessage } from '../../utils/functions/setMessage';
 import { constants } from '../../utils/constants/constants';
 
-const Authentication = () => {
+import modalStyle from '../../utils/styles/modal.style';
+import styleModal from '../../utils/styles/modal';
+import EmailIcon from '@mui/icons-material/Email';
+import HttpsIcon from '@mui/icons-material/Https';
 
+const Authentication = () => {
   const [openStatus, setOpen] = React.useState(false);
   const [values, setValues] = React.useState({
     email: '',
