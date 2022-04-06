@@ -29,7 +29,8 @@ public class UserHelper {
                 user.getEmail(),
                 user.getPassword(),
                 user.getBirthday(),
-                user.getBase64()
+                user.getBase64(),
+                user.getStatus()
         );
     }
 }

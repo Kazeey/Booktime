@@ -14,8 +14,9 @@ public class UserDTO {
     private String password;
     private Date birthday;
     private String base64;
+    private String status;
 
-    public UserDTO(String id, String pseudo, String name, String firstName, String email, String password, Date birthday, String base64) {
+    public UserDTO(String id, String pseudo, String name, String firstName, String email, String password, Date birthday, String base64, String status) {
         this.id = id;
         this.pseudo = pseudo;
         this.name = name;
@@ -24,6 +25,7 @@ public class UserDTO {
         this.password = password;
         this.birthday = birthday;
         this.base64 = base64;
+        this.status = status;
     }
 
     public String getId() {
@@ -88,5 +90,13 @@ public class UserDTO {
 
     public void setBase64(String base64) {
         this.base64 = base64;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

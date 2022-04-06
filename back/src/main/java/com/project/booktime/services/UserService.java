@@ -8,6 +8,7 @@ import com.project.booktime.repository.IUserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +56,18 @@ public class UserService {
         if (optionalUser.isEmpty()) throw new UserNotFoundException();
 
         User updatedUser = repository.save(user);
+
+        return UserHelper.convert(updatedUser);
+    }
+
+    public UserDTO changeAccount (User user) {
+        User notUpdatedUser = repository.findByEmail(user.getEmail());
+        
+        if (notUpdatedUser == null) throw new UserNotFoundException();
+
+        notUpdatedUser.setStatus(user.getStatus());
+
+        User updatedUser = repository.save(notUpdatedUser);
 
         return UserHelper.convert(updatedUser);
     }

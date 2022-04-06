@@ -11,8 +11,9 @@ import { checkPassword, passwordStrength } from '../../utils/functions/checkPass
 import styleModal from '../../utils/styles/modal';
 import ForgotPassword from '../forgotPassword';
 import CloseIcon from '@mui/icons-material/Close';
-import { connectUser } from '../../services/UserService';
+import { connectUser, changeAccount } from '../../services/UserService';
 import { setMessage } from '../../utils/functions/setMessage';
+import { constants } from '../../utils/constants/constants';
 
 const Authentication = () => {
 
@@ -20,6 +21,7 @@ const Authentication = () => {
   const [values, setValues] = React.useState({
     email: '',
     password: '',
+    nbTry : 4,
     showPassword: false,
   });
 
@@ -55,10 +57,26 @@ const Authentication = () => {
     connectUser(user)
     .then(response => {
       setMessage("");
-      console.log(response);
+      setValues({...values, nbTry : 4});
     })
     .catch(error => {
-      setMessage("error");
+      if (values.nbTry > 0)
+      {
+        setValues({...values, nbTry : values.nbTry - 1});
+        setMessage(constants.User.NOT_FOUND, values.nbTry);
+      }
+
+      if (values.nbTry === 0)
+      {
+        let user = {
+          "email" : email,
+          "status" : "blocked"
+        }
+
+        setMessage(constants.User.BLOCKED);
+        changeAccount(user);
+      }
+      
     });
   }
 
@@ -134,7 +152,7 @@ const Authentication = () => {
         </FormControl>
       </Box>
 
-      <p id="messageZone"></p>
+      <p id="messageZone" style={{fontSize : '10px'}}></p>
       
       <styleModal.StyledModal
         aria-labelledby="simple-modal-title"

@@ -18,8 +18,9 @@ public class User {
     private String password;
     private Date birthday;
     private String base64;
+    private String status;
 
-    public User(String pseudo, String name, String firstName, String email, String password, Date birthday, String base64) {
+    public User(String pseudo, String name, String firstName, String email, String password, Date birthday, String base64, String status) {
         this.pseudo = pseudo;
         this.name = name;
         this.firstName = firstName;
@@ -27,6 +28,7 @@ public class User {
         this.email = email;
         this.birthday = birthday;
         this.base64 = base64;
+        this.status = status;
     }
 
     public String getId() {
@@ -91,5 +93,13 @@ public class User {
 
     public void setBase64(String base64) {
         this.base64 = base64;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

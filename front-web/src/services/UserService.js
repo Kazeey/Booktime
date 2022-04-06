@@ -25,6 +25,18 @@ const forgetPassword = async (email) => {
     }
 }
 
+const changeAccount = async (user) => {
+    try
+    {
+        const response = await axios.post(constants.apiURL + 'user/changeAccount', user);
+        return response.data;
+    }
+    catch (error)
+    {
+        throw error;
+    }
+}
+
 const getUsersList = async () => {
     try
     {
@@ -49,5 +61,5 @@ const getUserById = async (id) => {
     }
 }
 
-export { connectUser, forgetPassword, getUsersList, getUserById };
+export { connectUser, forgetPassword, changeAccount, getUsersList, getUserById };
 
