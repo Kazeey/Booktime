@@ -1,34 +1,61 @@
 package com.project.frontMobile.ui.upcoming
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.google.android.material.button.MaterialButton
+import androidx.recyclerview.widget.GridLayoutManager
 import com.project.frontMobile.R
+import com.project.frontMobile.adapter.UpComingAdapter
+import com.project.frontMobile.adapter.UpComingAdapter.UpComingListener
+import com.project.frontMobile.databinding.FragmentUpcomingBinding
+import com.project.frontMobile.viewmodel.BookViewModel
 
 class UpcomingFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var binding: FragmentUpcomingBinding
+
+    private val viewModel: BookViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_upcoming, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_upcoming, container, false)
 
-        val bookButton = view.findViewById<MaterialButton>(R.id.book_button)
+        return binding.root
+    }
 
-        bookButton.setOnClickListener {
-            // TODO() : Replace hardcoded string for bookId with id get on recyclerView item
-            val action = UpcomingFragmentDirections.actionUpcomingFragmentToBookFragment("61fbdd5286bac81a8deaacd2")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
+
+        viewModel.getUpComingBooks()
+
+        val adapter = UpComingAdapter(UpComingListener { bookId ->
+            val action = UpcomingFragmentDirections.actionUpcomingFragmentToBookFragment(bookId)
             view?.findNavController()?.navigate(action)
+        })
+        val manager = GridLayoutManager(activity, 3, GridLayoutManager.VERTICAL, false)
+
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = manager
+
+        viewModel.books.observe(viewLifecycleOwner) {
+            it?.let {
+                adapter.submitList(it.sortedBy { book -> book.publicationDate })
+            }
         }
 
-        return view
+        binding.search.doOnTextChanged { text, _, _, _ ->
+            Log.d("Test", text.toString())
+        }
     }
 }

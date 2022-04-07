@@ -11,14 +11,14 @@ public class BookDTO {
     private String title;
     private String synopsis;
     private Object ISBN;
-    private String publicationDate;
+    private Date publicationDate;
     private List<String> category;
     private String pageCount;
     private String rating;
     private List<String> authorsId;
     private String base64;
 
-    public BookDTO(String id, String title, String synopsis, Object ISBN, String publicationDate, List<String> category, String pageCount, String rating, List<String> authorsId, String base64) {
+    public BookDTO(String id, String title, String synopsis, Object ISBN, Date publicationDate, List<String> category, String pageCount, String rating, List<String> authorsId, String base64) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
@@ -63,11 +63,11 @@ public class BookDTO {
         this.ISBN = ISBN;
     }
 
-    public String getPublicationDate() {
+    public Date getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(String publicationDate) {
+    public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
     }
 
