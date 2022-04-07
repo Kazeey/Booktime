@@ -32,6 +32,9 @@ interface BookTimeService {
     @GET("book/findAll")
     suspend fun getBooks(): List<BookResponse>
 
+    @GET("book/findUpComing")
+    suspend fun getUpComing(): List<BookResponse>
+
     @GET("book/findBy/{id}")
     suspend fun getBookById(@Path("id") id: String): BookResponse
 

@@ -20,10 +20,24 @@ class BookViewModel: ViewModel() {
     val books: MutableLiveData<List<Book>>
         get() = _books
 
-    private fun getAllBooks() {
+    private val _tempBooks = MutableLiveData<List<Book>>()
+    val tempBooks: MutableLiveData<List<Book>>
+        get() = _tempBooks
+
+    fun getAllBooks() {
         viewModelScope.launch {
             val listResult = BookTimeApi.retrofitService.getBooks()
             _books.value = BookConverter().convertAll(listResult)
+
+            Log.d(BookViewModel::class.java.name, "Nb of books : ${books.value?.size}")
+        }
+    }
+
+    fun getUpComingBooks() {
+        viewModelScope.launch {
+            val listResult = BookTimeApi.retrofitService.getUpComing()
+            _books.value = BookConverter().convertAll(listResult)
+            _tempBooks.value = BookConverter().convertAll(listResult)
 
             Log.d(BookViewModel::class.java.name, "Nb of books : ${books.value?.size}")
         }
@@ -35,6 +49,15 @@ class BookViewModel: ViewModel() {
             _currentBook.value = BookConverter().convert(bookResult)
 
             Log.d(BookViewModel::class.java.name, "Current Book : ${currentBook.value?.id}")
+        }
+    }
+
+    fun onSearchChanged(input: CharSequence) {
+        if (input.trim().toString().length > 2) {
+            _books.value = books.value?.filter { it.title.contains(input) }
+        } else {
+            if (books.value?.size != tempBooks.value?.size)
+                _books.value = tempBooks.value
         }
     }
 }

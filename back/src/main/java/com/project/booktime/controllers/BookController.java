@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -40,6 +42,13 @@ public class BookController {
     @GetMapping("/findAll")
     public ResponseEntity<List<BookDTO>> findAll() {
         List<BookDTO> bookDTOList = bookService.findAll();
+
+        return ResponseEntity.ok(bookDTOList);
+    }
+
+    @GetMapping("/findUpComing")
+    public ResponseEntity<List<BookDTO>> findUpComing() {
+        List<BookDTO> bookDTOList = bookService.findUpComing();
 
         return ResponseEntity.ok(bookDTOList);
     }
@@ -85,7 +94,7 @@ public class BookController {
     }
 
     @GetMapping("/googleApi/database/addBooks")
-    public void addBooksToDB() throws IOException, ParseException,  InterruptedException {
+    public void addBooksToDB() throws IOException, ParseException, InterruptedException, java.text.ParseException {
         URL url;
         ImageService imageService = new ImageService();
         AuthorService authorService = new AuthorService(authorRepository);
@@ -144,7 +153,8 @@ public class BookController {
                     String zAverageRating = checkKey(volumeInfo.get("averageRating"));
                     String zDescription = checkKey(volumeInfo.get("description"));
                     String zPageCount = checkKey(volumeInfo.get("pageCount"));
-                    String zDate = checkKey(volumeInfo.get("publishedDate"));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    Date zDate = format.parse(checkKey(volumeInfo.get("publishedDate")));
 
                     if (!volumeInfo.containsKey("imageLinks"))
                     {

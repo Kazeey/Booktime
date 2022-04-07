@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         setupToolbar()
         setupNav()
 
-        userViewModel.getUserById("61e61dfb9f32e71fa3b2c11d")
+        userViewModel.getUserById("6231ce3362c151333c14f83e")
     }
 
     private fun setupToolbar() {
