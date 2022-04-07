@@ -7,7 +7,14 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.Base64
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.RequestOptions.bitmapTransform
+import com.project.frontMobile.R
+import jp.wasabeef.glide.transformations.BlurTransformation
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.OffsetDateTime

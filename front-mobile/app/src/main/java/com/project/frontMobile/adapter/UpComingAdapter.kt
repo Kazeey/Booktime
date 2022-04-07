@@ -2,18 +2,18 @@ package com.project.frontMobile.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.project.frontMobile.R
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.project.frontMobile.adapter.UpComingAdapter.UpComingViewHolder
 import com.project.frontMobile.data.model.Book
 import com.project.frontMobile.databinding.ItemBookComingSoonBinding
+import jp.wasabeef.glide.transformations.BlurTransformation
 
-class UpComingAdapter(val clickListener: UpComingListener): ListAdapter<Book, UpComingViewHolder>(UpComingDiffCallback()) {
+class UpComingAdapter(private val clickListener: UpComingListener): ListAdapter<Book, UpComingViewHolder>(UpComingDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpComingViewHolder {
         return UpComingViewHolder.from(parent)
@@ -29,6 +29,11 @@ class UpComingAdapter(val clickListener: UpComingListener): ListAdapter<Book, Up
             binding.book = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
+
+            Glide.with(binding.root)
+                .load(item.formatPicture())
+                .apply(RequestOptions.bitmapTransform(BlurTransformation(20, 2)))
+                .into(binding.bookCoverPicture)
         }
 
         companion object {
