@@ -2,15 +2,15 @@ package com.project.booktime.services;
 
 import com.project.booktime.params.Constants;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Properties;
 
-@Configuration
-public class MailService {
+@Service
+public class MailService
+{
     @Bean
     public JavaMailSender getJavaMailSender()
     {
