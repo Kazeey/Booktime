@@ -30,6 +30,9 @@
     <!-- Up Coming -->
     <string name="days_left">%1$s days left</string>
 
+    <!-- Create Profile -->
+    <string name="screen_catch_phrase">We are excited to get to know you better !</string>
+
     <!-- Main Menu -->
     <string name="header_user_data">Main Information</string>
     <string name="header_app_data">App Settings</string>
