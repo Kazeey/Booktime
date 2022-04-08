@@ -12,7 +12,7 @@ import com.project.frontMobile.data.model.User
 import com.project.frontMobile.network.service.BookTimeApi
 import kotlinx.coroutines.launch
 
-class UserViewModel: ViewModel() {
+class ProfileViewModel: ViewModel() {
 
     private val _currentUser = MutableLiveData<User>()
     val currentUser: LiveData<User>
