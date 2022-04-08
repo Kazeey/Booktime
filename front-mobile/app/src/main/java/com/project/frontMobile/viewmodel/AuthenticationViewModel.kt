@@ -37,7 +37,7 @@ class AuthenticationViewModel: ViewModel() {
 
     fun onClick(view: View) {
         val action = when (view.id) {
-            R.id.sign_up_button -> SignUpFragmentDirections.actionSignUpFragmentToLibraryFragment()
+            R.id.sign_up_button -> SignUpFragmentDirections.actionSignUpFragmentToCreateProfileFragment()
             R.id.back_nav_sign_up -> SignUpFragmentDirections.actionSignUpFragmentToAuthenticationFragment()
             R.id.log_in_button -> LogInFragmentDirections.actionLogInFragmentToLibraryFragment()
             R.id.forgot_password_button -> LogInFragmentDirections.actionLogInFragmentToForgotPasswordFragment()

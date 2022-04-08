@@ -59,11 +59,11 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUpFragment_to_libraryFragment"
-            app:destination="@id/libraryFragment" />
-        <action
             android:id="@+id/action_signUpFragment_to_authenticationFragment"
             app:destination="@id/authenticationFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_createProfileFragment"
+            app:destination="@id/createProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -165,4 +165,13 @@
         android:name="com.project.frontMobile.ui.rgpd.RGPDFragment"
         android:label="fragment_r_g_p_d"
         tools:layout="@layout/fragment_r_g_p_d" />
+    <fragment
+        android:id="@+id/createProfileFragment"
+        android:name="com.project.frontMobile.ui.user.CreateProfileFragment"
+        android:label="fragment_create_profile"
+        tools:layout="@layout/fragment_create_profile" >
+        <action
+            android:id="@+id/action_createProfileFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
+    </fragment>
 </navigation>

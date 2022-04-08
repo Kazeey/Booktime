@@ -20,6 +20,9 @@
     <string name="hint_confirm_email">Confirm Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_search">Search</string>
+    <string name="hint_pseudo">Pseudo</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_firstname">Firstname</string>
 
     <!-- Author RecyclerView -->
     <string name="author_name">%1$s %2$s</string>
@@ -47,4 +50,8 @@
     <string name="button_search">Search</string>
     <string name="button_book">Book</string>
     <string name="button_author">Author</string>
+    <string name="button_next">-- Next --</string>
+
+    <!-- Error -->
+    <string name="error_empty_field">Field Cannot be empty</string>
 </resources>
