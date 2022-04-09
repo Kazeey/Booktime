@@ -1,8 +1,10 @@
 package com.project.booktime.controllers;
 
 import com.project.booktime.exception.UserNotFoundException;
+import com.project.booktime.model.dto.SignUpDTO;
 import com.project.booktime.model.dto.UserDTO;
 import com.project.booktime.model.entity.User;
+import com.project.booktime.model.helper.SignUpHelper;
 import com.project.booktime.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,13 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @PostMapping("/signUp")
+    public ResponseEntity<UserDTO> signUp(@RequestBody SignUpDTO signUpDTO) {
+        UserDTO userDTO = userService.add(SignUpHelper.signUpDTOToUser(signUpDTO));
+
+        return ResponseEntity.ok(userDTO);
     }
 
     @GetMapping("/findAll")

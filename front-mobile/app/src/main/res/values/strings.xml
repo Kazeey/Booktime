@@ -31,7 +31,10 @@
     <string name="days_left">%1$s days left</string>
 
     <!-- Create Profile -->
-    <string name="screen_catch_phrase">We are excited to get to know you better !</string>
+    <string name="title_create_profile">We are excited to get to know you better !</string>
+
+    <!-- Sign Up -->
+    <string name="title_sign_up">Join us and discover the world\'s largest tracking tool for books</string>
 
     <!-- Main Menu -->
     <string name="header_user_data">Main Information</string>
@@ -57,4 +60,13 @@
 
     <!-- Error -->
     <string name="error_empty_field">Field Cannot be empty</string>
+    <string name="error_email_not_match">Emails are not the same</string>
+    <string name="error_not_email">Please enter a correct email address</string>
+    <string name="error_not_password">Password must contain : 1 capital letter, letter and number, at least 8 characters</string>
+
+    <!-- Helper -->
+    <string name="helper_password">- Capital letter\n- Letter and number\n- At least 8 characters</string>
+
+    <!-- Status Message -->
+    <string name="error_sign_up">Sign up failed. Please try again later</string>
 </resources>

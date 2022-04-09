@@ -13,15 +13,16 @@ import com.project.frontMobile.R
 import com.project.frontMobile.data.model.User
 import com.project.frontMobile.databinding.FragmentCreateProfileBinding
 import com.project.frontMobile.utils.DateUtils
-import com.project.frontMobile.viewmodel.ProfileViewModel
+import com.project.frontMobile.viewmodel.UserViewModel
 import java.util.*
 
 class CreateProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateProfileBinding
 
-    private val viewModel: ProfileViewModel by viewModels()
+    private val viewModel: UserViewModel by viewModels()
 
+    private lateinit var userId: String
     private lateinit var currentUser: User
 
     override fun onCreateView(
@@ -40,7 +41,12 @@ class CreateProfileFragment : Fragment() {
         binding.fragment = this
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.getUserById("6231ce3362c151333c14f83e")
+
+        arguments?.let {
+            userId = it.getString("userId").toString()
+        }
+
+        viewModel.getUserById(userId)
 
         viewModel.currentUser.observe(viewLifecycleOwner) {
             currentUser = it
@@ -57,6 +63,7 @@ class CreateProfileFragment : Fragment() {
 
         DatePickerDialog(requireContext(), { _, y, m, d ->
             currentUser.birthday = DateUtils().formatDate(y, m, d)
+            binding.birthday.text = DateUtils().formatBirthday(currentUser.birthday)
         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH))
             .show()
     }

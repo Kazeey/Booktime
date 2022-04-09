@@ -59,11 +59,11 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUpFragment_to_authenticationFragment"
-            app:destination="@id/authenticationFragment" />
-        <action
             android:id="@+id/action_signUpFragment_to_createProfileFragment"
             app:destination="@id/createProfileFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_authenticationFragment"
+            app:destination="@id/authenticationFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -173,5 +173,8 @@
         <action
             android:id="@+id/action_createProfileFragment_to_libraryFragment"
             app:destination="@id/libraryFragment" />
+        <argument
+            android:name="userId"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     private val userViewModel: UserViewModel by viewModels()
-    private val authenticationViewModel: AuthenticationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setupToolbar()
         setupNav()
 
-        userViewModel.getUserById("6231ce3362c151333c14f83e")
+        userViewModel.getUserById("6231ce3362c151333c14f83")
     }
 
     private fun setupToolbar() {
@@ -48,7 +47,6 @@ class MainActivity : AppCompatActivity() {
         manageBottomNavigationVisibility(bottomNavView)
         manageToolbarVisibility()
         manageStatusBar()
-        manageCache()
     }
 
     private fun manageBottomNavigationVisibility(bottomNavView: BottomNavigationView) {
@@ -102,19 +100,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.logInFragment -> window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
                 R.id.signUpFragment -> window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
                 R.id.forgotPasswordFragment -> window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                R.id.createProfileFragment -> window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
                 else -> window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-            }
-        }
-    }
-
-    private fun manageCache() {
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            when (destination.id) {
-                R.id.authenticationFragment -> { }
-                R.id.logInFragment -> { }
-                R.id.signUpFragment -> { }
-                R.id.forgotPasswordFragment -> { }
-                else -> authenticationViewModel.clearCache()
             }
         }
     }

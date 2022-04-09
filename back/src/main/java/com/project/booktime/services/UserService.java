@@ -1,6 +1,7 @@
 package com.project.booktime.services;
 
 import com.project.booktime.exception.UserNotFoundException;
+import com.project.booktime.model.dto.SignUpDTO;
 import com.project.booktime.model.dto.UserDTO;
 import com.project.booktime.model.entity.User;
 import com.project.booktime.model.helper.UserHelper;

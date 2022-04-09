@@ -35,8 +35,6 @@ class AuthenticationFragment : Fragment(), ClickHandler {
 
         binding.handler = this
         binding.lifecycleOwner = viewLifecycleOwner
-
-       // requireActivity().onBackPressedDispatcher.addCallback { }
     }
 
     override fun onClick(view: View) {
