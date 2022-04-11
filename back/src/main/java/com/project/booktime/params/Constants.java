@@ -21,6 +21,9 @@ public class Constants
     public final static String MAIL_USERNAME = "booktime.projet@gmail.com";
     public final static String MAIL_PASSWORD = "Booktime1!";
 
+    public static final long ACCESS_TOKEN_VALIDITY_SECONDS = 5*60*60;
+    public static final String SIGNING_KEY = "booktime";
+
     // Google books categories
     public final static String categories[] = {
             "Anthologies",

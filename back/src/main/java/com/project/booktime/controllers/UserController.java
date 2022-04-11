@@ -67,7 +67,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/connect")
+    @PostMapping("/login")
     public ResponseEntity<UserDTO> connect(@RequestBody User user) {
         try {
             UserDTO userDTO = userService.findByEmailAndPassword(user);
