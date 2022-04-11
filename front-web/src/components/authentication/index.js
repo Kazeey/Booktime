@@ -15,6 +15,8 @@ import styleModal from '../../utils/styles/modal';
 import EmailIcon from '@mui/icons-material/Email';
 import HttpsIcon from '@mui/icons-material/Https';
 
+import { Navigate, useNavigate } from "react-router-dom";
+
 const Authentication = () => {
   const [openStatus, setOpen] = React.useState(false);
   const [values, setValues] = React.useState({
@@ -23,6 +25,8 @@ const Authentication = () => {
     nbTry : 4,
     showPassword: false,
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value })
@@ -77,6 +81,10 @@ const Authentication = () => {
       }
       
     });
+  }
+
+  const bookContainer = () => {
+    navigate('/books', { state: { from: 'authentication' } });
   }
 
   return (
@@ -136,7 +144,8 @@ const Authentication = () => {
             disabled={
               !values.email || !checkMail(values.email) || !values.password || !checkPassword(values.password)
             }
-            onClick={() => { connection(values.email, values.password) }}
+            // onClick={() => { connection(values.email, values.password) }}
+            onClick={() => { bookContainer() }}
           >
             Se connecter
           </Button>
