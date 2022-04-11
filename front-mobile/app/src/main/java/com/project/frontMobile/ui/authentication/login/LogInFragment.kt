@@ -5,13 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.project.frontMobile.R
 import com.project.frontMobile.databinding.FragmentLogInBinding
+import com.project.frontMobile.utils.RequestStatus
 import com.project.frontMobile.utils.SnackbarUtils
 import com.project.frontMobile.viewmodel.AuthenticationViewModel
 
@@ -43,19 +43,18 @@ class LogInFragment : Fragment() {
         viewModel.status.observe(viewLifecycleOwner) {
             binding.loading.visibility = View.GONE
 
-            when (it) {
-                "OK" -> {
-                    viewModel.clearStatus()
+            when (it.statusCode) {
+                RequestStatus.STATUS_OK -> {
                     val action = LogInFragmentDirections.actionLogInFragmentToLibraryFragment()
                     view.findNavController().navigate(action)
                 }
-                "NOT_FOUND" -> SnackbarUtils().showSnackbar(
+                RequestStatus.STATUS_NOT_FOUND -> SnackbarUtils().showSnackbar(
                     requireContext(),
                     binding.coordinator,
                     getString(R.string.error_wrong_ids),
                     Snackbar.LENGTH_INDEFINITE
                 )
-                "FAIL" -> SnackbarUtils().showSnackbar(
+                RequestStatus.STATUS_FAIL -> SnackbarUtils().showSnackbar(
                     requireContext(),
                     binding.coordinator,
                     getString(R.string.error_occurred),

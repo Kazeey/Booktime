@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.project.frontMobile.R
 import com.project.frontMobile.data.model.User
 import com.project.frontMobile.databinding.FragmentSignUpBinding
+import com.project.frontMobile.utils.RequestStatus
 import com.project.frontMobile.utils.SnackbarUtils
 import com.project.frontMobile.viewmodel.AuthenticationViewModel
 
@@ -51,13 +52,12 @@ class SignUpFragment : Fragment() {
         viewModel.status.observe(viewLifecycleOwner) {
             binding.loading.visibility = View.GONE
 
-            when (it) {
-                "OK" -> {
-                    viewModel.clearStatus()
+            when (it.statusCode) {
+                RequestStatus.STATUS_OK -> {
                     val action = SignUpFragmentDirections.actionSignUpFragmentToCreateProfileFragment()
                     view.findNavController().navigate(action)
                 }
-                "FAIL" -> SnackbarUtils().showSnackbar(
+                RequestStatus.STATUS_FAIL -> SnackbarUtils().showSnackbar(
                     requireContext(),
                     binding.coordinator,
                     getString(R.string.error_occurred),

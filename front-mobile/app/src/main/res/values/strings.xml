@@ -81,4 +81,5 @@
     <!-- Status Message -->
     <string name="error_occurred">An error occurred, please try again later</string>
     <string name="error_wrong_ids">Wrong email or password</string>
+    <string name="error_not_found">Wrong email or password</string>
 </resources>

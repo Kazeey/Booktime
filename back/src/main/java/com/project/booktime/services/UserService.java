@@ -51,7 +51,6 @@ public class UserService {
     }
 
     public UserDTO update(String id, User user) {
-        System.out.print("Update");
         Optional<User> optionalUser = repository.findById(id);
 
         if (optionalUser.isEmpty()) throw new UserNotFoundException();

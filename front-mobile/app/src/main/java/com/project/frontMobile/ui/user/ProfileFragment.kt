@@ -63,13 +63,7 @@ class ProfileFragment : Fragment() {
                         requireActivity().onBackPressed()
                     }
                 }
-                RequestStatus.STATUS_NOT_FOUND -> SnackbarUtils().showSnackbar(
-                    requireContext(),
-                    binding.coordinator,
-                    getString(R.string.error_wrong_ids),
-                    Snackbar.LENGTH_INDEFINITE
-                )
-                RequestStatus.STATUS_FAIL -> SnackbarUtils().showSnackbar(
+                else -> SnackbarUtils().showSnackbar(
                     requireContext(),
                     binding.coordinator,
                     getString(R.string.error_occurred),

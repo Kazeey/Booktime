@@ -51,7 +51,6 @@ public class UserController {
     @PostMapping("/logIn")
     public ResponseEntity<UserDTO> findById(@RequestBody LogInDTO logInDTO) {
         try {
-            System.out.println("Log in");
             UserDTO userDTO = userService.logIn(logInDTO.getEmail(), logInDTO.getPassword());
 
             return ResponseEntity.ok().body(userDTO);

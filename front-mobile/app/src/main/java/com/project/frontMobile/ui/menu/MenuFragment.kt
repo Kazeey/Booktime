@@ -43,7 +43,8 @@ class MenuFragment : Fragment() {
             binding.loading.visibility = View.GONE
 
             when (it.statusCode) {
-                RequestStatus.STATUS_FAIL -> SnackbarUtils().showSnackbar(
+                RequestStatus.STATUS_OK -> {}
+                else -> SnackbarUtils().showSnackbar(
                     requireContext(),
                     binding.coordinator,
                     getString(R.string.error_occurred),

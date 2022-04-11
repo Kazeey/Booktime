@@ -45,4 +45,10 @@ class Book(
 
         return Duration.between(today, endDate).toDays()
     }
+
+    override fun toString(): String {
+        return "Book(id='$id', title='$title', synopsis='$synopsis', category=$category, authorsId=$authorsId, publicationDate='$publicationDate')"
+    }
+
+
 }
