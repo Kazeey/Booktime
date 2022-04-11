@@ -31,7 +31,18 @@
     <string name="days_left">%1$s days left</string>
 
     <!-- Create Profile -->
-    <string name="screen_catch_phrase">We are excited to get to know you better !</string>
+    <string name="title_create_profile">We are excited to get to know you better !</string>
+
+    <!-- Sign Up -->
+    <string name="title_sign_up">Join us and discover the world\'s largest tracking tool for books</string>
+
+    <!-- Log in -->
+    <string name="title_log_in">Welcome back to the world\'s largest tracking tool for books</string>
+
+    <!-- Profile -->
+    <string name="app_bar_title_profile">%1$s \"%2$s\" %3$s</string>
+    <string name="app_bar_menu_save">Save</string>
+    <string name="title_save_data">Do you want to save changes ?</string>
 
     <!-- Main Menu -->
     <string name="header_user_data">Main Information</string>
@@ -54,7 +65,21 @@
     <string name="button_book">Book</string>
     <string name="button_author">Author</string>
     <string name="button_next">-- Next --</string>
+    <string name="button_ok">OK</string>
+    <string name="button_save">Save</string>
+    <string name="button_discard">Discard</string>
 
     <!-- Error -->
     <string name="error_empty_field">Field Cannot be empty</string>
+    <string name="error_email_not_match">Emails are not the same</string>
+    <string name="error_not_email">Please enter a correct email address</string>
+    <string name="error_not_password">Password must contain : 1 capital letter, letter and number, at least 8 characters</string>
+
+    <!-- Helper -->
+    <string name="helper_password">- Capital letter\n- Letter and number\n- At least 8 characters</string>
+
+    <!-- Status Message -->
+    <string name="error_occurred">An error occurred, please try again later</string>
+    <string name="error_wrong_ids">Wrong email or password</string>
+    <string name="error_not_found">Wrong email or password</string>
 </resources>

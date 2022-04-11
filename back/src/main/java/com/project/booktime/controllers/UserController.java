@@ -1,8 +1,11 @@
 package com.project.booktime.controllers;
 
 import com.project.booktime.exception.UserNotFoundException;
+import com.project.booktime.model.dto.LogInDTO;
+import com.project.booktime.model.dto.SignUpDTO;
 import com.project.booktime.model.dto.UserDTO;
 import com.project.booktime.model.entity.User;
+import com.project.booktime.model.helper.SignUpHelper;
 import com.project.booktime.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +23,13 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping("/signUp")
+    public ResponseEntity<UserDTO> signUp(@RequestBody SignUpDTO signUpDTO) {
+        UserDTO userDTO = userService.add(SignUpHelper.signUpDTOToUser(signUpDTO));
+
+        return ResponseEntity.ok(userDTO);
+    }
+
     @GetMapping("/findAll")
     public ResponseEntity<List<UserDTO>> findAll() {
         List<UserDTO> userDTOList = userService.findAll();
@@ -31,6 +41,17 @@ public class UserController {
     public ResponseEntity<UserDTO> findById(@PathVariable("id") String id) {
         try {
             UserDTO userDTO = userService.findById(id);
+
+            return ResponseEntity.ok().body(userDTO);
+        } catch (UserNotFoundException exception) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/logIn")
+    public ResponseEntity<UserDTO> findById(@RequestBody LogInDTO logInDTO) {
+        try {
+            UserDTO userDTO = userService.logIn(logInDTO.getEmail(), logInDTO.getPassword());
 
             return ResponseEntity.ok().body(userDTO);
         } catch (UserNotFoundException exception) {

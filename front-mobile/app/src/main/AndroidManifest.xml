@@ -13,8 +13,7 @@
         android:theme="@style/Theme.FrontMobile">
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustNothing">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

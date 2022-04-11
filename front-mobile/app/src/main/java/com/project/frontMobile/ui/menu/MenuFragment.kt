@@ -6,25 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.Snackbar
 import com.project.frontMobile.R
 import com.project.frontMobile.databinding.FragmentMenuBinding
-import com.project.frontMobile.utils.ClickHandler
-import com.project.frontMobile.utils.DateUtils
+import com.project.frontMobile.utils.RequestStatus
+import com.project.frontMobile.utils.SnackbarUtils
 import com.project.frontMobile.viewmodel.UserViewModel
 
-class MenuFragment : Fragment(), ClickHandler {
+class MenuFragment : Fragment() {
 
     private lateinit var binding: FragmentMenuBinding
 
-    private val userViewModel: UserViewModel by activityViewModels()
+    private val viewModel: UserViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_menu, container, false)
 
         return binding.root
@@ -33,12 +33,28 @@ class MenuFragment : Fragment(), ClickHandler {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.viewModel = userViewModel
+        binding.viewModel = viewModel
+        binding.fragment = this
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.handler = this
+
+        viewModel.findMe()
+
+        viewModel.status.observe(viewLifecycleOwner) {
+            binding.loading.visibility = View.GONE
+
+            when (it.statusCode) {
+                RequestStatus.STATUS_OK -> {}
+                else -> SnackbarUtils().showSnackbar(
+                    requireContext(),
+                    binding.coordinator,
+                    getString(R.string.error_occurred),
+                    Snackbar.LENGTH_LONG
+                )
+            }
+        }
     }
 
-    override fun onClick(view: View) {
+    fun onClick(view: View) {
         val action = when (view.id) {
             R.id.account_settings_card -> MenuFragmentDirections.actionMenuFragmentToSettingsFragment()
             R.id.rgpd_card -> MenuFragmentDirections.actionMenuFragmentToRGPDFragment()

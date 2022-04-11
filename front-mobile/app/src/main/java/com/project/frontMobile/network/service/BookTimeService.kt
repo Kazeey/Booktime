@@ -1,6 +1,8 @@
 package com.project.frontMobile.network.service
 
 import com.project.frontMobile.data.model.User
+import com.project.frontMobile.network.request.LogInRequest
+import com.project.frontMobile.network.request.SignUpRequest
 import com.project.frontMobile.network.response.AuthorResponse
 import com.project.frontMobile.network.response.BookResponse
 import com.project.frontMobile.network.response.UserResponse
@@ -8,10 +10,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.PATCH
-import retrofit2.http.Path
+import retrofit2.http.*
 
 private const val BASE_URL = "http://10.0.2.2:8080"
 
@@ -54,6 +53,12 @@ interface BookTimeService {
     /**
      * USER
      */
+
+    @POST("user/signUp")
+    suspend fun signUp(@Body signUpRequest: SignUpRequest): UserResponse
+
+    @POST("user/logIn")
+    suspend fun logIn(@Body logInRequest: LogInRequest): UserResponse
 
     @GET("user/findBy/{id}")
     suspend fun getUserById(@Path("id") id: String): UserResponse

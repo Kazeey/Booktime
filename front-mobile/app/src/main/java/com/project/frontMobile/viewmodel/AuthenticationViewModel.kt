@@ -1,54 +1,58 @@
 package com.project.frontMobile.viewmodel
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.findNavController
-import com.project.frontMobile.R
-import com.project.frontMobile.ui.authentication.login.LogInFragmentDirections
-import com.project.frontMobile.ui.authentication.signup.SignUpFragmentDirections
+import androidx.lifecycle.viewModelScope
+import com.project.frontMobile.data.converter.UserConverter
+import com.project.frontMobile.data.model.Status
+import com.project.frontMobile.data.model.User
+import com.project.frontMobile.network.request.LogInRequest
+import com.project.frontMobile.network.request.SignUpRequest
+import com.project.frontMobile.network.service.BookTimeApi
+import com.project.frontMobile.utils.RequestCode
+import com.project.frontMobile.utils.RequestStatus
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class AuthenticationViewModel: ViewModel() {
 
-    private val _email = MutableLiveData<String>()
-    val email: LiveData<String>
-        get() = _email
+    private val _currentUser = MutableLiveData<User>()
+    val currentUser: LiveData<User>
+        get() = _currentUser
 
-    private val _confirmEmail = MutableLiveData<String>()
-    val confirmEmail: LiveData<String>
-        get() = _confirmEmail
+    private val _status = MutableLiveData<Status>()
+    val status: LiveData<Status>
+        get() = _status
 
-    private val _password = MutableLiveData<String>()
-    val password: LiveData<String>
-        get() = _password
+    fun signUp(email: String, password: String) {
+        viewModelScope.launch {
+            try {
+                val result = BookTimeApi.retrofitService.signUp(SignUpRequest(email, password))
+                _currentUser.value = UserConverter().convert(result)
 
-    fun onEmailChanged(input: CharSequence) {
-        _email.value = input.trim().toString()
-    }
-
-    fun onConfirmEmailChanged(input: CharSequence) {
-        _confirmEmail.value = input.trim().toString()
-    }
-
-    fun onPasswordChanged(input: CharSequence) {
-        _password.value = input.trim().toString()
-    }
-
-    fun onClick(view: View) {
-        val action = when (view.id) {
-            R.id.sign_up_button -> SignUpFragmentDirections.actionSignUpFragmentToCreateProfileFragment()
-            R.id.back_nav_sign_up -> SignUpFragmentDirections.actionSignUpFragmentToAuthenticationFragment()
-            R.id.log_in_button -> LogInFragmentDirections.actionLogInFragmentToLibraryFragment()
-            R.id.forgot_password_button -> LogInFragmentDirections.actionLogInFragmentToForgotPasswordFragment()
-            R.id.back_nav_log_in -> LogInFragmentDirections.actionLogInFragmentToAuthenticationFragment()
-            else -> LogInFragmentDirections.actionLogInFragmentToAuthenticationFragment()
+                _status.value = Status(RequestStatus.STATUS_OK, RequestCode.REQUEST_CODE_SIGN_UP)
+            } catch (e: Exception) {
+                _status.value = Status(RequestStatus.STATUS_FAIL, RequestCode.REQUEST_CODE_SIGN_UP)
+            }
         }
-        view.findNavController().navigate(action)
     }
 
-    fun clearCache() {
-        _email.value = null
-        _password.value = null
+    fun logIn(email: String, password: String) {
+        viewModelScope.launch {
+            try {
+                val result = BookTimeApi.retrofitService.logIn(LogInRequest(email, password))
+                _currentUser.value = UserConverter().convert(result)
+
+                _status.value = Status(RequestStatus.STATUS_OK, RequestCode.REQUEST_CODE_LOG_IN)
+            } catch (e: Exception) {
+                e.message?.let {
+                    when (it.contains(RequestStatus.STATUS_NOT_FOUND.toString())) {
+                        true -> _status.value = Status(RequestStatus.STATUS_NOT_FOUND, RequestCode.REQUEST_CODE_LOG_IN)
+                        else ->  _status.value = Status(RequestStatus.STATUS_FAIL, RequestCode.REQUEST_CODE_LOG_IN)
+                    }
+                }
+            }
+        }
     }
 }

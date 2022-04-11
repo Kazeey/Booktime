@@ -33,21 +33,24 @@
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/drawable/ic_baseline_back_arrow_24.xml" value="0.332" />
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/drawable/ic_baseline_calendar_24.xml" value="0.332" />
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.332" />
+        <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/drawable/ic_baseline_photo_camera_24.xml" value="0.1735" />
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/drawable/ic_book.xml" value="0.332" />
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/custom_dialog.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_authentication.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_authentication.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_book.xml" value="0.3671875" />
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_create_profile.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_loading.xml" value="0.28940217391304346" />
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_log_in.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_menu.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_menu.xml" value="0.1" />
+        <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_profile.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_r_g_p_d.xml" value="0.3671875" />
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_settings.xml" value="0.17857142857142858" />
-        <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_sign_up.xml" value="0.3671875" />
+        <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_sign_up.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/fragment_upcoming.xml" value="0.3671875" />
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/item_book_coming_soon.xml" value="0.1" />
         <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/layout/search_bar.xml" value="0.3671875" />
+        <entry key="..\:/Users/Eliott/Documents/GitHub/Booktime/front-mobile/app/src/main/res/menu/menu_toolbar_profile.xml" value="0.2712962962962963" />
       </map>
     </option>
   </component>
