@@ -64,7 +64,7 @@
             android:id="@+id/sign_up_button"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/button_sign_up"
             android:textAllCaps="false"
             android:onClick="@{view -> handler.onClick(view)}"

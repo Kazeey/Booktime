@@ -1,6 +1,7 @@
 package com.project.booktime.controllers;
 
 import com.project.booktime.exception.UserNotFoundException;
+import com.project.booktime.model.dto.LogInDTO;
 import com.project.booktime.model.dto.SignUpDTO;
 import com.project.booktime.model.dto.UserDTO;
 import com.project.booktime.model.entity.User;
@@ -40,6 +41,18 @@ public class UserController {
     public ResponseEntity<UserDTO> findById(@PathVariable("id") String id) {
         try {
             UserDTO userDTO = userService.findById(id);
+
+            return ResponseEntity.ok().body(userDTO);
+        } catch (UserNotFoundException exception) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/logIn")
+    public ResponseEntity<UserDTO> findById(@RequestBody LogInDTO logInDTO) {
+        try {
+            System.out.println("Log in");
+            UserDTO userDTO = userService.logIn(logInDTO.getEmail(), logInDTO.getPassword());
 
             return ResponseEntity.ok().body(userDTO);
         } catch (UserNotFoundException exception) {

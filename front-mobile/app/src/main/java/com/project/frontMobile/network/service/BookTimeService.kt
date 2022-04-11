@@ -1,6 +1,7 @@
 package com.project.frontMobile.network.service
 
 import com.project.frontMobile.data.model.User
+import com.project.frontMobile.network.request.LogInRequest
 import com.project.frontMobile.network.request.SignUpRequest
 import com.project.frontMobile.network.response.AuthorResponse
 import com.project.frontMobile.network.response.BookResponse
@@ -55,6 +56,9 @@ interface BookTimeService {
 
     @POST("user/signUp")
     suspend fun signUp(@Body signUpRequest: SignUpRequest): UserResponse
+
+    @POST("user/logIn")
+    suspend fun logIn(@Body logInRequest: LogInRequest): UserResponse
 
     @GET("user/findBy/{id}")
     suspend fun getUserById(@Path("id") id: String): UserResponse

@@ -36,6 +36,14 @@ public class UserService {
         return UserHelper.convert(user.get());
     }
 
+    public UserDTO logIn(String email, String password) {
+        Optional<User> user = repository.logIn(email, password);
+
+        if (user.isEmpty()) throw new UserNotFoundException();
+
+        return UserHelper.convert(user.get());
+    }
+
     public UserDTO add(User user) {
         User createdUser = repository.insert(user);
 

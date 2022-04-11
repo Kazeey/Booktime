@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.project.frontMobile.R
@@ -19,7 +19,7 @@ class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
 
-    private val viewModel: AuthenticationViewModel by activityViewModels()
+    private val viewModel: AuthenticationViewModel by viewModels()
 
     private lateinit var user: User
 
@@ -49,12 +49,14 @@ class SignUpFragment : Fragment() {
 
         viewModel.status.observe(viewLifecycleOwner) {
             binding.loading.visibility = View.GONE
+
             when (it) {
                 "OK" -> {
+                    viewModel.clearStatus()
                     val action = SignUpFragmentDirections.actionSignUpFragmentToCreateProfileFragment(user.id)
                     view.findNavController().navigate(action)
                 }
-                else -> {
+                "FAIL" -> {
                     val snackbar = Snackbar.make(binding.coordinator, R.string.error_sign_up, Snackbar.LENGTH_LONG)
                     snackbar.setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.red))
                     snackbar.show()
@@ -69,8 +71,7 @@ class SignUpFragment : Fragment() {
                 if (checkInputs()) {
                     viewModel.signUp(email, password)
                     binding.loading.visibility = View.VISIBLE
-                }
-                else displayError()
+                } else displayError()
             }
             R.id.back_nav_sign_up -> {
                 val action = SignUpFragmentDirections.actionSignUpFragmentToAuthenticationFragment()

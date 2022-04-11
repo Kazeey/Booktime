@@ -7,128 +7,175 @@
         <variable
             name="viewModel"
             type="com.project.frontMobile.viewmodel.AuthenticationViewModel" />
+        <variable
+            name="fragment"
+            type="com.project.frontMobile.ui.authentication.login.LogInFragment" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.authentication.login.LogInFragment">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/back_nav_log_in"
-            android:layout_width="136dp"
-            android:layout_height="136dp"
-            android:layout_marginStart="-16dp"
-            android:backgroundTint="@color/secondary"
-            android:onClick="@{view -> viewModel.onClick(view)}"
-            app:cardCornerRadius="68dp"
-            app:cardElevation="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/back_nav_log_in"
+                android:layout_width="136dp"
+                android:layout_height="136dp"
+                android:layout_marginStart="-16dp"
+                android:backgroundTint="@color/secondary"
+                android:onClick="@{view -> fragment.onClick(view)}"
+                app:cardCornerRadius="68dp"
+                app:cardElevation="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/back_arrow"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginBottom="32dp"
+                        android:layout_marginStart="24dp"
+                        android:src="@drawable/ic_baseline_back_arrow_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/view_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="@string/button_log_in"
+                        android:textSize="17sp"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toEndOf="@id/back_arrow"
+                        app:layout_constraintTop_toTopOf="@id/back_arrow"
+                        app:layout_constraintBottom_toBottomOf="@id/back_arrow" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/catch_phrase"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="128dp"
+                android:text="@string/title_log_in"
+                android:textStyle="italic"
+                android:textSize="21sp"
+                android:textAlignment="center"
+                android:textColor="@color/primary"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/email_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                app:errorEnabled="true"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_baseline_mail_outline_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/password_container">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/hint_email"
+                    android:onTextChanged="@{(text, start, before, count) -> fragment.onEmailChanged(text)}"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/password_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="64dp"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:helperText="@string/helper_password"
+                app:endIconMode="password_toggle"
+                app:startIconDrawable="@drawable/ic_outline_lock_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/log_in_button">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPassword"
+                    android:hint="@string/hint_password"
+                    android:onTextChanged="@{(text, start, before, count) -> fragment.onPasswordChanged(text)}"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/log_in_button"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/button_log_in"
+                android:textAllCaps="false"
+                android:onClick="@{view -> fragment.onClick(view)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/forgot_password_button" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/forgot_password_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/button_forgot_password"
+                android:textAllCaps="false"
+                android:onClick="@{view -> fragment.onClick(view)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/loading"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:elevation="8dp"
+                android:alpha="0.5"
+                android:background="@color/black"
+                android:visibility="gone">
 
-                <ImageView
-                    android:id="@+id/back_arrow"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginBottom="32dp"
-                    android:layout_marginStart="24dp"
-                    android:src="@drawable/ic_baseline_back_arrow_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/view_name"
+                <com.google.android.material.progressindicator.CircularProgressIndicator
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:text="@string/button_log_in"
-                    android:textSize="17sp"
-                    android:textColor="@color/white"
-                    app:layout_constraintStart_toEndOf="@id/back_arrow"
-                    app:layout_constraintTop_toTopOf="@id/back_arrow"
-                    app:layout_constraintBottom_toBottomOf="@id/back_arrow" />
+                    android:indeterminate="true"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/email_container"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/ic_baseline_mail_outline_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/password_container">
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textEmailAddress"
-                android:hint="@string/hint_email"
-                android:text="@{viewModel.email}"
-                android:onTextChanged="@{(text, start, before, count) -> viewModel.onEmailChanged(text)}"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/password_container"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="64dp"
-            app:endIconMode="password_toggle"
-            app:startIconDrawable="@drawable/ic_outline_lock_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/log_in_button">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textPassword"
-                android:hint="@string/hint_password"
-                android:text="@{viewModel.password}"
-                android:onTextChanged="@{(text, start, before, count) -> viewModel.onPasswordChanged(text)}"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/log_in_button"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="@string/button_log_in"
-            android:textAllCaps="false"
-            android:onClick="@{view -> viewModel.onClick(view)}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/forgot_password_button" />
-
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:id="@+id/forgot_password_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="@string/button_forgot_password"
-            android:textAllCaps="false"
-            android:onClick="@{view -> viewModel.onClick(view)}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

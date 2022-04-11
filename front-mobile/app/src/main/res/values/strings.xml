@@ -36,6 +36,9 @@
     <!-- Sign Up -->
     <string name="title_sign_up">Join us and discover the world\'s largest tracking tool for books</string>
 
+    <!-- Log in -->
+    <string name="title_log_in">Welcome back to the world\'s largest tracking tool for books</string>
+
     <!-- Main Menu -->
     <string name="header_user_data">Main Information</string>
     <string name="header_app_data">App Settings</string>
@@ -57,6 +60,7 @@
     <string name="button_book">Book</string>
     <string name="button_author">Author</string>
     <string name="button_next">-- Next --</string>
+    <string name="button_ok">OK</string>
 
     <!-- Error -->
     <string name="error_empty_field">Field Cannot be empty</string>
@@ -69,4 +73,6 @@
 
     <!-- Status Message -->
     <string name="error_sign_up">Sign up failed. Please try again later</string>
+    <string name="error_log_in">Log in failed. Please try again later</string>
+    <string name="error_wrong_ids">Wrong email or password</string>
 </resources>
