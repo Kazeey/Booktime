@@ -22,7 +22,6 @@ class CreateProfileFragment : Fragment() {
 
     private val viewModel: UserViewModel by viewModels()
 
-    private lateinit var userId: String
     private lateinit var currentUser: User
 
     override fun onCreateView(
@@ -41,12 +40,7 @@ class CreateProfileFragment : Fragment() {
         binding.fragment = this
         binding.lifecycleOwner = viewLifecycleOwner
 
-
-        arguments?.let {
-            userId = it.getString("userId").toString()
-        }
-
-        viewModel.getUserById(userId)
+        viewModel.findMe()
 
         viewModel.currentUser.observe(viewLifecycleOwner) {
             currentUser = it

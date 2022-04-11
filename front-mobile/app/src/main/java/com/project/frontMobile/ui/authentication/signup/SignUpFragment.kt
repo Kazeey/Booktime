@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.project.frontMobile.R
 import com.project.frontMobile.data.model.User
 import com.project.frontMobile.databinding.FragmentSignUpBinding
+import com.project.frontMobile.utils.SnackbarUtils
 import com.project.frontMobile.viewmodel.AuthenticationViewModel
 
 class SignUpFragment : Fragment() {
@@ -53,14 +54,15 @@ class SignUpFragment : Fragment() {
             when (it) {
                 "OK" -> {
                     viewModel.clearStatus()
-                    val action = SignUpFragmentDirections.actionSignUpFragmentToCreateProfileFragment(user.id)
+                    val action = SignUpFragmentDirections.actionSignUpFragmentToCreateProfileFragment()
                     view.findNavController().navigate(action)
                 }
-                "FAIL" -> {
-                    val snackbar = Snackbar.make(binding.coordinator, R.string.error_sign_up, Snackbar.LENGTH_LONG)
-                    snackbar.setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.red))
-                    snackbar.show()
-                }
+                "FAIL" -> SnackbarUtils().showSnackbar(
+                    requireContext(),
+                    binding.coordinator,
+                    getString(R.string.error_occurred),
+                    Snackbar.LENGTH_LONG
+                )
             }
         }
     }

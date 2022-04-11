@@ -173,8 +173,5 @@
         <action
             android:id="@+id/action_createProfileFragment_to_libraryFragment"
             app:destination="@id/libraryFragment" />
-        <argument
-            android:name="userId"
-            app:argType="string" />
     </fragment>
 </navigation>

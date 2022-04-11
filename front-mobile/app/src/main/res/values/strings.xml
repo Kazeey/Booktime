@@ -39,6 +39,11 @@
     <!-- Log in -->
     <string name="title_log_in">Welcome back to the world\'s largest tracking tool for books</string>
 
+    <!-- Profile -->
+    <string name="app_bar_title_profile">%1$s \"%2$s\" %3$s</string>
+    <string name="app_bar_menu_save">Save</string>
+    <string name="title_save_data">Do you want to save changes ?</string>
+
     <!-- Main Menu -->
     <string name="header_user_data">Main Information</string>
     <string name="header_app_data">App Settings</string>
@@ -61,6 +66,8 @@
     <string name="button_author">Author</string>
     <string name="button_next">-- Next --</string>
     <string name="button_ok">OK</string>
+    <string name="button_save">Save</string>
+    <string name="button_discard">Discard</string>
 
     <!-- Error -->
     <string name="error_empty_field">Field Cannot be empty</string>
@@ -72,7 +79,6 @@
     <string name="helper_password">- Capital letter\n- Letter and number\n- At least 8 characters</string>
 
     <!-- Status Message -->
-    <string name="error_sign_up">Sign up failed. Please try again later</string>
-    <string name="error_log_in">Log in failed. Please try again later</string>
+    <string name="error_occurred">An error occurred, please try again later</string>
     <string name="error_wrong_ids">Wrong email or password</string>
 </resources>

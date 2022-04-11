@@ -11,8 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.project.frontMobile.R
-import com.project.frontMobile.data.model.User
 import com.project.frontMobile.databinding.FragmentLogInBinding
+import com.project.frontMobile.utils.SnackbarUtils
 import com.project.frontMobile.viewmodel.AuthenticationViewModel
 
 class LogInFragment : Fragment() {
@@ -20,8 +20,6 @@ class LogInFragment : Fragment() {
     private lateinit var binding: FragmentLogInBinding
 
     private val viewModel: AuthenticationViewModel by viewModels()
-
-    private lateinit var user: User
 
     private var email: String = ""
     private var password: String = ""
@@ -42,10 +40,6 @@ class LogInFragment : Fragment() {
         binding.fragment = this
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.currentUser.observe(viewLifecycleOwner) {
-            user = it
-        }
-
         viewModel.status.observe(viewLifecycleOwner) {
             binding.loading.visibility = View.GONE
 
@@ -55,8 +49,18 @@ class LogInFragment : Fragment() {
                     val action = LogInFragmentDirections.actionLogInFragmentToLibraryFragment()
                     view.findNavController().navigate(action)
                 }
-                "NOT_FOUND" -> showSnackbar(getString(R.string.error_wrong_ids), Snackbar.LENGTH_INDEFINITE)
-                "FAIL" -> showSnackbar(getString(R.string.error_log_in), Snackbar.LENGTH_LONG)
+                "NOT_FOUND" -> SnackbarUtils().showSnackbar(
+                    requireContext(),
+                    binding.coordinator,
+                    getString(R.string.error_wrong_ids),
+                    Snackbar.LENGTH_INDEFINITE
+                )
+                "FAIL" -> SnackbarUtils().showSnackbar(
+                    requireContext(),
+                    binding.coordinator,
+                    getString(R.string.error_occurred),
+                    Snackbar.LENGTH_LONG
+                )
             }
         }
     }
@@ -109,17 +113,5 @@ class LogInFragment : Fragment() {
     private fun isPassword(input: String): Boolean {
         val regex = Regex("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}\$")
         return regex.matches(input)
-    }
-
-    private fun showSnackbar(message: String, duration: Int) {
-        val snackbar = Snackbar.make(binding.coordinator, message, duration)
-        snackbar.setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.red))
-        if (duration == Snackbar.LENGTH_INDEFINITE) {
-            snackbar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            snackbar.setAction(R.string.button_ok) {
-                snackbar.dismiss()
-            }
-        }
-        snackbar.show()
     }
 }

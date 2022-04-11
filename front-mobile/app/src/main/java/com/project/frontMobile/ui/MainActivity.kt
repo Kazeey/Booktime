@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -12,14 +11,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.project.frontMobile.R
-import com.project.frontMobile.viewmodel.AuthenticationViewModel
-import com.project.frontMobile.viewmodel.UserViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
-
-    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         setupToolbar()
         setupNav()
-
-        userViewModel.getUserById("6231ce3362c151333c14f83")
     }
 
     private fun setupToolbar() {
@@ -68,10 +61,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.authorFragment -> {
                     supportActionBar?.show()
                     supportActionBar?.title = getString(R.string.button_author)
-                }
-                R.id.profileFragment -> {
-                    supportActionBar?.show()
-                    supportActionBar?.title = getString(R.string.button_profile)
                 }
                 R.id.settingsFragment -> {
                     supportActionBar?.show()
