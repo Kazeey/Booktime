@@ -64,9 +64,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 )
                 .and();
 
-        http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/authentication/login").permitAll();
-
+        http
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/authentication/login")
+                .permitAll()
+                .antMatchers("/",
+                        "/favicon.ico",
+                        "/**/*.png",
+                        "/**/*.gif",
+                        "/**/*.svg",
+                        "/**/*.jpg",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .cors()
+                .and()
+                .exceptionHandling();
+        
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
