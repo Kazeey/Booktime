@@ -1,7 +1,6 @@
 package com.project.frontMobile.data.model
 
 import android.content.res.Resources
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -17,12 +16,17 @@ class Book(
     var base64: String
     ): Serializable {
 
-
-    fun decodeBase64(): Drawable {
+    fun formatPicture(): Drawable {
         val base64: ByteArray = Base64.decode(base64, Base64.DEFAULT)
-        val bitmap = BitmapFactory.decodeByteArray(base64, 0, base64.size)
+        return BitmapDrawable(Resources.getSystem(), BitmapFactory.decodeByteArray(base64, 0, base64.size))
+    }
 
-        return BitmapDrawable(Resources.getSystem(), bitmap)
+    fun isLiked(liked: List<String>): Boolean {
+        return liked.contains(id)
+    }
+
+    fun isAdded(library: List<String>): Boolean {
+        return library.contains(id)
     }
 
     override fun toString(): String {

@@ -9,6 +9,7 @@ import com.project.booktime.repository.IUserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,24 +25,12 @@ public class UserService {
         this.bookService = bookService;
     }
 
-    private UserDTO createUserDTO(User user) {
-        UserDTO userDTO = UserHelper.convert(user);
-
-        List<BookDTO> addedDTOList = bookService.findBookListById(user.getLibrary());
-        List<BookDTO> likedDTOList = bookService.findBookListById(user.getLiked());
-
-        userDTO.setLibrary(addedDTOList);
-        userDTO.setLiked(likedDTOList);
-
-        return userDTO;
-    }
-
     public UserDTO findMe(String id) {
         Optional<User> user = repository.findById(id);
 
         if (user.isEmpty()) throw new UserNotFoundException();
 
-        return createUserDTO(user.get());
+        return UserHelper.convert(user.get());
     }
 
     public List<UserDTO> findAll() {
@@ -55,13 +44,13 @@ public class UserService {
 
         if (user.isEmpty()) throw new UserNotFoundException();
 
-        return createUserDTO(user.get());
+        return UserHelper.convert(user.get());
     }
 
     public UserDTO add(User user) {
         User createdUser = repository.insert(user);
 
-        return createUserDTO(createdUser);
+        return UserHelper.convert(createdUser);
     }
 
     public UserDTO update(String id, User user) {
@@ -71,7 +60,7 @@ public class UserService {
 
         User updatedUser = repository.save(user);
 
-        return createUserDTO(updatedUser);
+        return UserHelper.convert(updatedUser);
     }
 
     public void delete(String id) {

@@ -1,6 +1,7 @@
 package com.project.frontMobile.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -15,10 +16,6 @@ private const val ITEM_VIEW_TYPE_ITEM = 1
 
 class LibraryAdapter(private val clickListener: LibraryListener): ListAdapter<LibraryAdapter.DataItem, RecyclerView.ViewHolder>(LibraryDiffCallback()) {
 
-    private val _items = mutableListOf<DataItem>()
-    val items: MutableList<DataItem>
-        get() = _items
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ITEM_VIEW_TYPE_HEADER -> HeaderViewHolder.from(parent)
@@ -28,11 +25,13 @@ class LibraryAdapter(private val clickListener: LibraryListener): ListAdapter<Li
     }
 
     fun addHeaderAndSubmitList(headerList: List<String>, bookList: List<Book>) {
+        val data = mutableListOf<DataItem>()
+
         for (header: String in headerList) {
-            _items.addAll(createSection(header, bookList))
+            data.addAll(createSection(header, bookList))
         }
 
-        submitList(_items)
+        submitList(data)
     }
 
     private fun createSection(header: String, bookList: List<Book>): List<DataItem> {

@@ -25,8 +25,8 @@ class UpcomingFragment : Fragment() {
 
         bookButton.setOnClickListener {
             // TODO() : Replace hardcoded string for bookId with id get on recyclerView item
-            /*val action = UpcomingFragmentDirections.actionUpcomingFragmentToBookFragment("61fbdd5286bac81a8deaacd2")
-            view?.findNavController()?.navigate(action)*/
+            val action = UpcomingFragmentDirections.actionUpcomingFragmentToBookFragment("6200ea111010dc1e695a2746")
+            view?.findNavController()?.navigate(action)
         }
 
         return view

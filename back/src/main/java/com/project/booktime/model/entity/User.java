@@ -112,4 +112,19 @@ public class User {
     public void setLiked(List<String> liked) {
         this.liked = liked;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", pseudo='" + pseudo + '\'' +
+                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", birthday=" + birthday +
+                ", library=" + library +
+                ", liked=" + liked +
+                '}';
+    }
 }

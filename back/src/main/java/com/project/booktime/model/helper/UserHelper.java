@@ -28,7 +28,9 @@ public class UserHelper {
                 user.getFirstName(),
                 user.getEmail(),
                 user.getBirthday(),
-                user.getBase64()
+                user.getBase64(),
+                user.getLibrary(),
+                user.getLiked()
         );
     }
 }
