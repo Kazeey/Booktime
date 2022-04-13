@@ -30,7 +30,7 @@ class BookFragment : Fragment() {
 
     private val bookViewModel: BookViewModel by viewModels()
     private val authorViewModel: AuthorViewModel by activityViewModels()
-    private val userViewModel: UserViewModel by activityViewModels()
+    private val userViewModel: UserViewModel by viewModels()
 
     private lateinit var currentUser: User
     private lateinit var currentBook: Book
@@ -51,6 +51,8 @@ class BookFragment : Fragment() {
         binding.userViewModel = userViewModel
         binding.fragment = this
         binding.lifecycleOwner = viewLifecycleOwner
+
+        userViewModel.findMe("625159f3c00b8d2788aca324")
 
         arguments?.let {
             val bookId = it.getString(BOOK_ID) as String

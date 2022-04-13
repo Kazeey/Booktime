@@ -27,8 +27,8 @@ interface BookTimeService {
     /**
      * BOOK
      */
-    @GET("book/findAll")
-    suspend fun getBooks(): List<BookResponse>
+    @POST("book/find/library")
+    suspend fun findLibrary(@Body booksId: List<String>): List<BookResponse>
 
     @GET("book/findBy/{id}")
     suspend fun getBookById(@Path("id") id: String): BookResponse

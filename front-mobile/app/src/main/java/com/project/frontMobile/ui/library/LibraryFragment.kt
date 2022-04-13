@@ -1,7 +1,6 @@
 package com.project.frontMobile.ui.library
 
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.project.frontMobile.R
@@ -17,21 +16,28 @@ import com.project.frontMobile.adapter.IndexAdapter
 import com.project.frontMobile.adapter.LibraryAdapter
 import com.project.frontMobile.adapter.LibraryAdapter.LibraryListener
 import com.project.frontMobile.data.model.Book
+import com.project.frontMobile.data.model.User
 import com.project.frontMobile.databinding.FragmentLibraryBinding
+import com.project.frontMobile.viewmodel.BookViewModel
 import com.project.frontMobile.viewmodel.UserViewModel
 
 class LibraryFragment : Fragment() {
+
     private lateinit var binding: FragmentLibraryBinding
 
-    var bookList = mutableListOf<Book>()
-    var headerList = mutableListOf<String>()
+    private val userViewModel: UserViewModel by viewModels()
+    private val bookViewModel: BookViewModel by viewModels()
+
+    /*private var bookList = mutableListOf<Book>()
+    private var headerList = mutableListOf<String>()*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_library, container, false)
-        val viewModel: UserViewModel by activityViewModels()
+
+        userViewModel.findMe("625159f3c00b8d2788aca324")
 
         val libraryAdapter = LibraryAdapter(LibraryListener { book ->
             val action = LibraryFragmentDirections.actionLibraryFragmentToBookFragment(book.id)
@@ -46,45 +52,40 @@ class LibraryFragment : Fragment() {
         val indexAdapter = IndexAdapter()
         binding.recyclerviewIndex.adapter = indexAdapter
 
-        viewModel.currentUser.observe(viewLifecycleOwner) {
-            it?.let {
-                /*bookList.addAll(it.library.bookList.sortedBy { book -> book.title.first() })
-                headerList.addAll(getHeader(bookList))
+        userViewModel.currentUser.observe(viewLifecycleOwner) {
+            bookViewModel.findLibrary(it.library)
+        }
 
-                Log.d("LibraryFragmentBookLsit", "${bookList.size}")
+        bookViewModel.books.observe(viewLifecycleOwner) {
+            if (binding.search.text.toString().length <= 3) {
+                val temp = it.sortedBy { book -> book.title.first() }
 
-                libraryAdapter.addHeaderAndSubmitList(headerList, bookList)
-                indexAdapter.submitList(headerList)
-                manageSpanSize(manager, libraryAdapter)*/
+                libraryAdapter.addHeaderAndSubmitList(getHeader(temp), temp)
+                indexAdapter.submitList(getHeader(temp))
+
+                manageSpanSize(manager, libraryAdapter)
             }
         }
 
-        binding.search.doOnTextChanged { text, start, before, count ->
-            val books = mutableListOf<Book>()
-            val headers = mutableListOf<String>()
+        binding.search.doOnTextChanged { text, _, _, _ ->
+            val books = bookViewModel.books.value?.sortedBy { book -> book.title.first() }
 
-            when (text?.length!! >= 3) {
-                true -> {
-                    books.addAll(bookList.filter { it.title.lowercase().contains(text.toString().lowercase()) })
-                    headers.addAll(getHeader(books))
+            if (books != null) {
+                when (text?.length!! >= 3) {
+                    true -> {
+                        val temp = books.filter { it.title.lowercase().contains(text.toString().lowercase()) }
 
-                    libraryAdapter.addHeaderAndSubmitList(
-                        headers,
-                        books
-                    )
-                    indexAdapter.submitList(headers)
-                }
-                else -> when (text.length) {
-                    0 -> {
-                        books.addAll(bookList)
-                        headers.addAll(headerList)
-
-                        libraryAdapter.addHeaderAndSubmitList(headers, books)
-                        indexAdapter.submitList(headers)
+                        libraryAdapter.addHeaderAndSubmitList(getHeader(temp), temp)
+                        indexAdapter.submitList(getHeader(temp))
                     }
-                    else -> {}
+                    else -> {
+                        libraryAdapter.addHeaderAndSubmitList(getHeader(books), books)
+                        indexAdapter.submitList(getHeader(books))
+                    }
                 }
             }
+
+            manageSpanSize(manager, libraryAdapter)
         }
 
         return binding.root
@@ -101,8 +102,8 @@ class LibraryFragment : Fragment() {
     }
 
     private fun manageSpanSize(manager: GridLayoutManager, adapter: LibraryAdapter) {
+        Log.d("Test", "Test")
         val items = adapter.currentList
-        Log.d("LibraryFragment", "${adapter.currentList.size}")
 
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int) = when (items[position]) {

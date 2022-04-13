@@ -38,4 +38,22 @@ class Book(
                 "  authorsId=$authorsId'\n" +
                 "}"
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Book
+
+        if (id != other.id) return false
+        if (title != other.title) return false
+        if (synopsis != other.synopsis) return false
+        if (category != other.category) return false
+        if (authorsId != other.authorsId) return false
+        if (base64 != other.base64) return false
+
+        return true
+    }
+
+
 }

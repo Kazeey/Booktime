@@ -20,9 +20,9 @@ class BookViewModel: ViewModel() {
     val books: MutableLiveData<List<Book>>
         get() = _books
 
-    fun getAllBooks() {
+    fun findLibrary(booksId: List<String>) {
         viewModelScope.launch {
-            val listResult = BookTimeApi.retrofitService.getBooks()
+            val listResult = BookTimeApi.retrofitService.findLibrary(booksId)
             _books.value = BookConverter().convertAll(listResult)
 
             Log.d(BookViewModel::class.java.name, "Nb of books : ${books.value?.size}")
@@ -36,5 +36,9 @@ class BookViewModel: ViewModel() {
 
             Log.d(BookViewModel::class.java.name, "Current Book : ${currentBook.value?.id}")
         }
+    }
+
+    fun clear() {
+        if (_currentBook.value != null) _currentBook.value = null
     }
 }
