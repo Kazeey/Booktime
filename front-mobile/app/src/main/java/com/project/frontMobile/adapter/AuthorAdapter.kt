@@ -28,7 +28,7 @@ class AuthorAdapter(private val context: Context, private val dataset: List<Auth
     override fun onBindViewHolder(holder: AuthorViewHolder, position: Int) {
         val author = dataset[position]
 
-        holder.authorName.text = author.name
+        holder.authorName.text = context.resources.getString(R.string.author_name, author.firstName, author.name)
 
         val base64: ByteArray = Base64.decode(author.base64, Base64.DEFAULT)
         holder.profilePicture.setImageBitmap(BitmapFactory.decodeByteArray(base64, 0, base64.size))

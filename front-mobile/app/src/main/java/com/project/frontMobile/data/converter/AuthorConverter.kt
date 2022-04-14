@@ -9,6 +9,7 @@ class AuthorConverter {
         return Author(
             response.id,
             response.name,
+            response.firstName,
             response.booksId,
             response.base64
         )

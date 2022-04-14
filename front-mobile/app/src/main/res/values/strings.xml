@@ -10,7 +10,9 @@
 
     <!-- Book Fragment -->
     <string name="header_synopsis">Synopsis</string>
-    <string name="header_author">Writing By</string>
+    <string name="header_author">Authors</string>
+    <string name="no_author">Unable to find authors for this book</string>
+    <string name="author_name">%1$s %2$s</string>
 
     <string name="button_log_in">Log In</string>
     <string name="button_sign_up">Sign up</string>
@@ -23,9 +25,15 @@
     <string name="button_search">Search</string>
     <string name="button_book">Book</string>
     <string name="button_author">Author</string>
+    <string name="button_ok">OK</string>
 
     <!-- Status Message -->
-    <string name="add_to_list"></string>
-    <string name="remove_from_list"></string>
+    <string name="error_occurred">An error occurred, please try again later</string>
+    <string name="error_wrong_ids">Wrong email or password</string>
+    <string name="error_not_found">Wrong email or password</string>
+    <string name="book_add">Book correctly added</string>
+    <string name="book_remove">Book correctly removed</string>
+    <string name="book_like">Book added to your favorite books</string>
+    <string name="book_unlike">Book remove from your favorite books</string>
 
 </resources>

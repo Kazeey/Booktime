@@ -200,6 +200,7 @@ public class BookController {
                                    "null",
                                    "null",
                                    "null",
+                                   "null",
                                    "null"
                            );
                            AuthorDTO authorDTO = authorService.add(author);
