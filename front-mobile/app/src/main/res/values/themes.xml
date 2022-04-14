@@ -1,5 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Theme.FrontMobile" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
@@ -20,6 +19,6 @@
     </style>
 
     <style name="ThemeOverlay.App.Toolbar" parent="">
-         <item name="colorPrimary">?attr/colorSecondary</item>
+        <item name="colorPrimary">?attr/colorSecondary</item>
     </style>
 </resources>

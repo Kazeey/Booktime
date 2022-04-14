@@ -27,6 +27,14 @@ public class BookService {
         return BookHelper.convertAll(bookList);
     }
 
+    public List<BookDTO> findUpComing() {
+        Optional<List<Book>> bookList = repository.findUpComing();
+
+        if (bookList.isEmpty()) throw new BookNotFoundException();
+
+        return BookHelper.convertAll(bookList.get());
+    }
+
     public BookDTO findById(String id) {
         Optional<Book> book = repository.findById(id);
 

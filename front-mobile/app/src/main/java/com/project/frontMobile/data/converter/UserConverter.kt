@@ -14,6 +14,7 @@ class UserConverter {
             response.name,
             response.firstName,
             response.email,
+            response.birthday,
             if (response.library.isNullOrEmpty()) mutableListOf() else response.library,
             if (response.liked.isNullOrEmpty()) mutableListOf() else response.liked,
             response.base64

@@ -12,6 +12,7 @@ import com.project.frontMobile.network.service.BookTimeApi
 import com.project.frontMobile.utils.RequestCode
 import com.project.frontMobile.utils.RequestStatus
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class BookViewModel: ViewModel() {
 
@@ -46,6 +47,27 @@ class BookViewModel: ViewModel() {
             }
         }
     }
+    
+    fun getUpComingBooks() {
+        viewModelScope.launch {
+            try {
+                val listResult = BookTimeApi.retrofitService.getUpComing()
+                _books.value = BookConverter().convertAll(listResult)
+
+                Log.d(BookViewModel::class.java.name, "Nb of books : ${books.value?.size}")
+
+                _status.value = Status(RequestStatus.STATUS_OK, RequestCode.REQUEST_CODE_FIND_BOOK)
+            } catch (e: Exception) {
+                e.message?.let {
+                    when (it.contains(RequestStatus.STATUS_NOT_FOUND.toString())) {
+                        true -> _status.value = Status(RequestStatus.STATUS_NOT_FOUND, RequestCode.REQUEST_CODE_FIND_BOOK)
+                        else ->  _status.value = Status(RequestStatus.STATUS_FAIL, RequestCode.REQUEST_CODE_FIND_BOOK)
+                    }
+                }
+            }
+        }
+    }
+
 
     fun getBookById(id: String) {
         viewModelScope.launch {

@@ -5,53 +5,63 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.Snackbar
 import com.project.frontMobile.R
+import com.project.frontMobile.databinding.FragmentMenuBinding
+import com.project.frontMobile.utils.RequestStatus
+import com.project.frontMobile.utils.SnackbarUtils
+import com.project.frontMobile.viewmodel.UserViewModel
 
 class MenuFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var binding: FragmentMenuBinding
+
+    private val viewModel: UserViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_menu, container, false)
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_menu, container, false)
 
-        val profileButton = view.findViewById<MaterialButton>(R.id.profile_button)
-        val settingsButton = view.findViewById<MaterialButton>(R.id.settings_button)
-        val rgpdButton = view.findViewById<MaterialButton>(R.id.rgpd_button)
-        val helpButton = view.findViewById<MaterialButton>(R.id.help_button)
-        val signOutButton = view.findViewById<MaterialButton>(R.id.sign_out_button)
+        return binding.root
+    }
 
-        profileButton.setOnClickListener {
-            val action = MenuFragmentDirections.actionMenuFragmentToProfileFragment()
-            view?.findNavController()?.navigate(action)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
+        binding.fragment = this
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        viewModel.findMe()
+
+        viewModel.status.observe(viewLifecycleOwner) {
+            binding.loading.visibility = View.GONE
+
+            when (it.statusCode) {
+                RequestStatus.STATUS_OK -> {}
+                else -> SnackbarUtils().showSnackbar(
+                    requireContext(),
+                    binding.coordinator,
+                    getString(R.string.error_occurred),
+                    Snackbar.LENGTH_LONG
+                )
+            }
         }
+    }
 
-        settingsButton.setOnClickListener {
-            val action = MenuFragmentDirections.actionMenuFragmentToSettingsFragment()
-            view?.findNavController()?.navigate(action)
+    fun onClick(view: View) {
+        val action = when (view.id) {
+            R.id.account_settings_card -> MenuFragmentDirections.actionMenuFragmentToSettingsFragment()
+            R.id.rgpd_card -> MenuFragmentDirections.actionMenuFragmentToRGPDFragment()
+            R.id.help_card -> MenuFragmentDirections.actionMenuFragmentToHelpFragment()
+            R.id.sign_out_card -> MenuFragmentDirections.actionMenuFragmentToAuthenticationFragment()
+            else -> MenuFragmentDirections.actionMenuFragmentToProfileFragment()
         }
-
-        rgpdButton.setOnClickListener {
-            val action = MenuFragmentDirections.actionMenuFragmentToRGPDFragment()
-            view?.findNavController()?.navigate(action)
-        }
-
-        helpButton.setOnClickListener {
-            val action = MenuFragmentDirections.actionMenuFragmentToHelpFragment()
-            view?.findNavController()?.navigate(action)
-        }
-
-        signOutButton.setOnClickListener {
-            val action = MenuFragmentDirections.actionMenuFragmentToAuthenticationFragment()
-            view?.findNavController()?.navigate(action)
-        }
-
-        return view
+        view.findNavController().navigate(action)
     }
 }

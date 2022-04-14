@@ -4,8 +4,22 @@ import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.util.Base64
 import java.io.Serializable
+import android.os.Build
+import android.util.Base64
+import android.util.Log
+import android.view.View
+import android.widget.ImageView
+import androidx.annotation.RequiresApi
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.RequestOptions.bitmapTransform
+import com.project.frontMobile.R
+import jp.wasabeef.glide.transformations.BlurTransformation
+import java.time.Duration
+import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
 class Book(
     var id: String,
@@ -13,6 +27,7 @@ class Book(
     var synopsis: String,
     var category: List<String>,
     var authorsId: List<String>,
+    var publicationDate: String,
     var base64: String
     ): Serializable {
 
@@ -39,21 +54,14 @@ class Book(
                 "}"
     }
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun daysLeft(): Long {
+        val today = LocalDateTime.now()
+        val endDate = LocalDateTime.parse(
+            publicationDate.replace("T", " ").substring(0, 19),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        )
 
-        other as Book
-
-        if (id != other.id) return false
-        if (title != other.title) return false
-        if (synopsis != other.synopsis) return false
-        if (category != other.category) return false
-        if (authorsId != other.authorsId) return false
-        if (base64 != other.base64) return false
-
-        return true
+        return Duration.between(today, endDate).toDays()
     }
-
-
 }

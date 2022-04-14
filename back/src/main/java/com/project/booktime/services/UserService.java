@@ -2,6 +2,7 @@ package com.project.booktime.services;
 
 import com.project.booktime.exception.UserNotFoundException;
 import com.project.booktime.model.dto.BookDTO;
+import com.project.booktime.model.dto.SignUpDTO;
 import com.project.booktime.model.dto.UserDTO;
 import com.project.booktime.model.entity.User;
 import com.project.booktime.model.helper.UserHelper;
@@ -41,6 +42,14 @@ public class UserService {
 
     public UserDTO findById(String id) {
         Optional<User> user = repository.findById(id);
+
+        if (user.isEmpty()) throw new UserNotFoundException();
+
+        return UserHelper.convert(user.get());
+    }
+
+    public UserDTO logIn(String email, String password) {
+        Optional<User> user = repository.logIn(email, password);
 
         if (user.isEmpty()) throw new UserNotFoundException();
 

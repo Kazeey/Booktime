@@ -12,6 +12,7 @@ import com.project.frontMobile.network.service.BookTimeApi
 import com.project.frontMobile.utils.RequestCode
 import com.project.frontMobile.utils.RequestStatus
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class UserViewModel: ViewModel() {
 
@@ -23,10 +24,10 @@ class UserViewModel: ViewModel() {
     val status: LiveData<Status>
         get() = _status
 
-    fun findMe(id: String) {
+    fun findMe() {
         viewModelScope.launch {
             try {
-                val userResult = BookTimeApi.retrofitService.findMe(id)
+                val userResult = BookTimeApi.retrofitService.getUserById("625159f3c00b8d2788aca324")
                 _currentUser.value = UserConverter().convert(userResult)
 
                 Log.d(UserViewModel::class.java.name, "Current User : ${currentUser.value?.toString()}")

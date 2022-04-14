@@ -14,4 +14,7 @@ public interface IBookRepository extends MongoRepository<Book, String>
 
     @Query("{ _id: { $in: ?0 } }")
     Optional<List<Book>> findBookListById(List<String> booksId);
+
+    @Query("{'publicationDate' : { $gte : new ISODate() }}")
+    Optional<List<Book>> findUpComing();
 }

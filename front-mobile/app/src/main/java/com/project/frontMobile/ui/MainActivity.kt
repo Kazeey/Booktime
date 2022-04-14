@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import android.view.WindowManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -11,13 +12,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.project.frontMobile.R
-import com.project.frontMobile.viewmodel.UserViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
-
-    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         setupToolbar()
         setupNav()
-
+        
         userViewModel.findMe("625159f3c00b8d2788aca324")
     }
 
@@ -42,6 +40,12 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(bottomNavView, navController)
         setupActionBarWithNavController(navController)
 
+        manageBottomNavigationVisibility(bottomNavView)
+        manageToolbarVisibility()
+        manageStatusBar()
+    }
+
+    private fun manageBottomNavigationVisibility(bottomNavView: BottomNavigationView) {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.libraryFragment -> bottomNavView.visibility = View.VISIBLE
@@ -51,17 +55,15 @@ class MainActivity : AppCompatActivity() {
                 else -> bottomNavView.visibility = View.GONE
             }
         }
+    }
 
+    private fun manageToolbarVisibility() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.bookFragment -> supportActionBar?.show()
                 R.id.authorFragment -> {
                     supportActionBar?.show()
                     supportActionBar?.title = getString(R.string.button_author)
-                }
-                R.id.profileFragment -> {
-                    supportActionBar?.show()
-                    supportActionBar?.title = getString(R.string.button_profile)
                 }
                 R.id.settingsFragment -> {
                     supportActionBar?.show()
@@ -79,6 +81,19 @@ class MainActivity : AppCompatActivity() {
                     supportActionBar?.hide()
                     supportActionBar?.title = ""
                 }
+            }
+        }
+    }
+
+    private fun manageStatusBar() {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.authenticationFragment -> window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                R.id.logInFragment -> window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                R.id.signUpFragment -> window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                R.id.forgotPasswordFragment -> window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                R.id.createProfileFragment -> window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                else -> window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
             }
         }
     }

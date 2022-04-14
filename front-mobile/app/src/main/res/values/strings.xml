@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">frontMobile</string>
+    <string name="app_name">BookTime</string>
+    <string name="app_catch_phrase">The world\'s largest tracking tool for books</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -8,11 +9,50 @@
     <string name="title_suggestion_fragment">Suggestion</string>
     <string name="title_settings_fragment">Settings</string>
 
-    <!-- Book Fragment -->
+    <!-- Header -->
     <string name="header_synopsis">Synopsis</string>
     <string name="header_author">Authors</string>
     <string name="no_author">Unable to find authors for this book</string>
+    <string name="header_username">Username</string>
+    <string name="header_birthday">Birthday</string>
+
+    <!-- Hint -->
+    <string name="hint_email">Email</string>
+    <string name="hint_confirm_email">Confirm Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_search">Search</string>
+    <string name="hint_pseudo">Pseudo</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_firstname">Firstname</string>
+
+    <!-- Author RecyclerView -->
     <string name="author_name">%1$s %2$s</string>
+
+    <!-- Up Coming -->
+    <string name="days_left">%1$s days left</string>
+
+    <!-- Create Profile -->
+    <string name="title_create_profile">We are excited to get to know you better !</string>
+
+    <!-- Sign Up -->
+    <string name="title_sign_up">Join us and discover the world\'s largest tracking tool for books</string>
+
+    <!-- Log in -->
+    <string name="title_log_in">Welcome back to the world\'s largest tracking tool for books</string>
+
+    <!-- Profile -->
+    <string name="app_bar_title_profile">%1$s \"%2$s\" %3$s</string>
+    <string name="app_bar_menu_save">Save</string>
+    <string name="title_save_data">Do you want to save changes ?</string>
+
+    <!-- Main Menu -->
+    <string name="header_user_data">Main Information</string>
+    <string name="header_app_data">App Settings</string>
+    <string name="header_my_profile">My Profile</string>
+    <string name="header_account_settings">Account Settings</string>
+    <string name="header_rgpd">RGPD</string>
+    <string name="header_help">Help</string>
+    <string name="header_sign_out">Sign out</string>
 
     <string name="button_log_in">Log In</string>
     <string name="button_sign_up">Sign up</string>
@@ -25,15 +65,26 @@
     <string name="button_search">Search</string>
     <string name="button_book">Book</string>
     <string name="button_author">Author</string>
+    <string name="book_add">Book correctly added</string>
+    <string name="book_remove">Book correctly removed</string>
+    <string name="book_like">Book added to your favorite books</string>
+    <string name="book_unlike">Book remove from your favorite books</string>
+    <string name="button_next">-- Next --</string>
     <string name="button_ok">OK</string>
+    <string name="button_save">Save</string>
+    <string name="button_discard">Discard</string>
+
+    <!-- Error -->
+    <string name="error_empty_field">Field Cannot be empty</string>
+    <string name="error_email_not_match">Emails are not the same</string>
+    <string name="error_not_email">Please enter a correct email address</string>
+    <string name="error_not_password">Password must contain : 1 capital letter, letter and number, at least 8 characters</string>
+
+    <!-- Helper -->
+    <string name="helper_password">- Capital letter\n- Letter and number\n- At least 8 characters</string>
 
     <!-- Status Message -->
     <string name="error_occurred">An error occurred, please try again later</string>
     <string name="error_wrong_ids">Wrong email or password</string>
     <string name="error_not_found">Wrong email or password</string>
-    <string name="book_add">Book correctly added</string>
-    <string name="book_remove">Book correctly removed</string>
-    <string name="book_like">Book added to your favorite books</string>
-    <string name="book_unlike">Book remove from your favorite books</string>
-
 </resources>
