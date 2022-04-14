@@ -1,7 +1,6 @@
 package com.project.frontMobile.ui.book
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +8,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -18,7 +15,6 @@ import com.project.frontMobile.R
 import com.project.frontMobile.adapter.AuthorAdapter
 import com.project.frontMobile.adapter.CategoryAdapter
 import com.project.frontMobile.data.model.Book
-import com.project.frontMobile.data.model.Status
 import com.project.frontMobile.data.model.User
 import com.project.frontMobile.databinding.FragmentBookBinding
 import com.project.frontMobile.ui.MainActivity
@@ -74,7 +70,7 @@ class BookFragment : Fragment() {
             bookId = it.getString(BOOK_ID) as String
         }
 
-        userViewModel.findMe("625159f3c00b8d2788aca324")
+        userViewModel.findMe()
 
         bookViewModel.currentBook.observe(viewLifecycleOwner) {
             currentBook = it

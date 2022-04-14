@@ -40,7 +40,7 @@ public class User {
         this.firstName = "";
         this.birthday = new Date();
         this.base64 = "";
-        this.added = new ArrayList<>();
+        this.library = new ArrayList<>();
         this.liked = new ArrayList<>();
     }
 

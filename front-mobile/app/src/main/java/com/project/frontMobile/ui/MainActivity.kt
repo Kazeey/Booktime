@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
 
         setupToolbar()
         setupNav()
-        
-        userViewModel.findMe("625159f3c00b8d2788aca324")
     }
 
     private fun setupToolbar() {

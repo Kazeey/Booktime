@@ -37,7 +37,7 @@ class LibraryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        userViewModel.findMe("625159f3c00b8d2788aca324")
+        userViewModel.findMe()
 
         val libraryAdapter = LibraryAdapter(LibraryListener { book ->
             val action = LibraryFragmentDirections.actionLibraryFragmentToBookFragment(book.id)
