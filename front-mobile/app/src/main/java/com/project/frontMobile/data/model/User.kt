@@ -27,8 +27,4 @@ class User(
         val base64: ByteArray = Base64.decode(base64, Base64.DEFAULT)
         return BitmapDrawable(Resources.getSystem(), BitmapFactory.decodeByteArray(base64, 0, base64.size))
     }
-
-    override fun toString(): String {
-        return "User(id='$id', pseudo='$pseudo', name='$name', firstName='$firstName', email='$email', birthday='$birthday')"
-    }
 }

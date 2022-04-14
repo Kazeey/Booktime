@@ -32,6 +32,7 @@ public class UserController {
         } catch (UserNotFoundException exception) {
             return ResponseEntity.notFound().build();
         }
+    }
 
     @PostMapping("/signUp")
     public ResponseEntity<UserDTO> signUp(@RequestBody SignUpDTO signUpDTO) {
