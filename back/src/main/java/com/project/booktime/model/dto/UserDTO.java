@@ -1,7 +1,5 @@
 package com.project.booktime.model.dto;
 
-import com.project.booktime.model.entity.Picture;
-
 import java.util.Date;
 import java.util.List;
 
@@ -14,10 +12,10 @@ public class UserDTO {
     private String email;
     private Date birthday;
     private String base64;
-    private List<String> added;
+    private List<String> library;
     private List<String> liked;
 
-    public UserDTO(String id, String pseudo, String name, String firstName, String email, Date birthday, String base64, List<String> added, List<String> liked) {
+    public UserDTO(String id, String pseudo, String name, String firstName, String email, Date birthday, String base64, List<String> library, List<String> liked) {
         this.id = id;
         this.pseudo = pseudo;
         this.name = name;
@@ -25,7 +23,7 @@ public class UserDTO {
         this.email = email;
         this.birthday = birthday;
         this.base64 = base64;
-        this.added = added;
+        this.library = library;
         this.liked = liked;
     }
 
@@ -85,12 +83,12 @@ public class UserDTO {
         this.base64 = base64;
     }
 
-    public List<String> getAdded() {
-        return added;
+    public List<String> getLibrary() {
+        return library;
     }
 
-    public void setAdded(List<String> added) {
-        this.added = added;
+    public void setLibrary(List<String> library) {
+        this.library = library;
     }
 
     public List<String> getLiked() {
@@ -99,5 +97,19 @@ public class UserDTO {
 
     public void setLiked(List<String> liked) {
         this.liked = liked;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "id='" + id + '\'' +
+                ", pseudo='" + pseudo + '\'' +
+                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", email='" + email + '\'' +
+                ", birthday=" + birthday +
+                ", library=" + library +
+                ", liked=" + liked +
+                '}';
     }
 }

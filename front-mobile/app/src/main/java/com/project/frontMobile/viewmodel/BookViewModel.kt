@@ -28,6 +28,26 @@ class BookViewModel: ViewModel() {
     val status: LiveData<Status>
         get() = _status
 
+    fun findLibrary(booksId: List<String>) {
+        viewModelScope.launch {
+            try {
+                val listResult = BookTimeApi.retrofitService.findLibrary(booksId)
+                _books.value = BookConverter().convertAll(listResult)
+
+                Log.d(BookViewModel::class.java.name, "Nb of books : ${books.value?.size}")
+
+                _status.value = Status(RequestStatus.STATUS_OK, RequestCode.REQUEST_CODE_FIND_LIBRARY)
+            } catch (e: Exception) {
+                e.message?.let {
+                    when (it.contains(RequestStatus.STATUS_NOT_FOUND.toString())) {
+                        true -> _status.value = Status(RequestStatus.STATUS_NOT_FOUND, RequestCode.REQUEST_CODE_FIND_LIBRARY)
+                        else ->  _status.value = Status(RequestStatus.STATUS_FAIL, RequestCode.REQUEST_CODE_FIND_LIBRARY)
+                    }
+                }
+            }
+        }
+    }
+    
     fun getUpComingBooks() {
         viewModelScope.launch {
             try {
@@ -48,6 +68,7 @@ class BookViewModel: ViewModel() {
         }
     }
 
+
     fun getBookById(id: String) {
         viewModelScope.launch {
             try {
@@ -65,7 +86,6 @@ class BookViewModel: ViewModel() {
                     }
                 }
             }
-
         }
     }
 }

@@ -43,6 +43,14 @@ public class BookService {
         return BookHelper.convert(book.get());
     }
 
+    public List<BookDTO> findBookListById(List<String> booksId) {
+        Optional<List<Book>> books = repository.findBookListById(booksId);
+
+        if (books.isEmpty()) throw new BookNotFoundException();
+
+        return BookHelper.convertAll(books.get());
+    }
+
     public Boolean findByTitle(String title)
     {
         Book book = repository.findByTitle(title);

@@ -1,6 +1,7 @@
 package com.project.booktime.services;
 
 import com.project.booktime.exception.UserNotFoundException;
+import com.project.booktime.model.dto.BookDTO;
 import com.project.booktime.model.dto.SignUpDTO;
 import com.project.booktime.model.dto.UserDTO;
 import com.project.booktime.model.entity.User;
@@ -9,6 +10,7 @@ import com.project.booktime.repository.IUserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +19,19 @@ import java.util.Optional;
 public class UserService {
 
     private final IUserRepository repository;
+    private final BookService bookService;
 
-    public UserService(IUserRepository repository) {
+    public UserService(IUserRepository repository, BookService bookService) {
         this.repository = repository;
+        this.bookService = bookService;
+    }
+
+    public UserDTO findMe(String id) {
+        Optional<User> user = repository.findById(id);
+
+        if (user.isEmpty()) throw new UserNotFoundException();
+
+        return UserHelper.convert(user.get());
     }
 
     public List<UserDTO> findAll() {

@@ -20,4 +20,17 @@ class SnackbarUtils {
         }
         snackbar.show()
     }
+
+    fun showPositiveSnackbar(context: Context, coordinatorLayout: CoordinatorLayout, message: String, duration: Int) {
+        val snackbar = Snackbar.make(coordinatorLayout, message, duration)
+        snackbar.setBackgroundTint(ContextCompat.getColor(context, R.color.green))
+        if (duration == Snackbar.LENGTH_INDEFINITE) {
+            snackbar.setActionTextColor(ContextCompat.getColor(context, R.color.white))
+            snackbar.setAction(R.string.button_ok) {
+                snackbar.dismiss()
+            }
+        }
+        snackbar.show()
+    }
+
 }

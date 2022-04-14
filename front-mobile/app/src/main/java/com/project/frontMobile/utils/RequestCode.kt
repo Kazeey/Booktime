@@ -9,5 +9,8 @@ class RequestCode {
         const val REQUEST_CODE_LOG_IN = 4
         const val REQUEST_CODE_FIND_BOOK = 5
         const val REQUEST_CODE_UP_COMING_BOOKS = 6
+        const val REQUEST_CODE_FIND_LIBRARY = 7
+        const val REQUEST_CODE_FIND_AUTHOR = 8
+        const val REQUEST_CODE_FIND_AUTHOR_LIST = 9
     }
 }

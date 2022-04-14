@@ -112,7 +112,7 @@
             android:id="@+id/action_bookFragment_to_authorFragment"
             app:destination="@id/authorFragment" />
         <argument
-            android:name="book_id"
+            android:name="bookId"
             app:argType="string" />
     </fragment>
     <fragment

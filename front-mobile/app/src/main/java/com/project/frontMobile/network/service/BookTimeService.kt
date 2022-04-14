@@ -1,6 +1,7 @@
 package com.project.frontMobile.network.service
 
 import com.project.frontMobile.data.model.User
+import com.project.frontMobile.network.request.UserRequest
 import com.project.frontMobile.network.request.LogInRequest
 import com.project.frontMobile.network.request.SignUpRequest
 import com.project.frontMobile.network.response.AuthorResponse
@@ -28,8 +29,8 @@ interface BookTimeService {
     /**
      * BOOK
      */
-    @GET("book/findAll")
-    suspend fun getBooks(): List<BookResponse>
+    @POST("book/find/library")
+    suspend fun findLibrary(@Body booksId: List<String>): List<BookResponse>
 
     @GET("book/findUpComing")
     suspend fun getUpComing(): List<BookResponse>
@@ -54,6 +55,8 @@ interface BookTimeService {
      * USER
      */
 
+    @GET("user/me/{id}")
+    suspend fun findMe(@Path("id") id: String): UserResponse
     @POST("user/signUp")
     suspend fun signUp(@Body signUpRequest: SignUpRequest): UserResponse
 
@@ -65,7 +68,7 @@ interface BookTimeService {
 
     @PATCH("user/update/{id}")
     suspend fun updateUser(@Path("id") id: String,
-                           @Body user: User): UserResponse
+                           @Body user: UserRequest): UserResponse
 }
 
 object BookTimeApi {

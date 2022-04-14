@@ -47,7 +47,7 @@ class UserViewModel: ViewModel() {
     fun updateUser(user: User) {
         viewModelScope.launch {
             try {
-                val userResult = BookTimeApi.retrofitService.updateUser(user.id, user)
+                val userResult = BookTimeApi.retrofitService.updateUser(user.id, UserConverter().convert(user))
                 _currentUser.value = UserConverter().convert(userResult)
 
                 Log.d(UserViewModel::class.java.name, "Current User Updated : ${currentUser.value?.toString()}")

@@ -3,6 +3,7 @@ package com.project.frontMobile.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import android.view.WindowManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity() {
 
         setupToolbar()
         setupNav()
+        
+        userViewModel.findMe("625159f3c00b8d2788aca324")
     }
 
     private fun setupToolbar() {

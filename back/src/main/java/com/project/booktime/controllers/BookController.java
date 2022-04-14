@@ -5,6 +5,7 @@ import com.project.booktime.model.dto.AuthorDTO;
 import com.project.booktime.model.dto.BookDTO;
 import com.project.booktime.model.entity.Author;
 import com.project.booktime.model.entity.Book;
+import com.project.booktime.model.entity.Library;
 import com.project.booktime.params.Constants;
 import com.project.booktime.repository.IAuthorRepository;
 import com.project.booktime.services.AuthorService;
@@ -59,6 +60,17 @@ public class BookController {
             BookDTO bookDTO = bookService.findById(id);
 
             return ResponseEntity.ok().body(bookDTO);
+        } catch (BookNotFoundException exception) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/find/library")
+    public ResponseEntity<List<BookDTO>> findLibrary(@RequestBody List<String> bookList) {
+        try {
+            List<BookDTO> bookDTOList = bookService.findBookListById(bookList);
+
+            return ResponseEntity.ok().body(bookDTOList);
         } catch (BookNotFoundException exception) {
             return ResponseEntity.notFound().build();
         }
@@ -194,6 +206,7 @@ public class BookController {
                         {
                            Author author = new Author(
                                    lAuthors.get(j),
+                                   "null",
                                    "null",
                                    "null",
                                    "null",

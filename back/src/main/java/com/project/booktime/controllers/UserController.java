@@ -23,6 +23,16 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/me/{id}")
+    public ResponseEntity<UserDTO> findMe(@PathVariable("id") String id) {
+        try {
+            UserDTO userDTO = userService.findMe(id);
+
+            return ResponseEntity.ok().body(userDTO);
+        } catch (UserNotFoundException exception) {
+            return ResponseEntity.notFound().build();
+        }
+
     @PostMapping("/signUp")
     public ResponseEntity<UserDTO> signUp(@RequestBody SignUpDTO signUpDTO) {
         UserDTO userDTO = userService.add(SignUpHelper.signUpDTOToUser(signUpDTO));

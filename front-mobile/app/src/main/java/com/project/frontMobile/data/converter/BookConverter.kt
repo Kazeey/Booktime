@@ -17,7 +17,7 @@ class BookConverter {
         )
     }
 
-    fun convertAll(responses: List<BookResponse>): List<Book> {
+    fun convertAll(responses: List<BookResponse>): MutableList<Book> {
         val bookList = mutableListOf<Book>()
 
         for (response: BookResponse in responses) {

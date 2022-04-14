@@ -11,7 +11,8 @@
 
     <!-- Header -->
     <string name="header_synopsis">Synopsis</string>
-    <string name="header_author">Writing By</string>
+    <string name="header_author">Authors</string>
+    <string name="no_author">Unable to find authors for this book</string>
     <string name="header_username">Username</string>
     <string name="header_birthday">Birthday</string>
 
@@ -64,6 +65,10 @@
     <string name="button_search">Search</string>
     <string name="button_book">Book</string>
     <string name="button_author">Author</string>
+    <string name="book_add">Book correctly added</string>
+    <string name="book_remove">Book correctly removed</string>
+    <string name="book_like">Book added to your favorite books</string>
+    <string name="book_unlike">Book remove from your favorite books</string>
     <string name="button_next">-- Next --</string>
     <string name="button_ok">OK</string>
     <string name="button_save">Save</string>
