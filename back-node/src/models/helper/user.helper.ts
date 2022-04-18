@@ -1,6 +1,6 @@
 import express from 'express';
 import { ListFormat } from 'typescript';
-import List from '../../utils/list';
+import List from '../../utils/List';
 import UserDTO from '../DTO/UserDTO';
 import User from '../entity/User';
 

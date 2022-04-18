@@ -1,6 +1,6 @@
 import express, {Request, Response } from "express";
 import User from "../models/entity/User";
-import List from "../utils/list";
+import List from "../utils/List";
 
 const userService = require('../services/user.service');
 
