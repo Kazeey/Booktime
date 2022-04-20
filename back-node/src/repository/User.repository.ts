@@ -1,5 +1,5 @@
 import * as mongoDB from 'mongodb';
-import User from '../models/entity/User';
+import User from '../models/User';
 
 export interface UserRepository extends mongoDB.Collection
 {

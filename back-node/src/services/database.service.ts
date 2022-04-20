@@ -3,9 +3,9 @@ import { Constants } from '../config'
 
 export const collections: { 
     user?: mongoDB.Collection, 
-    book?: mongoDB.Collection 
-    author?: mongoDB.Collection 
-    library?: mongoDB.Collection 
+    book?: mongoDB.Collection, 
+    author?: mongoDB.Collection,
+    library?: mongoDB.Collection,
 } = {}
 
 export async function connectToDatabase()
@@ -26,5 +26,5 @@ export async function connectToDatabase()
     collections.author = authorCollection;
     collections.library = libraryCollection;
 
-
+    console.log('Connected to database ' + db.databaseName + " and collection " + userCollection.collectionName);
 }

@@ -2,10 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const http = require('http');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
 import { Constants } from "./config";
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
+import { connectToDatabase } from "./services/database.service";
 
 const app = express();
 app.use(cors())
@@ -23,5 +23,13 @@ app.use(routes);
 
 const httpServer = http.createServer(app);
 httpServer.listen(port);
+
+connectToDatabase()
+.then(() => {
+    console.log('Connected');
+})
+.catch(err => {
+    console.log(err);
+})
 
 console.log(`Connected | Port ${port}`);

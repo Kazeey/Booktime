@@ -1,7 +1,6 @@
-import express from 'express';
-import { ObjectId } from 'mongoose';
+import { ObjectId } from "mongoose";
 
-export default class UserDTO
+export default class User 
 {
     private _id: ObjectId;
     private name: String;
@@ -13,9 +12,8 @@ export default class UserDTO
     private base64: String;
     private status: String;
 
-    constructor(_id: ObjectId, name: String, firstname: String, pseudo: String, email: String, password: String, birthdate: Date, base64: String, status: String)
+    constructor(name: String, firstname: String, pseudo: String, email: String, password: String, birthdate: Date, base64: String, status: String)
     {
-        this._id = _id;
         this.name = name;
         this.firstname = firstname;
         this.pseudo = pseudo;
@@ -25,6 +23,7 @@ export default class UserDTO
         this.base64 = base64;
         this.status = status;
     }
+
     public getId(): ObjectId {
         return this._id;
     }
