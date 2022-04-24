@@ -9,7 +9,7 @@ export default class UserController
 
     public UserController() { }
 
-    public async findAll (req: Request, res: Response)
+    public async findAll (req: Request, res: Response)  
     {
         try
         {

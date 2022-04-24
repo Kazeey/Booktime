@@ -3,6 +3,7 @@ import { router as userRouter } from "./user.routes";
 import { router as bookRouter } from "./book.routes";
 import { router as authorRouter } from "./author.routes";
 import { router as libraryRouter } from "./library.routes";
+import { router as collectApiDataRouter } from "./collectApiData.routes";
 
 const router = express.Router();
 
@@ -10,6 +11,7 @@ router.use('/user', userRouter);
 router.use('/book', bookRouter);
 router.use('/author', authorRouter);
 router.use('/library', libraryRouter);
+router.use('/private', collectApiDataRouter);
 
 router.get('/', (req: express.Request, res: express.Response) => res.send('Hello World!'));
 router.get('/health', (req: express.Request, res: express.Response) => {
