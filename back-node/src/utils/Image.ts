@@ -2,38 +2,61 @@ import { Constants } from "../config";
 import express, { Request, Response } from "express";
 import fs from "fs";
 
-let fetch = require('node-fetch');
-
 export default class ImageConvert
 {
-    public async convertImage (url: string)
+    public async saveImage(req: Request, res: Response): Promise<string>
     {
-        return new Promise(async (resolve, reject) => {
-            await fetch(url)
-            .then((response: { ok: any; statusText: any; blob: () => any; }) => {
-                if (!response.ok)
-                    reject(`Error: ${response.statusText}`);
-                return response.blob();
-            })
-            .then((blob: Blob) => {
-                console.log("Avant blob");
-                const reader = fs;
-                let Url = new URL(url);
-                console.log(Url);
-                let contents = reader.readFileSync(Url.href, {encoding: 'base64'});
-                return resolve(contents);
+        let url = req.body.imageUrl;
+        let filename = "image.jpg"
+        return new Promise((resolve, reject) =>
+        {
+            const file = fs.createWriteStream(`${Constants.imagePath}${filename}`);
+            const request = require("request");
+            request(url).pipe(file);
+            file.on("finish", () =>
+            {
+                resolve(filename);
+            });
+            file.on("error", (err) =>
+            {
+                reject(err);
             });
         });
     }
 
-    public encodeImageFromUrl (req: Request, res: Response)
+    public async deleteImage(filename: string): Promise<void>
     {
-        const url = req.body.imageUrl;
-
-        this.convertImage(url).then((image) => {
-            res.send(image);
-        }).catch((error) => {
-            res.status(500).send(error);
+        return new Promise((resolve, reject) =>
+        {
+            fs.unlink(`${Constants.imagePath}${filename}`, (err) =>
+            {
+                if (err)
+                {
+                    reject(err);
+                }
+                else
+                {
+                    resolve();
+                }
+            });
         });
     }
+
+    public async convertImage(path: string): Promise<string>
+    {
+        return new Promise((resolve, reject) =>
+        {
+            fs.readFile(path, (err, data) =>
+            {
+                if (err)
+                {
+                    reject(err);
+                }
+                else
+                {
+                    resolve(data.toString("base64"));
+                }
+            });
+        });
+    }    
 }

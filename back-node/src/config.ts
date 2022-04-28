@@ -50,5 +50,7 @@ export const Constants = {
 
     noUser : "Il n'y a pas d'utilisateur qui corresponde à cet ID",
     noProject : "Il n'y pas de projet qui corresponde à cet ID",
-    notId : "Le format de l'identifiant n'est pas correct"
+    notId : "Le format de l'identifiant n'est pas correct",
+
+    imagePath : "src/images/"
 }
