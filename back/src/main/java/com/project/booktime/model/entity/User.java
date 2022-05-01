@@ -15,8 +15,8 @@ public class User {
     private String pseudo;
     private String name;
     private String firstName;
-    private String password;
     private String email;
+    private String password;
     private Date birthday;
     private String base64;
     private List<String> library;
@@ -147,5 +147,13 @@ public class User {
                 ", library=" + library +
                 ", liked=" + liked +
                 '}';
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

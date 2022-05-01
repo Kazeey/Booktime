@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Button, FormControl, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
-import modalStyle from '../../utils/styles/modal.style';
+import { Box, Button, FormControl, Input, InputAdornment, InputLabel } from '@mui/material';
 import checkMail from '../../utils/functions/checkMailFormat';
+import { setMessage } from '../../utils/functions/setMessage';
+
+import modalStyle from '../../utils/styles/modal.style';
 import EmailIcon from '@mui/icons-material/Email';
-import CloseIcon from '@mui/icons-material/Close';
 
 const ForgotPassword = ( props ) => {    
   const [values, setValues] = React.useState({
@@ -14,6 +15,17 @@ const ForgotPassword = ( props ) => {
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value })
   };
+
+  const forgetPassword = (email) => {
+    let mail = {
+      "email" : email
+    }
+
+    forgetPassword(mail)
+    .then(response => {
+      setMessage("Si l'adresse mail est correcte, vous recevrez un email avec un lien pour réinitialiser votre mot de passe.");
+    });
+  }
 
   return (
     <Box sx={modalStyle.forgetPasswordBox}>      

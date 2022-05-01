@@ -72,6 +72,18 @@ public class UserService {
         return UserHelper.convert(updatedUser);
     }
 
+    public UserDTO changeAccount (User user) {
+        User notUpdatedUser = repository.findByEmail(user.getEmail());
+
+        if (notUpdatedUser == null) throw new UserNotFoundException();
+
+        notUpdatedUser.setStatus(user.getStatus());
+
+        User updatedUser = repository.save(notUpdatedUser);
+
+        return UserHelper.convert(updatedUser);
+    }
+
     public void delete(String id) {
         Optional<User> optionalUser = repository.findById(id);
 

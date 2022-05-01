@@ -1,25 +1,32 @@
 import React from 'react'
-import { Box } from '@mui/system'
 import PropTypes from 'prop-types'
+import { Box } from '@mui/system'
 import { Button, Fade, FormControl, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
-import EmailIcon from '@mui/icons-material/Email';
-import HttpsIcon from '@mui/icons-material/Https';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import modalStyle from '../../utils/styles/modal.style';
 import checkMail from '../../utils/functions/checkMailFormat';
 import { checkPassword, passwordStrength } from '../../utils/functions/checkPassword';
-import styleModal from '../../utils/styles/modal';
 import ForgotPassword from '../forgotPassword';
-import CloseIcon from '@mui/icons-material/Close';
+import { connectUser, changeAccount } from '../../services/UserService';
+import { setMessage } from '../../utils/functions/setMessage';
+import { constants } from '../../utils/constants/constants';
+
+import modalStyle from '../../utils/styles/modal.style';
+import styleModal from '../../utils/styles/modal';
+import EmailIcon from '@mui/icons-material/Email';
+import HttpsIcon from '@mui/icons-material/Https';
+
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Authentication = () => {
-
   const [openStatus, setOpen] = React.useState(false);
   const [values, setValues] = React.useState({
     email: '',
     password: '',
+    nbTry : 4,
     showPassword: false,
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value })
@@ -43,6 +50,42 @@ const Authentication = () => {
   const onCloseModal = (event) => {
     setOpen(Boolean(event.target.value));
   };
+
+  const connection = (email, password) => {
+    let user = {
+      "email" : email,
+      "password" : password
+    }
+
+    connectUser(user)
+    .then(response => {
+      setMessage("");
+      setValues({...values, nbTry : 4});
+    })
+    .catch(error => {
+      if (values.nbTry > 0)
+      {
+        setValues({...values, nbTry : values.nbTry - 1});
+        setMessage(constants.User.NOT_FOUND, values.nbTry);
+      }
+
+      if (values.nbTry === 0)
+      {
+        let user = {
+          "email" : email,
+          "status" : "blocked"
+        }
+
+        setMessage(constants.User.BLOCKED);
+        changeAccount(user);
+      }
+      
+    });
+  }
+
+  const bookContainer = () => {
+    navigate('/books', { state: { from: 'authentication' } });
+  }
 
   return (
     <Box sx={modalStyle.authenticationBox}>
@@ -101,6 +144,8 @@ const Authentication = () => {
             disabled={
               !values.email || !checkMail(values.email) || !values.password || !checkPassword(values.password)
             }
+            // onClick={() => { connection(values.email, values.password) }}
+            onClick={() => { bookContainer() }}
           >
             Se connecter
           </Button>
@@ -115,6 +160,8 @@ const Authentication = () => {
         </FormControl>
       </Box>
 
+      <p id="messageZone" style={{fontSize : '10px'}}></p>
+      
       <styleModal.StyledModal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"

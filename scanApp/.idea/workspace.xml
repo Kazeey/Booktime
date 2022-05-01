@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a770370f-09df-4e5d-8efe-d6e7ddc6de0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/controllers/AuthorController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/exception/AuthorNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/model/dto/AuthorDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/model/entity/Author.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/model/helper/AuthorHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/repository/IAuthorRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/services/AuthorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../back/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/controllers/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/controllers/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/controllers/LibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/controllers/LibraryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back/src/main/java/com/project/booktime/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-web/src/__tests__/services/AuthorService.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-web/src/__tests__/services/AuthorService.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-web/src/services/AuthorService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front-web/src/services/AuthorService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-node/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../back-node/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-node/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../back-node/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-node/src/images/image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-node/src/routes/collectApiData.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../back-node/src/routes/collectApiData.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-node/src/utils/Image.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../back-node/src/utils/Image.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +85,7 @@
       <workItem from="1637513603225" duration="230000" />
       <workItem from="1642433322637" duration="9000" />
       <workItem from="1642463914225" duration="9000" />
+      <workItem from="1651417294538" duration="52000" />
     </task>
     <servers />
   </component>

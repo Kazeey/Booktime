@@ -10,6 +10,7 @@ public class UserDTO {
     private String name;
     private String firstName;
     private String email;
+    private String password;
     private Date birthday;
     private String base64;
     private List<String> library;
@@ -21,6 +22,7 @@ public class UserDTO {
         this.name = name;
         this.firstName = firstName;
         this.email = email;
+        this.password = password;
         this.birthday = birthday;
         this.base64 = base64;
         this.library = library;
@@ -65,6 +67,14 @@ public class UserDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Date getBirthday() {

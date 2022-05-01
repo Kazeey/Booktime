@@ -1,12 +1,12 @@
 const constants = {
     apiURL : "http://127.0.0.1:8080/",
     DbName : "booktime",
-    
-    // -------------------------------------------------
-    // ----------  CONSTANTS FOR MESSAGES  -------------
-    // -------------------------------------------------
-    passwordCriteria : ["Trop court", "Faible", "Ok", "Bon", "Fort"],
-    passwordMessage : "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
+
+    // User
+    User : {
+        NOT_FOUND : "Combinaison érronee de mail et mot de passe, nombre d'essai restant : ",
+        BLOCKED : "Votre compte a été bloqué, veuillez contacter l'administrateur",
+    },
 }
 
 export { constants };

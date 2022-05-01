@@ -170,7 +170,7 @@ public class BookController {
 
                     if (!volumeInfo.containsKey("imageLinks"))
                     {
-                        zThumbnailBase64 = imageService.encoreImageFromPath("src/main/assets/naThumbnail.jpg");
+                        zThumbnailBase64 = imageService.encodeImageFromPath("src/main/assets/naThumbnail.jpg");
                     }
                     else
                     {

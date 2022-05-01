@@ -1,13 +1,14 @@
 import React from 'react'
-import styleModal from '../../utils/styles/modal';
 import Authentication from '../authentication';
 import Register from '../register';
 import { Button, Fade, FormControl } from '@mui/material';
+
 import modalStyle from '../../utils/styles/modal.style';
+import styleModal from '../../utils/styles/modal';
+import buttonStyle from '../../utils/styles/button.style';
 
 const Modal = () => {
   const [moduleStatus, setModule] = React.useState(true);
-  const [forgotPasswordStatus, setForgotPasswordStatus] = React.useState(false);
   const [openStatus, setOpen] = React.useState(false);
   const [values, setValues] = React.useState("S'inscrire");
 
@@ -29,13 +30,15 @@ const Modal = () => {
   return (
     <div>
       <FormControl variant='standard'>
-        <Button variant='contained' color='warning' value={true} onClick={(event) => onOpenModal(event, true, "S'inscrire")}>
+        <Button variant='outlined' sx={buttonStyle.loginButton} value={true} onClick={(event) => onOpenModal(event, true, "S'inscrire")}>
           Se connecter
         </Button>
       </FormControl>
-      <button type="button" value={true} onClick={(event) => onOpenModal(event, false, "Se connecter")}> 
-        Enregistrement
-      </button>
+      <FormControl variant='standard'>
+        <Button variant='contained' sx={buttonStyle.loginButton} value={true} onClick={(event) => onOpenModal(event, false, "Se connecter")}>
+          Enregistrement
+        </Button>
+      </FormControl>
       
       <styleModal.StyledModal
         aria-labelledby="simple-modal-title"

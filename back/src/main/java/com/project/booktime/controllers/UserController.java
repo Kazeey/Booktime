@@ -98,4 +98,26 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserDTO> connect(@RequestBody User user) {
+        try {
+            UserDTO userDTO = userService.findByEmailAndPassword(user);
+
+            return ResponseEntity.ok().body(userDTO);
+        } catch (UserNotFoundException exception) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/changeAccount")
+    public ResponseEntity<UserDTO> changeAccount(@RequestBody User user) {
+        try {
+            UserDTO userDTO = userService.changeAccount(user);
+
+            return ResponseEntity.ok().body(userDTO);
+        } catch (UserNotFoundException exception) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
