@@ -1,21 +1,21 @@
 import { Constants } from "../config";
 import express, { Request, Response } from "express";
 import fs from "fs";
+import { v4 as uuidv4 } from "uuid";
+
+const request = require("request");
 
 export default class ImageConvert
 {
-    public async saveImage(req: Request, res: Response): Promise<string>
+    public async saveImage(urlAPI: String, path: string): Promise<string>
     {
-        let url = req.body.imageUrl;
-        let filename = "image.jpg"
         return new Promise((resolve, reject) =>
         {
-            const file = fs.createWriteStream(`${Constants.imagePath}${filename}`);
-            const request = require("request");
-            request(url).pipe(file);
+            const file = fs.createWriteStream(path);
+            request(urlAPI).pipe(file);
             file.on("finish", () =>
             {
-                resolve(filename);
+                resolve(path);
             });
             file.on("error", (err) =>
             {
@@ -24,11 +24,11 @@ export default class ImageConvert
         });
     }
 
-    public async deleteImage(filename: string): Promise<void>
+    public async deleteImage(path: string): Promise<void>
     {
-        return new Promise((resolve, reject) =>
+        return await new Promise((resolve, reject) =>
         {
-            fs.unlink(`${Constants.imagePath}${filename}`, (err) =>
+            fs.unlink(path, (err) =>
             {
                 if (err)
                 {
@@ -59,4 +59,21 @@ export default class ImageConvert
             });
         });
     }    
+
+    public convertImageLocally(path: string): String
+    {
+        return fs.readFileSync(path).toString("base64");
+    }
+
+    public async sendBase64Image(urlAPI: String): Promise<void>
+    {
+        let filename = "image" + uuidv4() + ".jpg"
+        let path = Constants.imagePath + filename;
+        
+        await this.saveImage(urlAPI, path);
+        await this.convertImage(path).then((data) => {
+            return data;
+        });
+        await this.deleteImage(path);
+    }
 }

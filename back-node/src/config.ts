@@ -21,6 +21,7 @@ export const Constants = {
 
     // Google
     apiKeyGoogle : "AIzaSyDojgOQt_GHgwTR-bCM--As_WTRERNqz0k",
+    apiGoogleUrl : "https://www.googleapis.com/books/v1/volumes?q=",
     categories : [
         "Anthologies",
         "Art",
@@ -47,7 +48,10 @@ export const Constants = {
 
     // App
     nonAcquis : "N/A",
-
+    noDescription : "Quam ob rem cave Catoni anteponas ne istum quidem ipsum, quem Apollo, ut ais, sapientissimum iudicavit; huius enim facta, illius dicta laudantur. De me autem, ut iam cum utroque vestrum loquar, sic habetote.",
+    noDate : new Date("01/05/2022"),
+    noImage : "src/images/naThumbnail.jpg",
+    
     noUser : "Il n'y a pas d'utilisateur qui corresponde à cet ID",
     noProject : "Il n'y pas de projet qui corresponde à cet ID",
     notId : "Le format de l'identifiant n'est pas correct",

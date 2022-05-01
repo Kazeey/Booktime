@@ -33,7 +33,7 @@ public class ImageService
         return Base64.getEncoder().encodeToString(imageInByte);
     }
 
-    public String encoreImageFromPath(String imagePath) throws IOException
+    public String encodeImageFromPath(String imagePath) throws IOException
     {
         InputStream inputStream = new FileInputStream(imagePath);
         byte[] bytes = IOUtils.toByteArray(inputStream);

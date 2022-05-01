@@ -67,9 +67,9 @@ export default class BookController
         try
         {
             let body = req.body;
-            let bookToAdd: Book = new Book(body.title, body.synopsis, body.ISBN, body.publicationDate, body.category, body.pageCount, body.authorsId, body.base64);
+            let bookToAdd: Book = new Book(body.title, body.synopsis, body.ISBN, body.publicationDate, body.category, body.pageCount, body.authorsId, body.averageRating, body.base64);
             
-            await collections.book?.insertOne(bookToAdd);
+            await collections.book?.update({title: bookToAdd.getTitle().toString(), upsert: true}, bookToAdd);
             
             res.status(200).send(bookToAdd);
         }
@@ -79,12 +79,26 @@ export default class BookController
         }
     }
 
+    public async addLocally (book: Book)
+    {
+        try
+        {
+            await collections.book?.update({title: book.getTitle()}, book, {upsert: true});
+            
+            return true;
+        }
+        catch(e)
+        {
+            throw e;
+        }
+    }
+
     public async update (req: Request, res: Response)
     {
         try
         {
             let body = req.body;
-            let bookToUpdate: Book = new Book(body.title, body.synopsis, body.ISBN, body.publicationDate, body.category, body.pageCount, body.authorsId, body.base64);
+            let bookToUpdate: Book = new Book(body.title, body.synopsis, body.ISBN, body.publicationDate, body.category, body.pageCount, body.authorsId, body.averageRating, body.base64);
             
             await collections.book?.updateOne({_id : new ObjectId(body.id)}, bookToUpdate);
             

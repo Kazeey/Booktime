@@ -51,4 +51,10 @@ export default class List<T>
     {
         this.items.forEach(callback);
     }
+    
+    fromArray(array: Array<T>): List<T>
+    {
+        this.items = array;
+        return this;
+    }
 }

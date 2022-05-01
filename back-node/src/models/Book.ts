@@ -7,13 +7,14 @@ export default class User
     private title: String;
     private synopsis: String;
     private ISBN: Object;
-    private publicationDate: String;
+    private publicationDate: Date;
     private category: List<String>;
     private pageCount: String;
     private authorsId: List<String>;
+    private averageRating: String;
     private base64: String;
 
-    constructor(title: String, synopsis: String, ISBN: Object, publicationDate: String, category: List<String>, pageCount: String, authorsId: List<String>, base64: String)
+    constructor(title: String, synopsis: String, ISBN: Object, publicationDate: Date, category: List<String>, pageCount: String, authorsId: List<String>, averageRating: String, base64: String)
     {
         this.title = title;
         this.synopsis = synopsis;
@@ -22,6 +23,7 @@ export default class User
         this.category = category;
         this.pageCount = pageCount;
         this.authorsId = authorsId;
+        this.averageRating = averageRating;
         this.base64 = base64;
     }
 
@@ -57,11 +59,11 @@ export default class User
         this.ISBN = value;
     }
 
-    public getPublicationDate(): String {
+    public getPublicationDate(): Date {
         return this.publicationDate;
     }
 
-    public setPublicationDate(value: String) {
+    public setPublicationDate(value: Date) {
         this.publicationDate = value;
     }
 
@@ -87,6 +89,14 @@ export default class User
 
     public setAuthorsId(value: List<String>) {
         this.authorsId = value;
+    }
+
+    public getAverageRating(): String {
+        return this.averageRating;
+    }
+
+    public setAverageRating(value: String) {
+        this.averageRating = value;
     }
 
     public getBase64(): String {
