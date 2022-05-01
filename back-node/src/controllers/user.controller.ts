@@ -3,6 +3,7 @@ import User from "../models/User";
 import List from "../utils/List";
 import { collections } from "../services/database.service";
 import { ObjectId } from "bson";
+import sendMail from "../services/mail.service";
 
 export default class UserController
 {
@@ -72,6 +73,8 @@ export default class UserController
 
             await collections.user?.insertOne(userToAdd);
 
+            sendMail(body.mail, "Bienvenue sur le site de la bibliothèque", "Vous êtes bien inscrit sur le site de la bibliothèque. Vous pouvez maintenant vous connecter sur le site.");
+
             res.status(200).send(userToAdd);
         }
         catch(e)
@@ -89,6 +92,8 @@ export default class UserController
             let userToUpdate: User = new User(body.name, body.firstname, body.pseudo, body.email, body.password, body.birthdate, body.base64, body.status);
 
             await collections.user?.updateOne({_id : new ObjectId(body.id)}, userToUpdate);
+
+            sendMail(body.mail, "Modifications de vos informations", "Vos informations ont bien été modifiées.");
 
             res.status(200).send(userToUpdate);
         }
