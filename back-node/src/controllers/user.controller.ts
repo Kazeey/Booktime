@@ -4,6 +4,9 @@ import List from "../utils/List";
 import { collections } from "../services/database.service";
 import { ObjectId } from "bson";
 import sendMail from "../services/mail.service";
+import { reduceEachLeadingCommentRange } from "typescript";
+import * as jwt from 'jsonwebtoken';
+import { Constants } from "../config";
 
 export default class UserController
 {
@@ -34,9 +37,9 @@ export default class UserController
         try
         {
             let userToSend: User;
-            let body = req.body;
+            const { mail, password } = req.body;
             
-            userToSend = await (collections.user?.findOne({email: body.mail, password: body.password}) as unknown as User);
+            userToSend = await (collections.user?.findOne({email: mail, password: password}) as unknown as User);
             
             res.status(200).send(userToSend);
         }
@@ -115,6 +118,30 @@ export default class UserController
         }
         catch(e)
         {
+            res.status(500).send(e);
+        }
+    }
+
+    public async auth(req: Request, res: Response) 
+    {
+        const { email, password } = req.body;
+        
+        try {
+            let user = await collections.user?.findOne({ email: email, password: password });
+
+            if (!user)
+                res.send().status(401);
+
+            delete user.password;
+
+            const expireIn = 24 * 60 * 60;
+            const token = jwt.sign({ user: user }, Constants.jwtSecret, { expiresIn: expireIn });
+            
+            res.header('Authorization', 'Bearer' + token);
+            
+            return res.status(200).json(user);
+        } 
+        catch (e) {
             res.status(500).send(e);
         }
     }

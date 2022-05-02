@@ -11,6 +11,9 @@ export const Constants = {
         library : "library"
     },
 
+    //JWT
+    jwtSecret : "KCCORPISGONNAWINEUM2022!",
+
     // SMTP
     smtp : {
         host : "smtp.gmail.com",
