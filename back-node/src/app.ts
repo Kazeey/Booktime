@@ -7,8 +7,12 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 import { Constants } from "./config";
 import { connectToDatabase } from "./services/database.service";
 
+const corsOptions = {
+    exposedHeaders: 'Authorization',
+}
+
 const app = express();
-app.use(cors())
+app.use(cors(corsOptions))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

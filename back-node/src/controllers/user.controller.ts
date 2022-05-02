@@ -23,11 +23,12 @@ export default class UserController
             await usersDB.forEach((user:User) => {
                 usersToSend.push(user);
             });
-
+            
             res.status(200).send(usersToSend);
         }
         catch(e)
         {
+            console.log("catch error: ", e);
             res.status(500).send(e);
         }
     }
@@ -130,7 +131,10 @@ export default class UserController
             let user = await collections.user?.findOne({ email: email, password: password });
 
             if (!user)
-                res.send().status(401);
+            {
+                res.status(404).send("404 - User not found");
+                return false;
+            }
 
             delete user.password;
 
@@ -138,7 +142,6 @@ export default class UserController
             const token = jwt.sign({ user: user }, Constants.jwtSecret, { expiresIn: expireIn });
             
             res.header('Authorization', 'Bearer' + token);
-            
             return res.status(200).json(user);
         } 
         catch (e) {

@@ -7,10 +7,10 @@ export default class Security
 {
     public async checkJWT(req: Request, res: Response, next: NextFunction)
     {
-        if (req.headers['authorization'] == undefined)
+        if (req.headers['Authorization'] == undefined)
             return false;
 
-        let token: string = req.headers['authorization'].toString();
+        let token: string = req.headers['Authorization'].toString();
 
         if(!!token && token.startsWith('Bearer'))
             token = token.slice(6, token.length);

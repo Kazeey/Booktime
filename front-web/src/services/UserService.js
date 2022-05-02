@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { constants } from '../utils/constants/constants';
 
-const connectUser = async (user) => {
+const loginApi = async (user) => {
     try
     {
-        const response = await axios.post(constants.apiURL + 'user/connect', user);
-        return response.data;
+        const response = await axios.post(constants.apiURL + 'user/auth', user);
+        return response;
     }
     catch (error)
     {
@@ -61,5 +61,5 @@ const getUserById = async (id) => {
     }
 }
 
-export { connectUser, forgetPassword, changeAccount, getUsersList, getUserById };
+export { loginApi, forgetPassword, changeAccount, getUsersList, getUserById };
 

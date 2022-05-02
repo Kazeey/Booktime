@@ -6,7 +6,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import checkMail from '../../utils/functions/checkMailFormat';
 import { checkPassword, passwordStrength } from '../../utils/functions/checkPassword';
 import ForgotPassword from '../forgotPassword';
-import { connectUser, changeAccount } from '../../services/UserService';
+import { loginApi, changeAccount } from '../../services/UserService';
 import { setMessage } from '../../utils/functions/setMessage';
 import { constants } from '../../utils/constants/constants';
 
@@ -51,16 +51,41 @@ const Authentication = () => {
     setOpen(Boolean(event.target.value));
   };
 
-  const connection = (email, password) => {
+  const connection =  async (email, password) => {
     let user = {
       "email" : email,
       "password" : password
     }
 
-    connectUser(user)
-    .then(response => {
-      setMessage("");
-      setValues({...values, nbTry : 4});
+    setMessage("");
+    localStorage.clear();
+
+    await loginApi(user)
+    .then(res => {
+      if (res.status === 200)
+      {
+        console.log("status = 200")
+        if (res.data.status === constants.User.BLOCKED_STATE)
+        {
+          console.log("Compte bloqué")
+          setMessage("Votre compte a été bloqué, veuillez contacter l'administrateur du site.");
+        }
+        else
+        {
+          console.log("Compte pas bloqué")
+          if (res.headers.authorization !== undefined)
+          {
+            localStorage.setItem("token", res.headers.authorization);
+            localStorage.setItem("user", JSON.stringify(res.data));
+            setValues({...values, nbTry : 4});
+            bookContainer();
+          }
+          else
+          {
+            setMessage("Jeton d'authentification non valide, veuillez contacter l'administrateur du site.");
+          }
+        }
+      }
     })
     .catch(error => {
       if (values.nbTry > 0)
@@ -73,13 +98,12 @@ const Authentication = () => {
       {
         let user = {
           "email" : email,
-          "status" : "blocked"
+          "status" : constants.User.BLOCKED_STATE
         }
 
         setMessage(constants.User.BLOCKED);
         changeAccount(user);
       }
-      
     });
   }
 
@@ -144,8 +168,7 @@ const Authentication = () => {
             disabled={
               !values.email || !checkMail(values.email) || !values.password || !checkPassword(values.password)
             }
-            // onClick={() => { connection(values.email, values.password) }}
-            onClick={() => { bookContainer() }}
+            onClick={() => { connection(values.email, values.password) }}
           >
             Se connecter
           </Button>

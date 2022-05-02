@@ -11,6 +11,7 @@ import checkMail from '../../utils/functions/checkMailFormat';
 import { checkPassword, passwordStrength, samePassword } from '../../utils/functions/checkPassword';
 import checkNameFormat from '../../utils/functions/checkNameFormat';
 
+
 const Register = () => {
   const [values, setValues] = React.useState({
     name : '',
@@ -175,6 +176,7 @@ const Register = () => {
               !values.password || !checkPassword(values.password) ||
               values.password !== values.confirmPassword
             }
+            onClick={() => {}}
           >
             Se connecter
           </Button>
