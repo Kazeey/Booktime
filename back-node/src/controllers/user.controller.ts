@@ -4,9 +4,9 @@ import List from "../utils/List";
 import { collections } from "../services/database.service";
 import { ObjectId } from "bson";
 import sendMail from "../services/mail.service";
-import { reduceEachLeadingCommentRange } from "typescript";
 import * as jwt from 'jsonwebtoken';
 import { Constants } from "../config";
+import generatePassword from "../utils/generatePassword";
 
 export default class UserController
 {
@@ -97,7 +97,7 @@ export default class UserController
 
             await collections.user?.updateOne({_id : new ObjectId(body.id)}, userToUpdate);
 
-            sendMail(body.mail, "Modifications de vos informations", "Vos informations ont bien été modifiées.");
+            sendMail(body.mail, "Modifications de vos informations", "Bonjour, vos informations ont bien été modifiées.");
 
             res.status(200).send(userToUpdate);
         }
@@ -143,6 +143,24 @@ export default class UserController
             
             res.header('Authorization', 'Bearer' + token);
             return res.status(200).json(user);
+        } 
+        catch (e) {
+            res.status(500).send(e);
+        }
+    }
+
+    public async forgotPassword(req: Request, res: Response)
+    {
+        const { email } = req.body;
+
+        try {
+            let newPassword = generatePassword();
+
+            await collections.user?.update({ email: email }, { $set: { password:  newPassword} });
+
+            sendMail(email, "Modifications de votre mot de passe", "Bonjour, votre mot de passe a bien été modifié : " + newPassword);
+
+            res.status(200).send("Si l'adresse mail est correcte, un mail vous a été envoyé avec votre nouveau mot de passe.");
         } 
         catch (e) {
             res.status(500).send(e);

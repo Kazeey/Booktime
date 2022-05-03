@@ -13,7 +13,7 @@ const loginApi = async (user) => {
     }
 }
 
-const forgetPassword = async (email) => {
+const forgetPasswordApi = async (email) => {
     try
     {
         const response = await axios.post(constants.apiURL + 'user/forgetPassword', email);
@@ -61,5 +61,5 @@ const getUserById = async (id) => {
     }
 }
 
-export { loginApi, forgetPassword, changeAccount, getUsersList, getUserById };
+export { loginApi, forgetPasswordApi, changeAccount, getUsersList, getUserById };
 

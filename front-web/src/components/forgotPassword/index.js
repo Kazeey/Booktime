@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Box, Button, FormControl, Input, InputAdornment, InputLabel } from '@mui/material';
 import checkMail from '../../utils/functions/checkMailFormat';
 import { setMessage } from '../../utils/functions/setMessage';
+import { forgetPasswordApi } from '../../services/UserService';
 
 import modalStyle from '../../utils/styles/modal.style';
 import EmailIcon from '@mui/icons-material/Email';
@@ -16,12 +17,12 @@ const ForgotPassword = ( props ) => {
     setValues({ ...values, [prop]: event.target.value })
   };
 
-  const forgetPassword = (email) => {
+  const forgetPassword = async (email) => {
     let mail = {
       "email" : email
     }
 
-    forgetPassword(mail)
+    await forgetPasswordApi(mail)
     .then(response => {
       setMessage("Si l'adresse mail est correcte, vous recevrez un email avec un lien pour réinitialiser votre mot de passe.");
     });
@@ -57,12 +58,14 @@ const ForgotPassword = ( props ) => {
             </Button>
           </FormControl>
         </Box>
+        <div id="messageZone"></div>
         <Box>
           <FormControl variant='standard' sx={modalStyle.formControlForgetPassword}>
             <Button variant="contained" color="success" sx={modalStyle.buttonForm} style={{width: '50%'}}
               disabled={
                 !values.email || !checkMail(values.email)
               }
+              onClick={() => { forgetPassword(values.email) }}
             >
               Envoyer
             </Button>

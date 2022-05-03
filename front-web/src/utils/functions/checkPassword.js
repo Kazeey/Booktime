@@ -15,9 +15,13 @@ import React from 'react';
 const checkPassword = (password) => {
     const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
     if (re.test(String(password))) 
+    {
         return true;
+    }
     else
+    {
         return false;
+    }
 }
 
 /**
@@ -67,7 +71,7 @@ const passwordStrength = (password) => {
     else
         color = "green";
 
-    li.push(<li style={{"color" : color}}>Le mot de passe doit contenir au moins un caractère spécial</li>);
+    li.push(<li style={{"color" : color}}>Le mot de passe doit contenir au moins un caractère spécial : !@#$%^&*</li>);
     
 
     return (

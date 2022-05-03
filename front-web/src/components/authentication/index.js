@@ -51,7 +51,7 @@ const Authentication = () => {
     setOpen(Boolean(event.target.value));
   };
 
-  const connection =  async (email, password) => {
+  const connection = async (email, password) => {
     let user = {
       "email" : email,
       "password" : password
@@ -67,12 +67,10 @@ const Authentication = () => {
         console.log("status = 200")
         if (res.data.status === constants.User.BLOCKED_STATE)
         {
-          console.log("Compte bloqué")
           setMessage("Votre compte a été bloqué, veuillez contacter l'administrateur du site.");
         }
         else
         {
-          console.log("Compte pas bloqué")
           if (res.headers.authorization !== undefined)
           {
             localStorage.setItem("token", res.headers.authorization);
