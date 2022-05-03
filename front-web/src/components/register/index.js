@@ -200,7 +200,7 @@ const Register = () => {
           </Button>
         </FormControl>
       </Box>
-      <div id="messageZone"></div>
+      <p id="messageZone" style={{fontSize : '10px'}}></p>
     </Box>
   )
 }
