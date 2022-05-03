@@ -13,6 +13,18 @@ const loginApi = async (user) => {
     }
 }
 
+const registerApi = async (user) => {
+    try
+    {
+        const response = await axios.post(constants.apiURL + 'user/register', user);
+        return response;
+    }
+    catch (error)
+    {
+        throw error;
+    }
+}   
+
 const forgetPasswordApi = async (email) => {
     try
     {
@@ -61,5 +73,5 @@ const getUserById = async (id) => {
     }
 }
 
-export { loginApi, forgetPasswordApi, changeAccount, getUsersList, getUserById };
+export { loginApi, registerApi, forgetPasswordApi, changeAccount, getUsersList, getUserById };
 

@@ -61,11 +61,11 @@ const ForgotPassword = ( props ) => {
         <div id="messageZone"></div>
         <Box>
           <FormControl variant='standard' sx={modalStyle.formControlForgetPassword}>
-            <Button variant="contained" color="success" sx={modalStyle.buttonForm} style={{width: '50%'}}
+            <Button variant="contained" color="success" sx={modalStyle.buttonForm} style={{width: '50%'}} value={false}
               disabled={
                 !values.email || !checkMail(values.email)
               }
-              onClick={() => { forgetPassword(values.email) }}
+              onClick={() => { forgetPassword(values.email);}}
             >
               Envoyer
             </Button>

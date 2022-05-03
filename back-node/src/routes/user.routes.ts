@@ -16,3 +16,4 @@ router.patch('/update', securityControllerInstance.checkJWT, async (req: Request
 router.delete('/delete', securityControllerInstance.checkJWT, async (req: Request, res: Response) => await UserControllerInstance.delete(req, res));
 router.post('/auth', async (req: Request, res: Response) => await UserControllerInstance.auth(req, res));
 router.post('/forgetPassword', async (req: Request, res: Response) => await UserControllerInstance.forgotPassword(req, res));
+router.post('/register', async (req: Request, res: Response) => await UserControllerInstance.addFirstRegister(req, res));

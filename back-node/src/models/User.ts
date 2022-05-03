@@ -8,11 +8,11 @@ export default class User
     private pseudo: String;
     private email: String;
     private password: String;
-    private birthdate: Date;
+    private birthdate: Date | String;
     private base64: String;
     private status: String;
 
-    constructor(name: String, firstname: String, pseudo: String, email: String, password: String, birthdate: Date, base64: String, status: String)
+    constructor(name: String, firstname: String, pseudo: String, email: String, password: String, birthdate: Date | String, base64: String, status: String)
     {
         this.name = name;
         this.firstname = firstname;
@@ -72,11 +72,11 @@ export default class User
         this.password = value;
     }
 
-    public getBirthdate(): Date {
+    public getBirthdate(): Date | String {
         return this.birthdate;
     }
 
-    public setBirthdate(value: Date) {
+    public setBirthdate(value: Date | String) {
         this.birthdate = value;
     }
 

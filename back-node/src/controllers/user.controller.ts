@@ -87,6 +87,25 @@ export default class UserController
         }
     }
 
+    public async addFirstRegister(Req: Request, res: Response)
+    {
+        try
+        {
+            let body = Req.body;
+            let userToAdd: User = new User(body.name, body.firstname, "", body.email, body.password, "", "", body.status)
+
+            await collections.user?.insertOne(userToAdd);
+
+            sendMail(body.email, "Bienvenue sur le site de la bibliothèque", "Bonjour, vous êtes bien inscrit sur le site de la bibliothèque. Vous pouvez maintenant vous connecter sur le site.");
+
+            res.status(200).send(userToAdd);
+        }
+        catch(e)
+        {
+            res.status(500).send(e);
+        }
+    }
+
     public async update (req: Request, res: Response)
     {
         try
@@ -127,7 +146,8 @@ export default class UserController
     {
         const { email, password } = req.body;
         
-        try {
+        try 
+        {
             let user = await collections.user?.findOne({ email: email, password: password });
 
             if (!user)
@@ -144,7 +164,8 @@ export default class UserController
             res.header('Authorization', 'Bearer' + token);
             return res.status(200).json(user);
         } 
-        catch (e) {
+        catch (e)
+        {
             res.status(500).send(e);
         }
     }
@@ -153,7 +174,8 @@ export default class UserController
     {
         const { email } = req.body;
 
-        try {
+        try 
+        {
             let newPassword = generatePassword();
 
             await collections.user?.update({ email: email }, { $set: { password:  newPassword} });
@@ -162,7 +184,8 @@ export default class UserController
 
             res.status(200).send("Si l'adresse mail est correcte, un mail vous a été envoyé avec votre nouveau mot de passe.");
         } 
-        catch (e) {
+        catch (e) 
+        {
             res.status(500).send(e);
         }
     }

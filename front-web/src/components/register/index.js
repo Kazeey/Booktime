@@ -10,6 +10,8 @@ import modalStyle from '../../utils/styles/modal.style';
 import checkMail from '../../utils/functions/checkMailFormat';
 import { checkPassword, passwordStrength, samePassword } from '../../utils/functions/checkPassword';
 import checkNameFormat from '../../utils/functions/checkNameFormat';
+import { registerApi } from '../../services/UserService';
+import { setMessage } from '../../utils/functions/setMessage';
 
 
 const Register = () => {
@@ -49,6 +51,22 @@ const Register = () => {
   const handleMouseDownConfirmPassword = (event) => {
     event.preventDefault();
   };
+
+  const register = async (name, firstname, email, password) => {
+
+    let user = {
+      name : name,
+      firstname : firstname,
+      email: email,
+      password: password,
+      status : "active"
+    }
+
+    await registerApi(user)
+    .then(response => {
+      setMessage("Votre compte a été créé avec succès, vous pouvez maintenant vous connecter.");
+    });
+  }
 
   return (
     <Box sx={modalStyle.registerBox}>
@@ -176,12 +194,13 @@ const Register = () => {
               !values.password || !checkPassword(values.password) ||
               values.password !== values.confirmPassword
             }
-            onClick={() => {}}
+            onClick={() => { register(values.name, values.firstname, values.email, values.password) }}
           >
-            Se connecter
+            S'inscrire
           </Button>
         </FormControl>
       </Box>
+      <div id="messageZone"></div>
     </Box>
   )
 }
