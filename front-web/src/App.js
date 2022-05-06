@@ -10,6 +10,7 @@ import SettingsContainer from './containers/SettingsContainer'
 
 const App = () => {
   return (
+    <div className='App'>
       <Fragment>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
@@ -20,6 +21,7 @@ const App = () => {
           </Routes>
         </Suspense>
       </Fragment>
+    </div>
   )
 }
 
