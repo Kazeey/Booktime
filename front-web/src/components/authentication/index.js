@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Box } from '@mui/system'
 import { Button, Fade, FormControl, IconButton, Input, InputAdornment, InputLabel } from '@mui/material';
@@ -9,6 +9,7 @@ import ForgotPassword from '../forgotPassword';
 import { loginApi, changeAccount } from '../../services/UserService';
 import { setMessage } from '../../utils/functions/setMessage';
 import { constants } from '../../utils/constants/constants';
+import getLocalStorageKey from '../../utils/functions/localStorage';
 
 import modalStyle from '../../utils/styles/modal.style';
 import styleModal from '../../utils/styles/modal';

@@ -314,14 +314,14 @@ const Register = () => {
             <Box sx={{ flex: "1 1 auto" }} />
             <Button
               onClick={handleNext}
-              // disabled={activeStep === steps.length - 1 || 
-              //   !values.name || !checkNameFormat(values.name) || 
-              //   !values.firstname || !checkNameFormat(values.firstname) ||
-              //   !values.email || !checkMail(values.email) ||
-              //   !values.password || !checkPassword(values.password) ||
-              //   values.password !== values.confirmPassword
-              //   ? true : false
-              // }
+              disabled={activeStep === steps.length - 1 || 
+                !values.name || !checkNameFormat(values.name) || 
+                !values.firstname || !checkNameFormat(values.firstname) ||
+                !values.email || !checkMail(values.email) ||
+                !values.password || !checkPassword(values.password) ||
+                values.password !== values.confirmPassword
+                ? true : false
+              }
             >
               Next
             </Button>
