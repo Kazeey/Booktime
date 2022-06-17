@@ -4,6 +4,8 @@ import List from "../utils/List";
 import { collections } from "../services/database.service";
 import { ObjectId } from "bson";
 
+let mongoToSqlConverter = require("mongo-to-sql-converter");
+
 export default class BookController
 {
 
@@ -68,13 +70,16 @@ export default class BookController
         {
             let body = req.body;
             let bookToAdd: Book = new Book(body.title, body.synopsis, body.ISBN, body.publicationDate, body.category, body.pageCount, body.authorsId, body.averageRating, body.base64);
-            
+            const mongoQuery = "db.book.find({title: 'Harry Potter et la coupe de feu'})";
             await collections.book?.update({title: bookToAdd.getTitle().toString(), upsert: true}, bookToAdd);
-            
+            const SQLQuery = mongoToSqlConverter.convertToSQL(mongoQuery, true);
+
+            console.log(SQLQuery);
             res.status(200).send(bookToAdd);
         }
         catch(e)
         {
+            console.log("catch error: ", e);
             res.status(500).send(e);
         }
     }

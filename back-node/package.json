@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "eyespect": "^0.1.10",
     "jsonwebtoken": "^8.5.1",
+    "mongo-to-sql-converter": "^1.1.2",
     "mongoose": "^5.13.14",
     "node-fetch": "^2.6.7",
     "nodemailer": "^6.4.17",
