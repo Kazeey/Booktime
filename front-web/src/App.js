@@ -1,15 +1,17 @@
-import React, { Fragment, Suspense } from 'react'
-import { Route, Routes } from 'react-router-dom';
+import React, { Fragment, Suspense, useEffect, Component } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 
 import HomeContainer from './containers/HomeContainer'
 import BookContainer from './containers/BookContainer'
 import AuthorContainer from './containers/AuthorContainer'
 import SettingsContainer from './containers/SettingsContainer'
+import getLocalStorageKey from './utils/functions/localStorage';
 
 
-const App = () => {
+const App = () => {  
   return (
+    <div className='App'>
       <Fragment>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
@@ -20,6 +22,7 @@ const App = () => {
           </Routes>
         </Suspense>
       </Fragment>
+    </div>
   )
 }
 

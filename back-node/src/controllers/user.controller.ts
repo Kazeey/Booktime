@@ -92,13 +92,20 @@ export default class UserController
         try
         {
             let body = Req.body;
-            let userToAdd: User = new User(body.name, body.firstname, "", body.email, body.password, "", "", body.status)
+            let userToAdd: User = new User(body.name, body.firstname, body.pseudo, body.email, body.password, body.birthdate, "", body.status)
 
-            await collections.user?.insertOne(userToAdd);
+            let checkuser: User = await (collections.user?.findOne({email : body.email}) as unknown as User);
+            let toSend;
+            if(checkuser)
+                toSend = "Cet email est déjà utilisé";
+            else
+            {
+                toSend = userToAdd;
+                await collections.user?.insertOne(userToAdd);
+                sendMail(body.email, "Bienvenue sur le site de la bibliothèque", "Bonjour, vous êtes bien inscrit sur le site de la bibliothèque. Vous pouvez maintenant vous connecter sur le site.");    
+            }
 
-            sendMail(body.email, "Bienvenue sur le site de la bibliothèque", "Bonjour, vous êtes bien inscrit sur le site de la bibliothèque. Vous pouvez maintenant vous connecter sur le site.");
-
-            res.status(200).send(userToAdd);
+            res.status(200).send(toSend);
         }
         catch(e)
         {

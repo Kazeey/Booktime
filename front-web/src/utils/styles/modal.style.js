@@ -25,6 +25,30 @@ const modalStyle = {
         flexDirection : 'column',
         alignItems : 'center',
     },
+    firstBox : {
+        width : 400,
+        height : 500,
+        bgcolor : 'white',
+        p : 2,
+        px : 4,
+        pb : 3,
+        paddingTop : '2rem',
+        display : 'flex',
+        flexDirection : 'column',
+        alignItems : 'center',
+    },
+    secondBox : {
+        width : 400,
+        height : 400,
+        bgcolor : 'white',
+        p : 2,
+        px : 4,
+        pb : 3,
+        paddingTop : '1rem',
+        display : 'flex',
+        flexDirection : 'column',
+        alignItems : 'center',
+    },
     forgetPasswordBox : {
         width : 300,
         height : 200,
@@ -67,6 +91,11 @@ const modalStyle = {
         marginLeft : 50 + '%',
         display : 'flex',
         alignItems : 'center',
+    },
+    buttonPhase : {
+        marginTop : '-2rem',
+        display: "flex", 
+        flexDirection: "row", pt: 2 
     }
 };
 

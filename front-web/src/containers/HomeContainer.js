@@ -1,11 +1,21 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Modal from '../components/modal/index';
+import React, { useEffect } from 'react'
+import { Navigate } from 'react-router-dom';
+import "../assets/css/home.css";
+import getLocalStorageKey from '../utils/functions/localStorage';
 
-const HomeContainer = props => {
+import ModalContainer from './ModalContainer';
+
+const HomeContainer = props => {  
+    useEffect(() => {
+        if (getLocalStorageKey('token')) 
+        {
+        Navigate('/books', { state: { from: 'authentication' } });
+        }
+    });
+    
     return (
-        <div className='parentDiv'>
-            <Modal />
+        <div id='homeDiv'>
+            <ModalContainer />
         </div>
     )
 }

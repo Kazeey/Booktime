@@ -1,0 +1,15 @@
+#buttonModal
+{
+    width: 350px;
+}
+
+#connectModal
+{
+    float : left;
+}
+
+#registerModal 
+{
+    float : right;
+    margin-left: 2%;
+}
