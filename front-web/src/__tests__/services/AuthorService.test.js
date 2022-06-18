@@ -10,7 +10,7 @@ describe("AuthorService", () => {
                         id : expect.any(String),
                         name : expect.any(String),
                         firstName : expect.any(String),
-                        birthDate : expect.any(String),
+                        birthDate : expect.any(Date),
                         biography : expect.any(String),
                         country : expect.any(String),
                         base64 : expect.any(String)

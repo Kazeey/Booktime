@@ -37,3 +37,6 @@ connectToDatabase()
 })
 
 console.log(`Connected | Port ${port}`);
+
+
+let test = client;

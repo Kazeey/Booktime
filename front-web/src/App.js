@@ -6,8 +6,6 @@ import HomeContainer from './containers/HomeContainer'
 import BookContainer from './containers/BookContainer'
 import AuthorContainer from './containers/AuthorContainer'
 import SettingsContainer from './containers/SettingsContainer'
-import getLocalStorageKey from './utils/functions/localStorage';
-
 
 const App = () => {  
   return (
