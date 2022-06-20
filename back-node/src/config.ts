@@ -2,7 +2,6 @@ export const Constants = {
     port : 3001,
     
     // Database
-    dbUrl : "mongodb+srv://m001-student:m001-mongodb-basics@sandbox.iitvj.mongodb.net/Sandbox",
     dbName : "Booktime",
     collections : {
         user : "user",
@@ -18,12 +17,12 @@ export const Constants = {
     smtp : {
         host : "smtp.gmail.com",
         port : 587,
-        username : "booktime.projet@gmail.com",
-        password : "Booktime1!",
+        username : "",
+        password : "",
     },
 
     // Google
-    apiKeyGoogle : "AIzaSyDojgOQt_GHgwTR-bCM--As_WTRERNqz0k",
+    apiKeyGoogle : "",
     apiGoogleUrl : "https://www.googleapis.com/books/v1/volumes?q=",
     categories : [
         "Anthologies",
