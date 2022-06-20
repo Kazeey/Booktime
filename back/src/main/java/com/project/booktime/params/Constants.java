@@ -7,7 +7,6 @@ public class Constants
     private Constants() {}
 
     // API Key
-    public final static String API_KEY_GOOGLE_BOOKS = "AIzaSyDojgOQt_GHgwTR-bCM--As_WTRERNqz0k";
 
     // URL
     public final static String BACK_URL = "http://127.0.0.1:8080/";
@@ -18,8 +17,6 @@ public class Constants
 
     public final static String MAIL_HOST = "smtp.gmail.com";
     public final static int MAIL_PORT = 587;
-    public final static String MAIL_USERNAME = "booktime.projet@gmail.com";
-    public final static String MAIL_PASSWORD = "Booktime1!";
 
     public static final long ACCESS_TOKEN_VALIDITY_SECONDS = 5*60*60;
     public static final String SIGNING_KEY = "booktime";
